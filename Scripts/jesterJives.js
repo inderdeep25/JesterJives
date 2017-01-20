@@ -6,9 +6,28 @@ var surface = _canvas.getContext("2d");
 
 /* states is an array of objects where each object is a state with an enter, update and exit function. These
  functions get called in the changeState function. */
-var states = [{enter: enterMenu, update: updateMenu, exit: exitMenu}, 	// Main menu state.
-    {enter: enterGame, update: updateGame, exit: exitGame}, 	// Game state.
-    {enter: enterHelp, update: updateHelp, exit: exitHelp}];	// Help state.
+
+var State = {
+                MENU_STATE : 0,
+                GAME_STATE : 1,
+                HELP_STATE : 2,
+                CREDITS_STATE : 3
+            };
+
+var stateContainer = [
+                {   enter: enterMenu, // Main menu state.
+                    update: updateMenu,
+                    exit: exitMenu
+                },
+                {   enter: enterGame, // Game state.
+                    update: updateGame,
+                    exit: exitGame
+                },
+                {   enter: enterHelp, // Help state.
+                    update: updateHelp,
+                    exit: exitHelp
+                }
+             ];
 
 
 // These two variables should be indices for the states array.
@@ -86,22 +105,22 @@ function onAssetLoad(event)
 function initGame()
 {
     // This function can be called to kick-off the game when all important main/menu assets are loaded.
-    changeState(0); // Change to menu state.
+    changeState(State.MENU_STATE); // Change to menu state.
 }
 
 function changeState(stateToRun)
 {
-    if (stateToRun >= 0 && stateToRun < states.length) // Just a check to see if the state to run is valid.
+    if (stateToRun >= 0 && stateToRun < stateContainer.length) // Just a check to see if the state to run is valid.
     {
         if (currState >= 0) // The only time this doesn't run is the very first state change.
         {
             clearInterval(updateIval); // Stops the current setInterval method, which is the update function for the current state.
-            states[currState].exit(); // Will call the appropriate exit function of the current state.
+            stateContainer[currState].exit(); // Will call the appropriate exit function of the current state.
         }
         lastState = currState;
         currState = stateToRun;
-        states[currState].enter(); // Will call the appropriate enter function of the current state. For initialization, etc.
-        updateIval = setInterval(states[currState].update, fpsMS);
+        stateContainer[currState].enter(); // Will call the appropriate enter function of the current state. For initialization, etc.
+        updateIval = setInterval(stateContainer[currState].update, fpsMS);
     }
     else
         console.log("Invalid stateToRun!");
@@ -212,12 +231,12 @@ function render()
 
 function onStartClick()
 {
-    changeState(1);
+    changeState(State.GAME_STATE);
 }
 
 function onHelpClick()
 {
-    changeState(2);
+    changeState(State.HELP_STATE);
 }
 
 function onExitClick()
