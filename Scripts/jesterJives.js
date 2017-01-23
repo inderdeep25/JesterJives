@@ -14,6 +14,14 @@ var State = {
                 CREDITS_STATE : 3
             };
 
+var buttonType = {
+                    START : 0,
+                    HELP : 1,
+                    EXIT : 2
+                };
+
+var tileType = {};
+
 var stateContainer = [
                 {   enter: enterMenu, // Main menu state.
                     update: updateMenu,
@@ -63,7 +71,12 @@ var buttons = [
                      over:false,
                      click:onExitClick
                 }
-            ]
+            ];
+
+var tiles = [];
+for(var i = 1 ; i < 17 ; i++){
+    tiles[i-1] = "Resources/Images/Tile (" + i + ").png";
+}
 
 // The activeBtns array is set in each enter function for each state and holds the buttons currently on screen.
 var activeBtns = [];
@@ -130,7 +143,7 @@ function enterMenu()
 {
     console.log("Entering menu state.");
     _stage.style.backgroundColor = "cyan";
-    activeBtns = [ buttons[0] ];
+    activeBtns = [ buttons[buttonType.START] ];
 }
 
 function updateMenu()
@@ -148,8 +161,16 @@ function exitMenu()
 function enterGame()
 {
     console.log("Entering game state.");
-    _stage.style.backgroundColor = "yellow";
-    activeBtns = [ buttons[1], buttons[2] ];
+    _stage.style.backgroundColor = "darkgray";
+    activeBtns = [ buttons[buttonType.HELP], buttons[buttonType.EXIT] ];
+    generateMap();
+}
+
+function generateMap() {
+
+    var map = [];
+
+
 }
 
 function updateGame()
@@ -168,7 +189,7 @@ function enterHelp()
 {
     console.log("Entering help state.");
     _stage.style.backgroundColor = "green";
-    activeBtns = [ buttons[2] ];
+    activeBtns = [ buttons[buttonType.EXIT] ];
 }
 
 function updateHelp()
