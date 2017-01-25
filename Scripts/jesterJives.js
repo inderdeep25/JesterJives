@@ -3,6 +3,9 @@ var _canvas = document.querySelector("canvas");
 _canvas.width = 1024;
 _canvas.height = 768;
 var surface = _canvas.getContext("2d");
+var tileSize = 64;
+var numOfColumns = _canvas.width/tileSize;
+var numOfRows = _canvas.height/tileSize;
 
 /* states is an array of objects where each object is a state with an enter, update and exit function. These
  functions get called in the changeState function. */
@@ -20,7 +23,17 @@ var buttonType = {
                     EXIT : 2
                 };
 
-var tileType = {};
+var TileType = {
+                    TOP_LEFT : 16,
+                    BOTTOM_LEFT : 11,
+                    TOP_RIGHT : 17,
+                    BOTTOM_RIGHT : 12,
+                    TOP_HORIZONTAL : 18,
+                    BOTTOM_HORIZONTAL : 8,
+                    LEFT_VERTICAL : 3,
+                    RIGHT_VERTICAL : 5
+
+                };
 
 var stateContainer = [
                 {   enter: enterMenu, // Main menu state.
@@ -74,9 +87,12 @@ var buttons = [
             ];
 
 var tiles = [];
-for(var i = 1 ; i < 17 ; i++){
-    tiles[i-1] = "Resources/Images/Tile (" + i + ").png";
+var numOfTotalTiles = 19;
+for(var i = 1 ; i <= numOfTotalTiles ; i++){
+    tiles[i-1] = "Resources/Images/Tiles/Tile (" + i + ").png";
 }
+
+var map = [];
 
 // The activeBtns array is set in each enter function for each state and holds the buttons currently on screen.
 var activeBtns = [];
@@ -161,16 +177,58 @@ function exitMenu()
 function enterGame()
 {
     console.log("Entering game state.");
-    _stage.style.backgroundColor = "darkgray";
+    _stage.style.backgroundColor = "grey";
     activeBtns = [ buttons[buttonType.HELP], buttons[buttonType.EXIT] ];
     generateMap();
 }
 
-function generateMap() {
+function generateMap()
+{
+    setupEmptyMapArray();
+    var i = 0, j = 0 ;
 
-    var map = [];
+    //setup corner images
+    map[0][0] = getImageForPath(tiles[TileType.TOP_LEFT]);
+    map[0][numOfColumns-1] = getImageForPath(tiles[TileType.TOP_RIGHT]);
+    map[numOfRows-1][0] = getImageForPath(tiles[TileType.BOTTOM_LEFT]);
+    map[numOfRows-1][numOfColumns-1] = getImageForPath(tiles[TileType.BOTTOM_RIGHT]);
 
+    //setup top horizontal tiles
+    for ( i = 1 ; i < numOfColumns-1; i++)
+    {
+        map[0][i] = getImageForPath(tiles[TileType.TOP_HORIZONTAL]);
+    }
 
+    //setup bottom horizontal tiles
+    for ( i = 1 ; i < numOfColumns-1; i++)
+    {
+        map[numOfRows-1][i] = getImageForPath(tiles[TileType.BOTTOM_HORIZONTAL]);
+    }
+
+    //setup left vertical tiles
+    for ( j = 1 ; j < numOfRows-1; j++)
+    {
+        map[j][0] = getImageForPath(tiles[TileType.LEFT_VERTICAL]);
+    }
+
+    //setup right vertical tiles
+    for ( j = 1 ; j < numOfRows-1; j++)
+    {
+        map[j][numOfColumns-1] = getImageForPath(tiles[TileType.RIGHT_VERTICAL]);
+    }
+}
+
+function setupEmptyMapArray()
+{
+    var i = 0 , j = 0 ;
+    for (i = 0 ; i < numOfRows ; i++)
+    {
+        map[i] = [];
+        for(j = 0 ; j < numOfColumns; j++)
+        {
+            map[i][j] = "empty";
+        }
+    }
 }
 
 function updateGame()
@@ -238,6 +296,21 @@ function render()
 {
     surface.clearRect(0, 0, _canvas.width, _canvas.height);
     document.body.style.cursor = "default";
+
+    if(currState == State.GAME_STATE)
+    {
+        for(var i = 0; i < numOfRows ; i++)
+        {
+            for (var j = 0 ; j < numOfColumns ; j++)
+            {
+                if(map[i][j] !== "empty")
+                {
+                    surface.drawImage(map[i][j], j * 64, i * 64);
+                }
+            }
+        }
+    }
+
     for (var i = 0; i < activeBtns.length; i++)
     {
         if (activeBtns[i].over == true)
@@ -262,10 +335,10 @@ function onHelpClick()
 
 function onExitClick()
 {
-    if (currState == 1)
-        changeState(0);
-    else if (currState == 2)
-        changeState(1);
+    if (currState == State.GAME_STATE)
+        changeState(State.MENU_STATE);
+    else if (currState == State.HELP_STATE)
+        changeState(State.GAME_STATE);
 }
 
 // This function sets the mouse x and y position as it is on the canvas where 0,0 is top-left of canvas.
@@ -274,4 +347,11 @@ function updateMouse(event)
     var rect = _canvas.getBoundingClientRect();
     mouse.x = event.clientX - rect.left;
     mouse.y = event.clientY - rect.top;
+}
+
+function getImageForPath(path)
+{
+    var img = new Image();
+    img.src = path;
+    return img;
 }
