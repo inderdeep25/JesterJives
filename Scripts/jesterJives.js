@@ -337,17 +337,24 @@ function generateMap()
 function generateRandomLandTiles()
 {
     var numOfLandTilesInCurrentRow = 0;
+    var numOfTrapsInCurrentRow = 0;
 
     for(var i = 1 ; i < numOfRows - 1; i++)
     {
         for ( var j = 1 ; j < numOfColumns - 1; j++)
         {
             var rand = Math.random() * 10;
+
             if( i%2==0 && rand > 3 && rand < 9 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
             {
                 map[i][j] = getImageForPath(tiles[TileType.LAND_TILE]);
                 numOfLandTilesInCurrentRow++;
+            }else if(i%2==0 && rand > 0 && rand <= 3 && (numOfTrapsInCurrentRow + numOfLandTilesInCurrentRow) < (numOfColumns-2))
+            {
+                map[i][j] = getImageForPath(tiles[TileType.TRAP_TILE]);
+                numOfTrapsInCurrentRow++;
             }
+
         }
         numOfLandTilesInCurrentRow = 0;
     }
@@ -480,6 +487,8 @@ function render()
                 }
             }
         }
+        //Render player image
+        surface.drawImage(player.img, player.x, player.y);
     }
 
     for (var i = 0; i < activeBtns.length; i++)
@@ -493,8 +502,6 @@ function render()
             surface.drawImage(activeBtns[i].img, activeBtns[i].x, activeBtns[i].y);
     }
 
-    //Render player image
-    surface.drawImage(player.img, player.x, player.y);
 }
 
 function onStartClick()
