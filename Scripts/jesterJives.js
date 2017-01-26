@@ -32,9 +32,21 @@ var TileType = {
                     BOTTOM_HORIZONTAL : 8,
                     LEFT_VERTICAL : 3,
                     RIGHT_VERTICAL : 5,
-                    LAND_TILE : 14
+                    LAND_TILE : 14,
+                    TRAP_TILE : 19
 
                 };
+
+var KeyCode = {
+                W : 87,
+                A : 65,
+                S : 83,
+                D : 68,
+                UP_ARROW : 38,
+                LEFT_ARROW : 37,
+                RIGHT_ARROW : 39,
+                DOWN_ARROW : 40
+              };
 
 var stateContainer = [
                 {   enter: enterMenu, // Main menu state.
@@ -87,8 +99,21 @@ var buttons = [
                 }
             ];
 
+// Player Characteristics
+var player ={
+                x: _canvas.width/2,
+                y: _canvas.height-100, //y:canvas.height/2,
+                width: 64, // To ensure not to touch the outside of the canvas or wall, etc
+                height: 64, // MAKE SURE TO CHANGE THIS FOR DIFFERENT SPRITE!!!!
+                speed: 6, // Maximum player speed
+                velX: 0, // To ensure that the player can navigate at different speeds, not just one const
+                velY: 0,
+                jumping:false,//crouch??
+                img:new Image()
+            };
+
 var tiles = [];
-var numOfTotalTiles = 19;
+var numOfTotalTiles = 20;
 for(var i = 1 ; i <= numOfTotalTiles ; i++){
     tiles[i-1] = "Resources/Images/Tiles/Tile (" + i + ").png";
 }
@@ -106,6 +131,16 @@ const fps = 30; // or 60. The game's set frame rate all update functions will ru
 const fpsMS = 1/fps*1000; // The frames per second as a millisecond interval.
 var updateIval;
 
+// Movement input bools
+var aPressed = false;
+var dPressed = false;
+var wPressed = false;
+var sPressed = false;
+var friction = 0.9;
+var gravity = 0.4;
+
+window.addEventListener("keydown", onKeyDown);
+window.addEventListener("keyup", onKeyUp);
 window.addEventListener("load", loadAssets);
 _canvas.addEventListener("mousemove", updateMouse);
 _canvas.addEventListener("click", onMouseClick);
@@ -124,6 +159,8 @@ function loadAssets(event)
         tempBtnO.addEventListener("load", onAssetLoad);
         buttons[i].imgO = tempBtnO;
     }
+
+    player.img.src = "Resources/Images/playerProto1.png";
 }
 
 function onAssetLoad(event)
@@ -136,6 +173,112 @@ function initGame()
 {
     // This function can be called to kick-off the game when all important main/menu assets are loaded.
     changeState(State.MENU_STATE); // Change to menu state.
+}
+
+// Player Input
+function onKeyDown(event)
+{
+    switch (event.keyCode)
+    {
+        case KeyCode.LEFT_ARROW:
+        case KeyCode.A:
+            if (aPressed == false)
+                aPressed = true;
+            break;
+        case KeyCode.RIGHT_ARROW:
+        case KeyCode.D:
+            if (dPressed == false)
+                dPressed = true;
+            break;
+        case KeyCode.UP_ARROW:
+        case KeyCode.W:
+            if (wPressed == false)
+                wPressed = true;
+            break;
+        case KeyCode.DOWN_ARROW:
+        case KeyCode.S: // S
+            if (sPressed == false)
+                sPressed = true;
+            break;
+    }
+}
+
+function onKeyUp(event)
+{
+    switch(event.keyCode)
+    {
+        case KeyCode.LEFT_ARROW:
+        case KeyCode.A:
+            aPressed = false;
+            break;
+        case KeyCode.RIGHT_ARROW:
+        case KeyCode.D:
+            dPressed = false;
+            break;
+        case KeyCode.UP_ARROW:
+        case KeyCode.W:
+            wPressed = false;
+            break;
+        case KeyCode.DOWN_ARROW:
+        case KeyCode.S:
+            sPressed = false;
+            break;
+    }
+}
+
+function checkInput()
+{
+    if (aPressed == true) // left
+    {
+        if (player.velX > -player.speed)
+        {
+            player.velX--;
+        }
+    }
+    else if (dPressed == true)
+    {
+        if (player.velX < player.speed)
+        {
+            player.velX++;
+        }
+    }
+    if (wPressed == true)
+    {
+        if(!player.jumping)
+        {
+            player.jumping = true;
+            player.velY = -player.speed*2
+        }
+    }
+    /*else if (sPressed == true)
+     {
+     player.height = 32;
+     player.img.src = "../Resources/Images/playerProto2.png";
+     }
+     else if(sPressed == false)
+     {
+     player.height = 64;
+     player.img.src = "../Resources/Images/playerProto1.png";
+     }*/
+
+    player.x += player.velX;
+    player.y += player.velY;
+    player.velX *= friction;
+    player.velY += gravity;
+
+    if (player.x >= _canvas.width-player.width - tileSize)
+    {
+        player.x = _canvas.width-player.width - tileSize;
+    }
+    else if (player.x <= 0 + tileSize)
+    {
+        player.x = 0 + tileSize;
+    }
+
+    if(player.y >= _canvas.height-player.height - tileSize){
+        player.y = _canvas.height - player.height - tileSize;
+        player.jumping = false;
+    }
 }
 
 function changeState(stateToRun)
@@ -168,6 +311,7 @@ function updateMenu()
     console.log("In menu state.");
     checkButtons();
     render();
+
 }
 
 function exitMenu()
@@ -262,6 +406,7 @@ function updateGame()
     console.log("In game state.");
     checkButtons();
     render();
+    checkInput();
 }
 
 function exitGame()
@@ -347,6 +492,9 @@ function render()
         else
             surface.drawImage(activeBtns[i].img, activeBtns[i].x, activeBtns[i].y);
     }
+
+    //Render player image
+    surface.drawImage(player.img, player.x, player.y);
 }
 
 function onStartClick()
