@@ -178,6 +178,7 @@ function initGame()
 // Player Input
 function onKeyDown(event)
 {
+    event.preventDefault();
     switch (event.keyCode)
     {
         case KeyCode.LEFT_ARROW:
@@ -205,6 +206,7 @@ function onKeyDown(event)
 
 function onKeyUp(event)
 {
+    event.preventDefault();
     switch(event.keyCode)
     {
         case KeyCode.LEFT_ARROW:
