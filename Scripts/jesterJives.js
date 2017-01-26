@@ -6,7 +6,7 @@ var surface = _canvas.getContext("2d");
 var tileSize = 64;
 var numOfColumns = _canvas.width/tileSize;
 var numOfRows = _canvas.height/tileSize;
-
+var numOfMaxLandTilesInRow = 9;
 /* states is an array of objects where each object is a state with an enter, update and exit function. These
  functions get called in the changeState function. */
 
@@ -31,7 +31,8 @@ var TileType = {
                     TOP_HORIZONTAL : 18,
                     BOTTOM_HORIZONTAL : 8,
                     LEFT_VERTICAL : 3,
-                    RIGHT_VERTICAL : 5
+                    RIGHT_VERTICAL : 5,
+                    LAND_TILE : 14
 
                 };
 
@@ -185,7 +186,32 @@ function enterGame()
 function generateMap()
 {
     setupEmptyMapArray();
-    var i = 0, j = 0 ;
+    setupBorderTiles();
+    generateRandomLandTiles();
+}
+
+function generateRandomLandTiles()
+{
+    var numOfLandTilesInCurrentRow = 0;
+
+    for(var i = 1 ; i < numOfRows - 1; i++)
+    {
+        for ( var j = 1 ; j < numOfColumns - 1; j++)
+        {
+            var rand = Math.random() * 10;
+            if( i%2==0 && rand > 3 && rand < 9 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
+            {
+                map[i][j] = getImageForPath(tiles[TileType.LAND_TILE]);
+                numOfLandTilesInCurrentRow++;
+            }
+        }
+        numOfLandTilesInCurrentRow = 0;
+    }
+}
+
+function setupBorderTiles()
+{
+    var i, j;
 
     //setup corner images
     map[0][0] = getImageForPath(tiles[TileType.TOP_LEFT]);
