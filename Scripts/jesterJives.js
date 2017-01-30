@@ -9,64 +9,70 @@ var numOfRows = _canvas.height/tileSize;
 console.log("Col : " + numOfColumns + ", Row : " + numOfRows);
 var numOfMaxLandTilesInRow = 3;
 var previousTileType = -1;
+var playerImages = [new Image(), new Image()];
 /* states is an array of objects where each object is a state with an enter, update and exit function. These
  functions get called in the changeState function. */
 
 var State = {
-                MENU_STATE : 0,
-                GAME_STATE : 1,
-                HELP_STATE : 2,
-                CREDITS_STATE : 3
-            };
+    MENU_STATE : 0,
+    GAME_STATE : 1,
+    HELP_STATE : 2,
+    CREDITS_STATE : 3
+};
 
 var buttonType = {
-                    START : 0,
-                    HELP : 1,
-                    EXIT : 2
-                };
+    START : 0,
+    HELP : 1,
+    EXIT : 2
+};
 
 var TileType = {
-                    TOP_LEFT : 16,
-                    BOTTOM_LEFT : 11,
-                    TOP_RIGHT : 17,
-                    BOTTOM_RIGHT : 12,
-                    TOP_HORIZONTAL : 18,
-                    BOTTOM_HORIZONTAL : 8,
-                    LEFT_VERTICAL : 3,
-                    RIGHT_VERTICAL : 5,
-                    LAND_TILE_2: 24,
-                    LAND_TILE_4 : 21,
-                    LAND_TILE_L:22,
-                    LAND_TILE_L_OPP:23,
-                    TRAP_TILE : 19
+    TOP_LEFT : 16,
+    BOTTOM_LEFT : 11,
+    TOP_RIGHT : 17,
+    BOTTOM_RIGHT : 12,
+    TOP_HORIZONTAL : 18,
+    BOTTOM_HORIZONTAL : 8,
+    LEFT_VERTICAL : 3,
+    RIGHT_VERTICAL : 5,
+    LAND_TILE_2: 24,
+    LAND_TILE_4 : 21,
+    LAND_TILE_L:22,
+    LAND_TILE_L_OPP:23,
+    TRAP_TILE : 19
 
-                };
+};
+
+var PlayerImageType = {
+    PLAYER_LEFT : 0,
+    PLAYER_RIGHT : 1
+};
 
 var KeyCode = {
-                W : 87,
-                A : 65,
-                S : 83,
-                D : 68,
-                UP_ARROW : 38,
-                LEFT_ARROW : 37,
-                RIGHT_ARROW : 39,
-                DOWN_ARROW : 40
-              };
+    W : 87,
+    A : 65,
+    S : 83,
+    D : 68,
+    UP_ARROW : 38,
+    LEFT_ARROW : 37,
+    RIGHT_ARROW : 39,
+    DOWN_ARROW : 40
+};
 
 var stateContainer = [
-                {   enter: enterMenu, // Main menu state.
-                    update: updateMenu,
-                    exit: exitMenu
-                },
-                {   enter: enterGame, // Game state.
-                    update: updateGame,
-                    exit: exitGame
-                },
-                {   enter: enterHelp, // Help state.
-                    update: updateHelp,
-                    exit: exitHelp
-                }
-             ];
+    {   enter: enterMenu, // Main menu state.
+        update: updateMenu,
+        exit: exitMenu
+    },
+    {   enter: enterGame, // Game state.
+        update: updateGame,
+        exit: exitGame
+    },
+    {   enter: enterHelp, // Help state.
+        update: updateHelp,
+        exit: exitHelp
+    }
+];
 
 
 // These two variables should be indices for the states array.
@@ -75,47 +81,69 @@ var currState = -1;
 
 // The buttons array stores information about all buttons for my simple UI that just changes states.
 var buttons = [
-                 {   img:"Resources/Images/btnStart.png",// Start button
-                     imgO:"Resources/Images/btnStartO.png",
-                     x:448,
-                     y:512,
-                     w:128,
-                     h:32,
-                     over:false,
-                     click:onStartClick
-                 },
-                {    img:"Resources/Images/btnHelp.png", // Help button
-                     imgO:"Resources/Images/btnHelpO.png",
-                     x:64,
-                     y:704,
-                     w:128,
-                     h:32,
-                     over:false,
-                     click:onHelpClick
-                },
-                {    img:"Resources/Images/btnExit.png", // Exit button
-                     imgO:"Resources/Images/btnExitO.png",
-                     x:832,
-                     y:704,
-                     w:128,
-                     h:32,
-                     over:false,
-                     click:onExitClick
-                }
-            ];
+    {   img:"Resources/Images/btnStart.png",// Start button
+        imgO:"Resources/Images/btnStartO.png",
+        x:448,
+        y:512,
+        w:128,
+        h:32,
+        over:false,
+        click:onStartClick
+    },
+    {    img:"Resources/Images/btnHelp.png", // Help button
+        imgO:"Resources/Images/btnHelpO.png",
+        x:64,
+        y:704,
+        w:128,
+        h:32,
+        over:false,
+        click:onHelpClick
+    },
+    {    img:"Resources/Images/btnExit.png", // Exit button
+        imgO:"Resources/Images/btnExitO.png",
+        x:832,
+        y:704,
+        w:128,
+        h:32,
+        over:false,
+        click:onExitClick
+    }
+];
 
 // Player Characteristics
 var player ={
-                x: _canvas.width/2,
-                y: _canvas.height-100, //y:canvas.height/2,
-                width: 64, // To ensure not to touch the outside of the canvas or wall, etc
-                height: 64, // MAKE SURE TO CHANGE THIS FOR DIFFERENT SPRITE!!!!
-                speed: 6, // Maximum player speed
-                velX: 0, // To ensure that the player can navigate at different speeds, not just one const
-                velY: 0,
-                jumping:false,//crouch??
-                img:new Image()
-            };
+    x: 64,
+    y: 640, //y:canvas.height/2,
+    width: 64, // To ensure not to touch the outside of the canvas or wall, etc
+    height: 64, // MAKE SURE TO CHANGE THIS FOR DIFFERENT SPRITE!!!!
+    speed: 6, // Maximum player speed
+    velX: 0, // To ensure that the player can navigate at different speeds, not just one const
+    velY: 0,
+    img: playerImages[1],
+
+    //Animation properties/methods
+    direction: 1, //1 is facing right, 0 is facing left
+    idle: true, //true by default
+    running: false, //false by default
+    jumping: false, //false by default
+    frameIndex: 0,
+    currentFrame: 0,
+    framesPerSprite: 3, //the number of frames the individual sprite will be drawn for
+    animate: function()//animates the player, gets called from updateAnimation function
+    {
+        this.currentFrame++;
+        if(this.currentFrame == this.framesPerSprite)
+        {
+            this.frameIndex++;
+            this.currentFrame = 0;
+            if(this.frameIndex == 10)
+            {
+                this.frameIndex = 0;
+            }
+        }
+    }
+
+};
 
 var tiles = [];
 var numOfTotalTiles = 25;
@@ -165,7 +193,9 @@ function loadAssets(event)
         buttons[i].imgO = tempBtnO;
     }
 
-    player.img.src = "Resources/Images/playerProto1.png";
+    //Load player images
+    playerImages[0].src = "Resources/Images/Player/playerLeft2.png";
+    playerImages[1].src = "Resources//Images/Player/playerRight2.png";
 }
 
 function onAssetLoad(event)
@@ -237,20 +267,38 @@ function checkInput()
 {
     if (aPressed == true) // left
     {
+        player.dir = 0;
+        player.idle = false;
+        player.running = true;
+        player.img = playerImages[PlayerImageType.PLAYER_LEFT];
         if (player.velX > -player.speed)
         {
             player.velX--;
         }
     }
-    else if (dPressed == true)
+    else if (dPressed == true) // Right
     {
+        player.dir = 1;
+        player.idle = false;
+        player.running = true;
+        player.img = playerImages[PlayerImageType.PLAYER_RIGHT];
         if (player.velX < player.speed)
         {
             player.velX++;
         }
     }
-    if (wPressed == true)
+    else if(player.jumping == false)
     {
+        player.idle = true;
+        player.running = false;
+        if (player.dir == 1)
+            player.img = playerImages[PlayerImageType.PLAYER_RIGHT];
+        else
+            player.img = playerImages[PlayerImageType.PLAYER_LEFT];
+    }
+    if (wPressed == true) // Jump
+    {
+        player.idle = false;
         if(!player.jumping)
         {
             player.jumping = true;
@@ -286,6 +334,11 @@ function checkInput()
         player.y = _canvas.height - player.height - tileSize/2;
         player.jumping = false;
     }
+}
+
+function updateAnimation()
+{
+    player.animate();
 }
 
 function changeState(stateToRun)
@@ -434,6 +487,7 @@ function updateGame()
     checkButtons();
     render();
     checkInput();
+    updateAnimation();
 }
 
 function exitGame()
@@ -509,8 +563,23 @@ function render()
                 }
             }
         }
-        //Render player image
-        surface.drawImage(player.img, player.x, player.y);
+
+
+        //DRAW PLAYER
+        if (player.idle == true)
+            surface.drawImage(player.img,
+                0, 0, player.width, player.height,
+                player.x, player.y, player.width, player.height);
+        else if(player.jumping == true)
+            surface.drawImage(player.img,
+                player.dir ? player.width*2 : player.width*7 , 256, player.width, player.height,
+                player.x, player.y, player.width, player.height);
+        else if(player.running == true)
+            surface.drawImage(player.img,
+                player.frameIndex*player.width, 128, player.width, player.height,
+                player.x, player.y, player.width, player.height);
+
+
     }
 
     for (var i = 0; i < activeBtns.length; i++)
