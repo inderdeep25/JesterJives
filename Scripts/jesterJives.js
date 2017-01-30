@@ -3,10 +3,12 @@ var _canvas = document.querySelector("canvas");
 _canvas.width = 1024;
 _canvas.height = 768;
 var surface = _canvas.getContext("2d");
-var tileSize = 64;
+var tileSize = 128;
 var numOfColumns = _canvas.width/tileSize;
 var numOfRows = _canvas.height/tileSize;
-var numOfMaxLandTilesInRow = 9;
+console.log("Col : " + numOfColumns + ", Row : " + numOfRows);
+var numOfMaxLandTilesInRow = 3;
+var previousTileType = -1;
 /* states is an array of objects where each object is a state with an enter, update and exit function. These
  functions get called in the changeState function. */
 
@@ -32,7 +34,10 @@ var TileType = {
                     BOTTOM_HORIZONTAL : 8,
                     LEFT_VERTICAL : 3,
                     RIGHT_VERTICAL : 5,
-                    LAND_TILE : 14,
+                    LAND_TILE_2: 24,
+                    LAND_TILE_4 : 21,
+                    LAND_TILE_L:22,
+                    LAND_TILE_L_OPP:23,
                     TRAP_TILE : 19
 
                 };
@@ -113,7 +118,7 @@ var player ={
             };
 
 var tiles = [];
-var numOfTotalTiles = 20;
+var numOfTotalTiles = 25;
 for(var i = 1 ; i <= numOfTotalTiles ; i++){
     tiles[i-1] = "Resources/Images/Tiles/Tile (" + i + ").png";
 }
@@ -268,17 +273,17 @@ function checkInput()
     player.velX *= friction;
     player.velY += gravity;
 
-    if (player.x >= _canvas.width-player.width - tileSize)
+    if (player.x >= _canvas.width-player.width - tileSize/2)
     {
-        player.x = _canvas.width-player.width - tileSize;
+        player.x = _canvas.width-player.width - tileSize/2;
     }
-    else if (player.x <= 0 + tileSize)
+    else if (player.x <= tileSize/2)
     {
-        player.x = 0 + tileSize;
+        player.x = tileSize/2;
     }
 
-    if(player.y >= _canvas.height-player.height - tileSize){
-        player.y = _canvas.height - player.height - tileSize;
+    if(player.y >= _canvas.height-player.height - tileSize/2){
+        player.y = _canvas.height - player.height - tileSize/2;
         player.jumping = false;
     }
 }
@@ -332,7 +337,6 @@ function enterGame()
 function generateMap()
 {
     setupEmptyMapArray();
-    setupBorderTiles();
     generateRandomLandTiles();
 }
 
@@ -343,57 +347,71 @@ function generateRandomLandTiles()
 
     for(var i = 1 ; i < numOfRows - 1; i++)
     {
-        for ( var j = 1 ; j < numOfColumns - 1; j++)
+        for ( var j = 1 ; j < (numOfColumns - 1); j++)
         {
             var rand = Math.random() * 10;
 
-            if( i%2==0 && rand > 3 && rand < 9 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
+            if(previousTileType != TileType.LAND_TILE_4 && rand > 0 && rand < 3 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
             {
-                map[i][j] = getImageForPath(tiles[TileType.LAND_TILE]);
+                map[i][j] = getImageForPath(tiles[TileType.LAND_TILE_4]);
                 numOfLandTilesInCurrentRow++;
-            }else if(i%2==0 && rand > 0 && rand <= 3 && (numOfTrapsInCurrentRow + numOfLandTilesInCurrentRow) < (numOfColumns-2))
-            {
-                map[i][j] = getImageForPath(tiles[TileType.TRAP_TILE]);
-                numOfTrapsInCurrentRow++;
+                previousTileType = TileType.LAND_TILE_4;
             }
+            else if(previousTileType != TileType.LAND_TILE_2 && rand > 3 && rand < 6 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
+            {
+                map[i][j] = getImageForPath(tiles[TileType.LAND_TILE_2]);
+                numOfLandTilesInCurrentRow++;
+                previousTileType = TileType.LAND_TILE_2;
+            }
+            else if(previousTileType != TileType.LAND_TILE_L && rand > 6 && rand < 9 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
+            {
+                map[i][j] = getImageForPath(tiles[TileType.LAND_TILE_L]);
+                numOfLandTilesInCurrentRow++;
+                previousTileType = TileType.LAND_TILE_L;
+            }
+            // else if(i%2==0 && rand > 0 && rand <= 3 && (numOfTrapsInCurrentRow + numOfLandTilesInCurrentRow) < (numOfColumns-2))
+            // {
+            //     map[i][j] = getImageForPath(tiles[TileType.TRAP_TILE]);
+            //     numOfTrapsInCurrentRow++;
+            // }
 
         }
         numOfLandTilesInCurrentRow = 0;
     }
 }
 
-function setupBorderTiles()
+function renderBorderTiles()
 {
     var i, j;
 
     //setup corner images
-    map[0][0] = getImageForPath(tiles[TileType.TOP_LEFT]);
-    map[0][numOfColumns-1] = getImageForPath(tiles[TileType.TOP_RIGHT]);
-    map[numOfRows-1][0] = getImageForPath(tiles[TileType.BOTTOM_LEFT]);
-    map[numOfRows-1][numOfColumns-1] = getImageForPath(tiles[TileType.BOTTOM_RIGHT]);
+    surface.drawImage(getImageForPath(tiles[TileType.TOP_LEFT]), 0, 0);
+    surface.drawImage(getImageForPath(tiles[TileType.TOP_RIGHT]), 7.5*tileSize, 0);
+    surface.drawImage(getImageForPath(tiles[TileType.BOTTOM_LEFT]), 0, 5.5*tileSize);
+    surface.drawImage(getImageForPath(tiles[TileType.BOTTOM_RIGHT]), 7.5*tileSize, 5.5*tileSize);
 
     //setup top horizontal tiles
-    for ( i = 1 ; i < numOfColumns-1; i++)
+    for ( i = 1 ; i < 15 ; i++)
     {
-        map[0][i] = getImageForPath(tiles[TileType.TOP_HORIZONTAL]);
+        surface.drawImage(getImageForPath(tiles[TileType.TOP_HORIZONTAL]) , i * tileSize/2, 0);
     }
 
     //setup bottom horizontal tiles
-    for ( i = 1 ; i < numOfColumns-1; i++)
+    for ( i = 1 ; i < 15; i++)
     {
-        map[numOfRows-1][i] = getImageForPath(tiles[TileType.BOTTOM_HORIZONTAL]);
+        surface.drawImage(getImageForPath(tiles[TileType.BOTTOM_HORIZONTAL]) , i * tileSize/2, 5.5*tileSize);
     }
 
     //setup left vertical tiles
-    for ( j = 1 ; j < numOfRows-1; j++)
+    for ( j = 1 ; j < 11; j++)
     {
-        map[j][0] = getImageForPath(tiles[TileType.LEFT_VERTICAL]);
+        surface.drawImage(getImageForPath(tiles[TileType.LEFT_VERTICAL]),0,j*tileSize/2);
     }
 
     //setup right vertical tiles
-    for ( j = 1 ; j < numOfRows-1; j++)
+    for ( j = 1 ; j < 11; j++)
     {
-        map[j][numOfColumns-1] = getImageForPath(tiles[TileType.RIGHT_VERTICAL]);
+        surface.drawImage(getImageForPath(tiles[TileType.RIGHT_VERTICAL]) , 7.5*tileSize, j*tileSize/2 );
     }
 }
 
@@ -479,13 +497,15 @@ function render()
 
     if(currState == State.GAME_STATE)
     {
+        renderBorderTiles();
+
         for(var i = 0; i < numOfRows ; i++)
         {
             for (var j = 0 ; j < numOfColumns ; j++)
             {
                 if(map[i][j] !== "empty")
                 {
-                    surface.drawImage(map[i][j], j * 64, i * 64);
+                    surface.drawImage(map[i][j], j * tileSize, i * tileSize);
                 }
             }
         }
