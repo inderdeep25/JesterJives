@@ -402,7 +402,7 @@ function generateRandomLandTiles()
     {
         for ( var j = 1 ; j < (numOfColumns - 1); j++)
         {
-            var rand = Math.random() * 10;
+            var rand = Math.round(Math.random() * 10);
 
             if(previousTileType != TileType.LAND_TILE_4 && rand > 0 && rand < 3 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
             {
@@ -422,11 +422,11 @@ function generateRandomLandTiles()
                 numOfLandTilesInCurrentRow++;
                 previousTileType = TileType.LAND_TILE_L;
             }
-            // else if(i%2==0 && rand > 0 && rand <= 3 && (numOfTrapsInCurrentRow + numOfLandTilesInCurrentRow) < (numOfColumns-2))
-            // {
-            //     map[i][j] = getImageForPath(tiles[TileType.TRAP_TILE]);
-            //     numOfTrapsInCurrentRow++;
-            // }
+            else if(rand % 2 == 0 && rand > 2 && rand < 8)
+            {
+                map[i][j] = getImageForPath(tiles[TileType.TRAP_TILE]);
+                numOfTrapsInCurrentRow++;
+            }
 
         }
         numOfLandTilesInCurrentRow = 0;
