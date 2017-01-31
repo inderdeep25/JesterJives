@@ -184,7 +184,7 @@ var SubTileCoordinates = [
                             }
                          ];
 
-var TileCoordinatesMap = [
+var TileDetails = [
                             {
                                 numOfSubTiles:4,
                                 emptyTilePosition:[0]
@@ -209,7 +209,9 @@ for(var i = 1 ; i <= numOfTotalTiles ; i++){
     tiles[i-1] = "Resources/Images/Tiles/Tile (" + i + ").png";
 }
 
-var map = [];
+var collidableTiles = [];
+var indexForCollidableTiles = 0;
+var tileMap = [];
 
 // The activeBtns array is set in each enter function for each state and holds the buttons currently on screen.
 var activeBtns = [];
@@ -379,6 +381,7 @@ function checkInput()
     player.velX *= friction;
     player.velY += gravity;
 
+    //Boundary collision checks
     if (player.x >= _canvas.width-player.width - tileSize/2)
     {
         player.x = _canvas.width-player.width - tileSize/2;
@@ -460,36 +463,89 @@ function generateRandomLandTiles()
     {
         for ( var j = 1 ; j < (numOfColumns - 1); j++)
         {
-            var rand = Math.round(Math.random() * 10);
+            var rand = Math.round(Math.random() * 13);
+            var data = "empty";
 
             if(previousTileType != TileType.LAND_TILE_4 && rand > 0 && rand < 3 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
             {
-                map[i][j] = getImageForPath(tiles[TileType.LAND_TILE_4]);
+                data = {
+                            img:getImageForPath(tiles[TileType.LAND_TILE_4]),
+                            tileDetails:TileDetails[LandTile.WITH_4_SUB_TILES]
+                       };
+
                 numOfLandTilesInCurrentRow++;
                 previousTileType = TileType.LAND_TILE_4;
+                // collidableTiles[indexForCollidableTiles] =
             }
             else if(previousTileType != TileType.LAND_TILE_2 && rand > 3 && rand < 6 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
             {
-                map[i][j] = getImageForPath(tiles[TileType.LAND_TILE_2]);
+                data = {
+                            img:getImageForPath(tiles[TileType.LAND_TILE_2]),
+                            tileDetails:TileDetails[LandTile.WITH_2_SUB_TILES]
+                        };
                 numOfLandTilesInCurrentRow++;
                 previousTileType = TileType.LAND_TILE_2;
             }
             else if(previousTileType != TileType.LAND_TILE_L && rand > 6 && rand < 9 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
             {
-                map[i][j] = getImageForPath(tiles[TileType.LAND_TILE_L]);
+                data = {
+                            img:getImageForPath(tiles[TileType.LAND_TILE_L]),
+                            tileDetails:TileDetails[LandTile.WITH_3_SUB_TILES]
+                       };
                 numOfLandTilesInCurrentRow++;
                 previousTileType = TileType.LAND_TILE_L;
             }
+            else if(previousTileType != TileType.LAND_TILE_L_OPP && rand > 9 && rand < 12 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
+            {
+                data = {
+                            img:getImageForPath(tiles[TileType.LAND_TILE_L_OPP]),
+                            tileDetails:TileDetails[LandTile.WITH_3_SUB_TILES_OPP]
+                        };
+                numOfLandTilesInCurrentRow++;
+                previousTileType = TileType.WITH_3_SUB_TILES_OPP;
+            }
             else if(rand % 2 == 0 && rand > 2 && rand < 8)
             {
-                map[i][j] = getImageForPath(tiles[TileType.TRAP_TILE]);
+                data = {
+                            img:getImageForPath(tiles[TileType.TRAP_TILE]),
+                            tileDetails:[]
+                       };
+                tileMap[i][j] = getImageForPath(tiles[TileType.TRAP_TILE]);
                 numOfTrapsInCurrentRow++;
+                previousTileType = TileType.TRAP_TILE;
             }
+
+            if(data != "empty")
+            {
+                setCollisionTilesDataFor(previousTileType,i,j);
+            }
+
+            tileMap[i][j] = data;
 
         }
         numOfLandTilesInCurrentRow = 0;
     }
 }
+
+function setCollisionTilesDataFor(tileType,i,j)
+{
+    if(tileType==TileType.LAND_TILE_4)
+    {
+
+    }
+    else if (tileType==TileType.LAND_TILE_2)
+    {
+
+    }
+    else if (tileType==TileType.LAND_TILE_L)
+    {
+
+    }
+    else if (tileType==TileType.LAND_TILE_L_OPP)
+    {
+
+    }
+};
 
 function renderBorderTiles()
 {
@@ -531,10 +587,10 @@ function setupEmptyMapArray()
     var i = 0 , j = 0 ;
     for (i = 0 ; i < numOfRows ; i++)
     {
-        map[i] = [];
+        tileMap[i] = [];
         for(j = 0 ; j < numOfColumns; j++)
         {
-            map[i][j] = "empty";
+            tileMap[i][j] = "empty";
         }
     }
 }
@@ -615,9 +671,9 @@ function render()
         {
             for (var j = 0 ; j < numOfColumns ; j++)
             {
-                if(map[i][j] !== "empty")
+                if(tileMap[i][j] !== "empty")
                 {
-                    surface.drawImage(map[i][j], j * tileSize, i * tileSize);
+                    surface.drawImage(tileMap[i][j].img, j * tileSize, i * tileSize);
                 }
             }
         }
