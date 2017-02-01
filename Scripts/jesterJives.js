@@ -387,17 +387,15 @@ function checkInput()
     player.velX *= friction;
     player.velY += gravity;
 
-    if (player.x >= _canvas.width-player.width - tileSize/2)
-    {
-        player.x = _canvas.width-player.width - tileSize/2;
+    if (player.x >= _canvas.width - player.width - tileSize / 2) {
+        player.x = _canvas.width - player.width - tileSize / 2;
     }
-    else if (player.x <= tileSize/2)
-    {
-        player.x = tileSize/2;
+    else if (player.x <= tileSize / 2) {
+        player.x = tileSize / 2;
     }
 
-    if(player.y >= _canvas.height-64 - tileSize/2){
-        player.y = _canvas.height - 64 - tileSize/2;
+    if (player.y >= _canvas.height - 64 - tileSize / 2) {
+        player.y = _canvas.height - 64 - tileSize / 2;
         player.jumping = false;
     }
 
@@ -407,29 +405,23 @@ function checkInput()
 function handleCollisionWithTiles(){
 
 
-    for(var i = 0; i < collidableTiles.length ; i++)
-    {
-        var firstChk = (player.y + 2> collidableTiles[i].y + collidableTiles[i].height);
-        var secondChk = (player.y + player.height  - 2< collidableTiles[i].y);
-        var thirdChk = (player.x + 2> collidableTiles[i].x + collidableTiles[i].width);
-        var fourthChk = (player.x + player.width - 2< collidableTiles[i].x);
+    for(var i = 0; i < collidableTiles.length ; i++) {
+        var firstChk = (player.y + 2 > collidableTiles[i].y + collidableTiles[i].height);
+        var secondChk = (player.y + player.height - 2 < collidableTiles[i].y);
+        var thirdChk = (player.x + 2 > collidableTiles[i].x + collidableTiles[i].width);
+        var fourthChk = (player.x + player.width - 2 < collidableTiles[i].x);
 
-        // console.log(collidableTiles[i]);
-        if( firstChk == false &&
+        if (firstChk == false &&
             secondChk == false &&
             thirdChk == false &&
-            fourthChk == false)
-        {
-            console.log(("length : " + collidableTiles.length) + "num of tiles = " + indexForCollidableTiles);
-            console.log("Collided with tile " + collidableTiles[i].x + "," +collidableTiles[i].y + " at index " + i);
-            clearInterval(updateIval);
+            fourthChk == false) {
+
+            if (player.y + player.height >= collidableTiles[i].y) {
+                player.y = collidableTiles[i].y;
+            }
 
         }
     }
-    //
-    // console.log(("length : " + collidableTiles.length) + "num of tiles = " + indexForCollidableTiles);
-    // clearInterval(updateIval);
-
 }
 
 function updateAnimation()
