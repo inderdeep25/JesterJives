@@ -409,22 +409,26 @@ function handleCollisionWithTiles(){
 
     for(var i = 0; i < collidableTiles.length ; i++)
     {
-        var firstChk = (player.y > collidableTiles[i].y + collidableTiles[i].height);
-        var secondChk = (player.y + collidableTiles[i].height < collidableTiles[i].y);
-        var thirdChk = (player.x > collidableTiles[i].x + collidableTiles[i].width);
-        var fourthChk = (player.x + collidableTiles[i].width < collidableTiles[i].x);
+        var firstChk = (player.y + 2> collidableTiles[i].y + collidableTiles[i].height);
+        var secondChk = (player.y + player.height  - 2< collidableTiles[i].y);
+        var thirdChk = (player.x + 2> collidableTiles[i].x + collidableTiles[i].width);
+        var fourthChk = (player.x + player.width - 2< collidableTiles[i].x);
 
-        console.log(collidableTiles[i]);
+        // console.log(collidableTiles[i]);
         if( firstChk == false &&
             secondChk == false &&
             thirdChk == false &&
             fourthChk == false)
         {
-
-            console.log("You Crashed");
+            console.log(("length : " + collidableTiles.length) + "num of tiles = " + indexForCollidableTiles);
+            console.log("Collided with tile " + collidableTiles[i].x + "," +collidableTiles[i].y + " at index " + i);
+            clearInterval(updateIval);
 
         }
     }
+    //
+    // console.log(("length : " + collidableTiles.length) + "num of tiles = " + indexForCollidableTiles);
+    // clearInterval(updateIval);
 
 }
 
@@ -549,7 +553,7 @@ function generateRandomLandTiles()
 
             if(data != "empty")
             {
-                setCollisionTilesDataFor(previousTileType,i-1,j-1);
+                setCollisionTilesDataFor(previousTileType,j,i);
             }
 
             tileMap[i][j] = data;
@@ -559,30 +563,31 @@ function generateRandomLandTiles()
     }
 }
 
-function setCollisionTilesDataFor(tileType,i,j)
+function setCollisionTilesDataFor(tileType,posInRow,posInCol)
 {
+    indexForCollidableTiles++;
     if(tileType==TileType.LAND_TILE_4)
     {
-        var tile1 = {x:i*64+tileSize,
-                     y:j*64+tileSize,
+        var tile1 = {x:posInRow*tileSize,
+                     y:posInCol*tileSize,
                      width:64,
                      height:64
                     };
 
-        var tile2 = {x:i*64+tile1.width+tileSize,
-                     y:j*64+tileSize,
+        var tile2 = {x:posInRow*tileSize+64,
+                     y:posInCol*tileSize,
                      width:64,
                      height:64
                     };
 
-        var tile3 = {x:i*64+tileSize,
-                     y:j*64+tile2.height+tileSize,
+        var tile3 = {x:posInRow*tileSize,
+                     y:posInCol*tileSize+64,
                      width:64,
                      height:64
                     };
 
-        var tile4 = {x:i*64+tile1.width+tileSize,
-                     y:j*64+tile1.height+tileSize,
+        var tile4 = {x:posInRow*tileSize+64,
+                     y:posInCol*tileSize+64,
                      width:64,
                      height:64
                     };
@@ -596,38 +601,37 @@ function setCollisionTilesDataFor(tileType,i,j)
     }
     else if (tileType==TileType.LAND_TILE_2)
     {
-        var tile1 = {x:i*64+tileSize,
-            y:j*64+tileSize,
+        var tile1 = {x:posInRow*tileSize,
+            y:posInCol*tileSize,
             width:64,
             height:64
         };
 
-        var tile2 = {x:i*64+tile1.width+tileSize,
-            y:j*64+tileSize,
+        var tile2 = {x:posInRow*tileSize+64,
+            y:posInCol*tileSize,
             width:64,
             height:64
         };
-
 
         collidableTiles.push(tile1);
         collidableTiles.push(tile2);
     }
     else if (tileType==TileType.LAND_TILE_L)
     {
-        var tile1 = {x:i*64+tileSize,
-            y:j*64+tileSize,
+        var tile1 = {x:posInRow*tileSize,
+            y:posInCol*tileSize,
             width:64,
             height:64
         };
 
-        var tile3 = {x:i*64+tileSize,
-            y:j*64+tile1.height+tileSize,
+        var tile3 = {x:posInRow*tileSize,
+            y:posInCol*tileSize+64,
             width:64,
             height:64
         };
 
-        var tile4 = {x:i*64+tile1.width+tileSize,
-            y:j*64+tile1.height+tileSize,
+        var tile4 = {x:posInRow*tileSize+64,
+            y:posInCol*tileSize+64,
             width:64,
             height:64
         };
@@ -638,20 +642,20 @@ function setCollisionTilesDataFor(tileType,i,j)
     }
     else if (tileType==TileType.LAND_TILE_L_OPP)
     {
-        var tile1 = {x:i*64+tileSize,
-            y:j*64+tileSize,
+        var tile1 = {x:posInRow*tileSize,
+            y:posInCol*tileSize,
             width:64,
             height:64
         };
 
-        var tile2 = {x:i*64+tile1.width+tileSize,
-            y:j*64+tileSize,
+        var tile2 = {x:posInRow*tileSize+64,
+            y:posInCol*tileSize,
             width:64,
             height:64
         };
 
-        var tile4 = {x:i*64+tile1.width+tileSize,
-            y:j*64+tile1.height+tileSize,
+        var tile4 = {x:posInRow*tileSize+64,
+            y:posInCol*tileSize+64,
             width:64,
             height:64
         };
