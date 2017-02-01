@@ -10,6 +10,9 @@ console.log("Col : " + numOfColumns + ", Row : " + numOfRows);
 var numOfMaxLandTilesInRow = 3;
 var previousTileType = -1;
 var playerImages = [new Image(), new Image()];
+
+var playerSpriteWidth = 64; //These are used for height and width of sprite on the spritesheet
+var playerSpriteHeight = 64;//Only change if sprite sheet is changed
 /* states is an array of objects where each object is a state with an enter, update and exit function. These
  functions get called in the changeState function. */
 
@@ -139,6 +142,7 @@ var player = {
                 idle: true, //true by default
                 running: false, //false by default
                 jumping: false, //false by default
+                crouching: false,
                 frameIndex: 0,
                 currentFrame: 0,
                 framesPerSprite: 3, //the number of frames the individual sprite will be drawn for
@@ -325,7 +329,19 @@ function onKeyUp(event)
 
 function checkInput()
 {
-    if (aPressed == true) // left
+    if(sPressed == false)
+    {
+        player.crouching = false;
+        player.height = 64;
+    }
+    if (sPressed == true)
+    {
+        player.crouching = true;
+        player.height = 32;
+        player.idle = false;
+        player.running = false;
+    }
+    else if (aPressed == true) // left
     {
         player.dir = 0;
         player.idle = false;
@@ -365,23 +381,12 @@ function checkInput()
             player.velY = -player.speed*2
         }
     }
-    /*else if (sPressed == true)
-     {
-     player.height = 32;
-     player.img.src = "../Resources/Images/playerProto2.png";
-     }
-     else if(sPressed == false)
-     {
-     player.height = 64;
-     player.img.src = "../Resources/Images/playerProto1.png";
-     }*/
 
     player.x += player.velX;
     player.y += player.velY;
     player.velX *= friction;
     player.velY += gravity;
 
-    //Boundary collision checks
     if (player.x >= _canvas.width-player.width - tileSize/2)
     {
         player.x = _canvas.width-player.width - tileSize/2;
@@ -391,8 +396,8 @@ function checkInput()
         player.x = tileSize/2;
     }
 
-    if(player.y >= _canvas.height-player.height - tileSize/2){
-        player.y = _canvas.height - player.height - tileSize/2;
+    if(player.y >= _canvas.height-64 - tileSize/2){
+        player.y = _canvas.height - 64 - tileSize/2;
         player.jumping = false;
     }
 }
@@ -681,17 +686,23 @@ function render()
 
         //DRAW PLAYER
         if (player.idle == true)
+        {
             surface.drawImage(player.img,
-                0, 0, player.width, player.height,
-                player.x, player.y, player.width, player.height);
+                0, 0, playerSpriteWidth, playerSpriteHeight,
+                player.x-18, player.y, playerSpriteWidth, playerSpriteHeight);
+        }
+        else if(player.crouching == true)
+            surface.drawImage(player.img,
+                player.dir ? playerSpriteWidth*7 : playerSpriteWidth*2, 256, playerSpriteWidth, playerSpriteHeight,
+                player.x-18, player.y, playerSpriteWidth, playerSpriteHeight);
         else if(player.jumping == true)
             surface.drawImage(player.img,
-                player.dir ? player.width*2 : player.width*7 , 256, player.width, player.height,
-                player.x, player.y, player.width, player.height);
+                player.dir ? playerSpriteWidth*2 : playerSpriteWidth*7 , 256, playerSpriteWidth, playerSpriteHeight,
+                player.x-18, player.y, playerSpriteWidth, playerSpriteHeight);
         else if(player.running == true)
             surface.drawImage(player.img,
-                player.frameIndex*player.width, 128, player.width, player.height,
-                player.x, player.y, player.width, player.height);
+                player.frameIndex*playerSpriteWidth, 128, playerSpriteWidth, playerSpriteHeight,
+                player.x-18, player.y, playerSpriteWidth, playerSpriteHeight);
 
 
     }
