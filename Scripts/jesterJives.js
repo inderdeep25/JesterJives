@@ -10,6 +10,7 @@ console.log("Col : " + numOfColumns + ", Row : " + numOfRows);
 var numOfMaxLandTilesInRow = 3;
 var previousTileType = -1;
 var playerImages = [new Image(), new Image()];
+var screens = [new Image(), new Image()];
 
 var playerSpriteWidth = 64; //These are used for height and width of sprite on the spritesheet
 var playerSpriteHeight = 64;//Only change if sprite sheet is changed
@@ -20,13 +21,14 @@ var State = {
                 MENU_STATE : 0,
                 GAME_STATE : 1,
                 HELP_STATE : 2,
-                CREDITS_STATE : 3
+                GAMEOVER_STATE : 3
             };
 
 var buttonType = {
                     START : 0,
                     HELP : 1,
-                    EXIT : 2
+                    EXIT : 2,
+					TRYAGAIN: 3
                  };
 
 
@@ -91,7 +93,12 @@ var stateContainer = [
                         {   enter: enterHelp, // Help state.
                             update: updateHelp,
                             exit: exitHelp
-                        }
+                        },
+						{
+							enter: enterGameOver,//Game over state
+							update: updateGameOver,
+							exit: exitGameOver
+						}
                     ];
 
 
@@ -103,10 +110,10 @@ var currState = -1;
 var buttons = [
                 {   img:"Resources/Images/btnStart.png",// Start button
                     imgO:"Resources/Images/btnStartO.png",
-                    x:448,
+                    x:273,
                     y:512,
-                    w:128,
-                    h:32,
+                    w:478,
+                    h:141,
                     over:false,
                     click:onStartClick
                 },
@@ -127,7 +134,17 @@ var buttons = [
                     h:32,
                     over:false,
                     click:onExitClick
-                }
+                },
+				{
+					img: "Resources/Images/btnTryAgain.png",//Try again button
+					imgO: "Resources/Images/btnTryAgainO.png",
+					x: 273,
+					y: 412,
+					w: 478,
+					h: 141,
+					over: false,
+					click: onTryAgainClick
+				}
             ];
 
 // Player Characteristics
@@ -216,6 +233,7 @@ var background = [];
 var backRows = (_canvas.width - 128) / 32;
 var backCols = (_canvas.height - 128) / 32;
 
+var traps = [];
 var tiles = [];
 var numOfTotalTiles = 29;
 for(var i = 1 ; i <= numOfTotalTiles ; i++){
@@ -223,37 +241,50 @@ for(var i = 1 ; i <= numOfTotalTiles ; i++){
 }
 
 var fire =
-    {
-        isTrap: true,
-        img:getImageForPath(tiles[TileType.TRAP_TILE]),
-        x: 0,//used for finding collision
-        y: 0,
-
-        //Animation properties/methods
-        frameIndex: 0,
-        currentFrame: 0,
-        framesPerSprite: 4, //the number of frames the individual sprite will be drawn for
-
-        animate: function()
+{
+	isTrap: true,
+	img:getImageForPath(tiles[TileType.TRAP_TILE]),
+	x: 0,//used for finding collision
+	y: 0,
+	
+	//Animation properties/methods
+	frameIndex: 0,
+    currentFrame: 0,
+    framesPerSprite: 4, //the number of frames the individual sprite will be drawn for
+	
+	animate: function()
+	{
+		
+        this.currentFrame++;
+        if(this.currentFrame == this.framesPerSprite)
         {
-
-            this.currentFrame++;
-            if(this.currentFrame == this.framesPerSprite)
+            this.frameIndex++;
+            this.currentFrame = 0;
+            if(this.frameIndex == 3)
             {
-                this.frameIndex++;
-                this.currentFrame = 0;
-                if(this.frameIndex == 3)
-                {
-                    this.frameIndex = 0;
-                }
+                this.frameIndex = 0;
             }
-        }
-
-        /*activate: function()
-         {
-
-         }*/
-    };
+        }		
+	},
+	
+	activate: function()
+	{
+		if
+		(player.y < this.y+64 
+		&& player.y+64 > this.y 
+		&& player.x < this.x+64 
+		&& player.x+64 > this.x)
+		{
+			setTimeout(
+			function(){changeState(State.GAMEOVER_STATE);
+			player.x = 64;
+			player.y = 640;
+			player.velX = 0;
+			player.velY = 0;}, 250
+			)
+		}
+	}
+};
 
 
 var collidableTiles = [];
@@ -303,6 +334,10 @@ function loadAssets(event)
     //Load player images
     playerImages[0].src = "Resources/Images/Player/playerLeft2.png";
     playerImages[1].src = "Resources/Images/Player/playerRight2.png";
+	
+	//Load screen images
+	screens[0].src = "Resources/Images/titleScreen.png";
+	screens[1].src = "Resources/Images/gameOverScreen.png";
 }
 
 function onAssetLoad(event)
@@ -377,6 +412,7 @@ function onKeyUp(event)
         case KeyCode.R:
             if(currState == State.GAME_STATE)
             {
+		traps = [];
                 collidableTiles = [];
                 onStartClick();
             }
@@ -535,9 +571,23 @@ function generateBackground()
     }
 }
 
-function updateAnimation()
+function updateAnimation()//called from updateGame
 {
     player.animate();
+	animateTraps();
+}
+
+function animateTraps()//called from updateAnimation
+{
+	fire.animate();
+}
+
+function activateTraps()//called from updateGame
+{
+	for(var i = 0; i < traps.length; i++)
+	{
+		traps[i].activate();
+	}
 }
 
 function changeState(stateToRun)
@@ -558,10 +608,29 @@ function changeState(stateToRun)
         console.log("Invalid stateToRun!");
 }
 
+function enterGameOver()
+{
+	console.log("Entering game over state.");
+	_stage.style.backgroundColor = "darkRed";
+	activeBtns = [ buttons[buttonType.TRYAGAIN] ];
+}
+
+function updateGameOver()
+{
+	console.log("In game over state");
+	checkButtons();
+	render();
+}
+
+function exitGameOver()
+{
+	console.log("Exiting game over state");
+}
+
 function enterMenu()
 {
     console.log("Entering menu state.");
-    _stage.style.backgroundColor = "cyan";
+    _stage.style.backgroundColor = "darkRed";
     activeBtns = [ buttons[buttonType.START] ];
 }
 
@@ -581,7 +650,7 @@ function exitMenu()
 function enterGame()
 {
     console.log("Entering game state.");
-    _stage.style.backgroundColor = "grey";
+    _stage.style.backgroundColor = "black";
     activeBtns = [ buttons[buttonType.HELP], buttons[buttonType.EXIT] ];
     generateMap();
 }
@@ -645,12 +714,12 @@ function generateRandomLandTiles()
                 numOfLandTilesInCurrentRow++;
                 previousTileType = TileType.LAND_TILE_L_OPP;
             }
-            else if(rand % 2 == 0 && rand > 2 && rand < 8)
+            else if(rand % 2 == 0 && rand > 2 && rand < 8)//Traps
             {
-                data = {
-                            img:getImageForPath(tiles[TileType.TRAP_TILE]),
-                            tileDetails:[]
-                       };
+                data = Object.create(fire);
+				data.x = j*tileSize;
+				data.y = i*tileSize;
+				traps.push(data);
 
                 numOfTrapsInCurrentRow++;
                 previousTileType = TileType.TRAP_TILE;
@@ -838,6 +907,7 @@ function updateGame()
     render();
     checkInput();
     updateAnimation();
+	activateTraps();
 }
 
 function exitGame()
@@ -898,7 +968,14 @@ function render()
 {
     surface.clearRect(0, 0, _canvas.width, _canvas.height);
     document.body.style.cursor = "default";
-
+	if(currState == State.MENU_STATE)
+	{
+		surface.drawImage(screens[0], 0, 0, 1024, 768);
+	}
+	if(currState == State.GAMEOVER_STATE)
+	{
+		surface.drawImage(screens[1], 0, 0, 1024, 768);
+	}
     if(currState == State.GAME_STATE)
     {
         //DRAW BACKGROUND TILES
@@ -916,7 +993,11 @@ function render()
         {
             for (var j = 0 ; j < numOfColumns ; j++)
             {
-                if(tileMap[i][j] !== "empty")
+                if(tileMap[i][j].isTrap == true)
+				{
+					surface.drawImage(tileMap[i][j].img, tileMap[i][j].frameIndex*64, 0, 64, 64, j * tileSize, i * tileSize, 64, 64);
+				}
+                else if(tileMap[i][j] !== "empty" && tileMap[i][j].isTrap !== true)
                 {
                     surface.drawImage(tileMap[i][j].img, j * tileSize, i * tileSize);
                 }
@@ -976,6 +1057,11 @@ function onExitClick()
         changeState(State.MENU_STATE);
     else if (currState == State.HELP_STATE)
         changeState(State.GAME_STATE);
+}
+
+function onTryAgainClick()
+{
+	changeState(State.GAME_STATE);
 }
 
 // This function sets the mouse x and y position as it is on the canvas where 0,0 is top-left of canvas.
