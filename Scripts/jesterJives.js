@@ -72,7 +72,8 @@ var KeyCode = {
                     UP_ARROW : 38,
                     LEFT_ARROW : 37,
                     RIGHT_ARROW : 39,
-                    DOWN_ARROW : 40
+                    DOWN_ARROW : 40,
+                    R : 82
               };
 
 var stateContainer = [
@@ -234,7 +235,7 @@ var dPressed = false;
 var wPressed = false;
 var sPressed = false;
 var friction = 0.9;
-var gravity = 0.4;
+var gravity = 0.3;
 
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
@@ -324,6 +325,14 @@ function onKeyUp(event)
         case KeyCode.S:
             sPressed = false;
             break;
+        case KeyCode.R:
+            if(currState == State.GAME_STATE)
+            {
+                collidableTiles = [];
+                onStartClick();
+            }
+
+            break;
     }
 }
 
@@ -411,14 +420,20 @@ function handleCollisionWithTiles(){
         var thirdChk = (player.x + 2 > collidableTiles[i].x + collidableTiles[i].width);
         var fourthChk = (player.x + player.width - 2 < collidableTiles[i].x);
 
-        if (firstChk == false &&
-            secondChk == false &&
-            thirdChk == false &&
-            fourthChk == false) {
+        if (!firstChk && !secondChk && !thirdChk && ! fourthChk) {
+
 
             if (player.y + player.height >= collidableTiles[i].y) {
-                player.y = collidableTiles[i].y;
+                player.y = collidableTiles[i].y - collidableTiles[i].height;
+                player.jumping = false;
             }
+            // if(player.y < collidableTiles[i].y +collidableTiles[i].height && player.y + player.height > collidableTiles[i].y)
+            // {
+            //     player.y = collidableTiles[i].y + collidableTiles[i].height;
+            // }
+
+
+
 
         }
     }
@@ -530,7 +545,7 @@ function generateRandomLandTiles()
                         };
 
                 numOfLandTilesInCurrentRow++;
-                previousTileType = TileType.WITH_3_SUB_TILES_OPP;
+                previousTileType = TileType.LAND_TILE_L_OPP;
             }
             else if(rand % 2 == 0 && rand > 2 && rand < 8)
             {
