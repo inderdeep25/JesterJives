@@ -2,6 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1a43cac-d004-48c3-a6a7-b09ef574dc30" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (12).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (12).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (13).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (13).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (17).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (17).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (18).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (18).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (19).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (19).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (20).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (20).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (21).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (21).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (22).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (22).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (23).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (23).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (24).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (24).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (25).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (25).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (4).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (4).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (6).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (6).png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (9).png" afterPath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (9).png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/jesterJives.js" afterPath="$PROJECT_DIR$/Scripts/jesterJives.js" />
     </list>
@@ -27,8 +41,8 @@
       <file leaf-file-name="jesterJives.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="330" column="37" lean-forward="false" selection-start-line="330" selection-start-column="37" selection-end-line="330" selection-end-column="37" />
+            <state relative-caret-position="610">
+              <caret line="483" column="0" lean-forward="true" selection-start-line="483" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -47,8 +61,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="6" lean-forward="true" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+            <state relative-caret-position="187">
+              <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -76,6 +90,8 @@
       <find>check</find>
       <find>//I</find>
       <find>player</find>
+      <find>generateBackground</find>
+      <find>gene</find>
     </findStrings>
     <replaceStrings>
       <replace>Resources/Images</replace>
@@ -91,6 +107,7 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$USER_HOME$/Downloads/jesterJives.js" />
         <option value="$PROJECT_DIR$/Styles/jesterJivesStyles.css" />
+        <option value="$PROJECT_DIR$/../newAssets/jesterJives.js" />
         <option value="$PROJECT_DIR$/Scripts/jesterJives.js" />
       </list>
     </option>
@@ -123,7 +140,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -152,6 +168,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -248,12 +265,13 @@
       <workItem from="1485799407226" duration="2102000" />
       <workItem from="1485874503176" duration="5265000" />
       <workItem from="1485967820848" duration="11921000" />
-      <workItem from="1486051174528" duration="3859000" />
+      <workItem from="1486051174528" duration="5406000" />
+      <workItem from="1486057026131" duration="1379000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41252000" />
+    <option name="totallyTimeSpent" value="44178000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -288,6 +306,38 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15283">
+          <caret line="899" column="9" lean-forward="false" selection-start-line="899" selection-start-column="9" selection-end-line="899" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../newAssets/jesterJives.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15436">
+          <caret line="908" column="50" lean-forward="true" selection-start-line="908" selection-start-column="50" selection-end-line="908" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -536,10 +586,25 @@
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa0.658/game_script.js" />
     <entry file="file://$USER_HOME$/Downloads/jesterJives.js" />
     <entry file="file://$USER_HOME$/Downloads/jesterJives (1).js" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa0.632/mario.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2907">
+          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../newAssets/jesterJives.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="908" column="50" lean-forward="false" selection-start-line="908" selection-start-column="50" selection-end-line="908" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="6" lean-forward="true" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        <state relative-caret-position="187">
+          <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -552,20 +617,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa0.632/mario.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2907">
-          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="330" column="37" lean-forward="false" selection-start-line="330" selection-start-column="37" selection-end-line="330" selection-end-column="37" />
+        <state relative-caret-position="610">
+          <caret line="483" column="0" lean-forward="true" selection-start-line="483" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
           <folding />
         </state>
       </provider>

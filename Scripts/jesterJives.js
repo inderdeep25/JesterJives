@@ -29,6 +29,7 @@ var buttonType = {
                     EXIT : 2
                  };
 
+
 var TileType = {
                     TOP_LEFT : 16,
                     BOTTOM_LEFT : 11,
@@ -40,9 +41,13 @@ var TileType = {
                     RIGHT_VERTICAL : 5,
                     LAND_TILE_2: 24,
                     LAND_TILE_4 : 21,
-                    LAND_TILE_L:22,
-                    LAND_TILE_L_OPP:23,
-                    TRAP_TILE : 19
+                    LAND_TILE_L: 22,
+                    LAND_TILE_L_OPP: 23,
+                    TRAP_TILE : 19,
+                    BACK_TILE_1: 25,
+                    BACK_TILE_2: 26,
+                    BACK_TILE_3: 27,
+                    BACK_TILE_4: 28,
                 };
 
 var LandTile = {
@@ -53,10 +58,8 @@ var LandTile = {
                };
 
 var SubTileType = {
-                    SUB_TILE_1:0,
-                    SUB_TILE_2:1,
-                    SUB_TILE_3:2,
-                    SUB_TILE_4:3
+                    TOP_COLLIDABLE:0,
+                    TOP_NOT_COLLIDABLE:1
                   };
 
 var PlayerImageType = {
@@ -208,11 +211,50 @@ var TileDetails = [
                             }
                          ];
 
+//Background generation variables
+var background = [];
+var backRows = (_canvas.width - 128) / 32;
+var backCols = (_canvas.height - 128) / 32;
+
 var tiles = [];
-var numOfTotalTiles = 25;
+var numOfTotalTiles = 29;
 for(var i = 1 ; i <= numOfTotalTiles ; i++){
     tiles[i-1] = "Resources/Images/Tiles/Tile (" + i + ").png";
 }
+
+var fire =
+    {
+        isTrap: true,
+        img:getImageForPath(tiles[TileType.TRAP_TILE]),
+        x: 0,//used for finding collision
+        y: 0,
+
+        //Animation properties/methods
+        frameIndex: 0,
+        currentFrame: 0,
+        framesPerSprite: 4, //the number of frames the individual sprite will be drawn for
+
+        animate: function()
+        {
+
+            this.currentFrame++;
+            if(this.currentFrame == this.framesPerSprite)
+            {
+                this.frameIndex++;
+                this.currentFrame = 0;
+                if(this.frameIndex == 3)
+                {
+                    this.frameIndex = 0;
+                }
+            }
+        }
+
+        /*activate: function()
+         {
+
+         }*/
+    };
+
 
 var collidableTiles = [];
 var indexForCollidableTiles = 0;
@@ -286,16 +328,19 @@ function onKeyDown(event)
             if (aPressed == false)
                 aPressed = true;
             break;
+
         case KeyCode.RIGHT_ARROW:
         case KeyCode.D:
             if (dPressed == false)
                 dPressed = true;
             break;
+
         case KeyCode.UP_ARROW:
         case KeyCode.W:
             if (wPressed == false)
                 wPressed = true;
             break;
+
         case KeyCode.DOWN_ARROW:
         case KeyCode.S: // S
             if (sPressed == false)
@@ -313,25 +358,28 @@ function onKeyUp(event)
         case KeyCode.A:
             aPressed = false;
             break;
+
         case KeyCode.RIGHT_ARROW:
         case KeyCode.D:
             dPressed = false;
             break;
+
         case KeyCode.UP_ARROW:
         case KeyCode.W:
             wPressed = false;
             break;
+
         case KeyCode.DOWN_ARROW:
         case KeyCode.S:
             sPressed = false;
             break;
+
         case KeyCode.R:
             if(currState == State.GAME_STATE)
             {
                 collidableTiles = [];
                 onStartClick();
             }
-
             break;
     }
 }
@@ -423,7 +471,7 @@ function handleCollisionWithTiles(){
         if (!firstChk && !secondChk && !thirdChk && ! fourthChk) {
 
 
-            if (player.y + player.height >= collidableTiles[i].y) {
+            if (collidableTiles[i].tileType == SubTileType.TOP_COLLIDABLE && player.y + player.height >= collidableTiles[i].y && player.y + player.height < collidableTiles[i].y + collidableTiles[i].height) {
                 player.y = collidableTiles[i].y - collidableTiles[i].height;
                 player.jumping = false;
             }
@@ -435,6 +483,54 @@ function handleCollisionWithTiles(){
 
 
 
+        }
+    }
+}
+
+function generateBackground()
+{
+    for(var i = 0; i < backRows; i++)
+    {
+        background[i] = [];
+        for(var j = 0; j < backCols; j++)
+        {
+            var randNum = Math.floor(Math.random()*8);//Random number to decide back tile
+            var tempTile =
+                {
+                    x: i * 32 + 64,
+                    y: j * 32 + 64,
+                    img: undefined
+                }
+
+            switch(randNum)//Decides background tile based on randNum
+            {
+                case 0:
+                    tempTile.img = getImageForPath(tiles[TileType.BACK_TILE_1]);
+                    break;
+                case 1:
+                    tempTile.img = getImageForPath(tiles[TileType.BACK_TILE_1]);
+                    break;
+                case 2:
+                    tempTile.img = getImageForPath(tiles[TileType.BACK_TILE_2]);
+                    break;
+                case 3:
+                    tempTile.img = getImageForPath(tiles[TileType.BACK_TILE_2]);
+                    break;
+                case 4:
+                    tempTile.img = getImageForPath(tiles[TileType.BACK_TILE_3]);
+                    break;
+                case 5:
+                    tempTile.img = getImageForPath(tiles[TileType.BACK_TILE_3]);
+                    break;
+                case 6:
+                    tempTile.img = getImageForPath(tiles[TileType.BACK_TILE_4]);
+                    break;
+                case 7:
+                    tempTile.img = getImageForPath(tiles[TileType.BACK_TILE_4]);
+                    break;
+            }
+
+            background[i][j] = tempTile;
         }
     }
 }
@@ -494,6 +590,7 @@ function generateMap()
 {
     setupEmptyMapArray();
     generateRandomLandTiles();
+    generateBackground();
 }
 
 function generateRandomLandTiles()
@@ -524,6 +621,7 @@ function generateRandomLandTiles()
                             img:getImageForPath(tiles[TileType.LAND_TILE_2]),
                             tileDetails:TileDetails[LandTile.WITH_2_SUB_TILES]
                         };
+
                 numOfLandTilesInCurrentRow++;
                 previousTileType = TileType.LAND_TILE_2;
             }
@@ -578,25 +676,29 @@ function setCollisionTilesDataFor(tileType,posInRow,posInCol)
         var tile1 = {x:posInRow*tileSize,
                      y:posInCol*tileSize,
                      width:64,
-                     height:64
+                     height:64,
+                     tileType:SubTileType.TOP_COLLIDABLE
                     };
 
         var tile2 = {x:posInRow*tileSize+64,
                      y:posInCol*tileSize,
                      width:64,
-                     height:64
+                     height:64,
+                     tileType:SubTileType.TOP_COLLIDABLE
                     };
 
         var tile3 = {x:posInRow*tileSize,
                      y:posInCol*tileSize+64,
                      width:64,
-                     height:64
+                     height:64,
+                     tileType:SubTileType.TOP_NOT_COLLIDABLE
                     };
 
         var tile4 = {x:posInRow*tileSize+64,
                      y:posInCol*tileSize+64,
                      width:64,
-                     height:64
+                     height:64,
+                     tileType:SubTileType.TOP_NOT_COLLIDABLE
                     };
 
         collidableTiles.push(tile1);
@@ -611,13 +713,15 @@ function setCollisionTilesDataFor(tileType,posInRow,posInCol)
         var tile1 = {x:posInRow*tileSize,
             y:posInCol*tileSize,
             width:64,
-            height:64
+            height:64,
+            tileType:SubTileType.TOP_COLLIDABLE
         };
 
         var tile2 = {x:posInRow*tileSize+64,
             y:posInCol*tileSize,
             width:64,
-            height:64
+            height:64,
+            tileType:SubTileType.TOP_COLLIDABLE
         };
 
         collidableTiles.push(tile1);
@@ -628,19 +732,22 @@ function setCollisionTilesDataFor(tileType,posInRow,posInCol)
         var tile1 = {x:posInRow*tileSize,
             y:posInCol*tileSize,
             width:64,
-            height:64
+            height:64,
+            tileType:SubTileType.TOP_COLLIDABLE
         };
 
         var tile3 = {x:posInRow*tileSize,
             y:posInCol*tileSize+64,
             width:64,
-            height:64
+            height:64,
+            tileType:SubTileType.TOP_NOT_COLLIDABLE
         };
 
         var tile4 = {x:posInRow*tileSize+64,
             y:posInCol*tileSize+64,
             width:64,
-            height:64
+            height:64,
+            tileType:SubTileType.TOP_COLLIDABLE
         };
 
         collidableTiles.push(tile1);
@@ -652,19 +759,22 @@ function setCollisionTilesDataFor(tileType,posInRow,posInCol)
         var tile1 = {x:posInRow*tileSize,
             y:posInCol*tileSize,
             width:64,
-            height:64
+            height:64,
+            tileType:SubTileType.TOP_COLLIDABLE
         };
 
         var tile2 = {x:posInRow*tileSize+64,
             y:posInCol*tileSize,
             width:64,
-            height:64
+            height:64,
+            tileType:SubTileType.TOP_COLLIDABLE
         };
 
         var tile4 = {x:posInRow*tileSize+64,
             y:posInCol*tileSize+64,
             width:64,
-            height:64
+            height:64,
+            tileType:SubTileType.TOP_NOT_COLLIDABLE
         };
 
         collidableTiles.push(tile1);
@@ -791,6 +901,15 @@ function render()
 
     if(currState == State.GAME_STATE)
     {
+        //DRAW BACKGROUND TILES
+        for(var i = 0; i < backRows; i++)
+        {
+            for(var j = 0; j < backCols; j++)
+            {
+                surface.drawImage(background[i][j].img, background[i][j].x, background[i][j].y);
+            }
+        }
+
         renderBorderTiles();
 
         for(var i = 0; i < numOfRows ; i++)
