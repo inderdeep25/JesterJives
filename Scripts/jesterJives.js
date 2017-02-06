@@ -21,14 +21,14 @@ var State = {
                 MENU_STATE : 0,
                 GAME_STATE : 1,
                 HELP_STATE : 2,
-                GAMEOVER_STATE : 3
+                GAME_OVER_STATE : 3
             };
 
 var buttonType = {
                     START : 0,
                     HELP : 1,
                     EXIT : 2,
-					TRYAGAIN: 3
+					TRY_AGAIN: 3
                  };
 
 
@@ -61,7 +61,9 @@ var LandTile = {
 
 var SubTileType = {
                     TOP_COLLIDABLE:0,
-                    TOP_NOT_COLLIDABLE:1
+                    BOTTOM_COLLIDABLE:1,
+                    LEFT_COLLIDABLE:2,
+                    RIGHT_COLLIDABLE:3
                   };
 
 var PlayerImageType = {
@@ -276,11 +278,12 @@ var fire =
 		&& player.x+64 > this.x)
 		{
 			setTimeout(
-			function(){changeState(State.GAMEOVER_STATE);
-			player.x = 64;
-			player.y = 640;
-			player.velX = 0;
-			player.velY = 0;}, 250
+			function(){
+			    changeState(State.GAME_OVER_STATE);
+                player.x = 64;
+                player.y = 640;
+                player.velX = 0;
+                player.velY = 0;}, 250
 			)
 		}
 	}
@@ -412,7 +415,7 @@ function onKeyUp(event)
         case KeyCode.R:
             if(currState == State.GAME_STATE)
             {
-		traps = [];
+		        traps = [];
                 collidableTiles = [];
                 onStartClick();
             }
@@ -495,29 +498,54 @@ function checkInput()
     handleCollisionWithTiles();
 }
 
-function handleCollisionWithTiles(){
+function handleCollisionWithTiles()
+{
 
 
-    for(var i = 0; i < collidableTiles.length ; i++) {
+    for(var i = 0; i < collidableTiles.length ; i++)
+    {
         var firstChk = (player.y + 2 > collidableTiles[i].y + collidableTiles[i].height);
         var secondChk = (player.y + player.height - 2 < collidableTiles[i].y);
         var thirdChk = (player.x + 2 > collidableTiles[i].x + collidableTiles[i].width);
         var fourthChk = (player.x + player.width - 2 < collidableTiles[i].x);
 
-        if (!firstChk && !secondChk && !thirdChk && ! fourthChk) {
+        if (!firstChk && !secondChk && !thirdChk && ! fourthChk)
+        {
+            var tileTypes = collidableTiles[i].tileType;
+            for(var j = 0 ; j < tileTypes.length;j++)
+            {
 
+                if (tileTypes[j] == SubTileType.TOP_COLLIDABLE
+                    && player.y + player.height >= collidableTiles[i].y
+                    && player.y + player.height < collidableTiles[i].y + collidableTiles[i].height)
 
-            if (collidableTiles[i].tileType == SubTileType.TOP_COLLIDABLE && player.y + player.height >= collidableTiles[i].y && player.y + player.height < collidableTiles[i].y + collidableTiles[i].height) {
-                player.y = collidableTiles[i].y - collidableTiles[i].height;
-                player.jumping = false;
+                {
+                    player.y = collidableTiles[i].y - collidableTiles[i].height;
+                    player.jumping = false;
+                }
+                if(tileTypes[j] == SubTileType.BOTTOM_COLLIDABLE
+                    && player.y <= collidableTiles[i].y +collidableTiles[i].height
+                    && player.y + player.height > collidableTiles[i].y)
+
+                {
+                    player.y = collidableTiles[i].y + collidableTiles[i].height;
+                }
+                // if(tileTypes[j] == SubTileType.RIGHT_COLLIDABLE
+                //     && player.x + player.width <= collidableTiles[i].x
+                //     && player.x < collidableTiles[i].x+collidableTiles[i].width)
+                //
+                // {
+                //     player.x = collidableTiles[i].x + collidableTiles[i].width;
+                // }
+                // if(tileTypes[j] == SubTileType.RIGHT_COLLIDABLE
+                //     && player.x >= collidableTiles[i].x + collidableTiles[i].width
+                //     && player.x < collidableTiles[i].x+collidableTiles[i].width)
+                //
+                // {
+                //     player.x = collidableTiles[i].x - player.width;
+                // }
+
             }
-            // if(player.y < collidableTiles[i].y +collidableTiles[i].height && player.y + player.height > collidableTiles[i].y)
-            // {
-            //     player.y = collidableTiles[i].y + collidableTiles[i].height;
-            // }
-
-
-
 
         }
     }
@@ -612,7 +640,7 @@ function enterGameOver()
 {
 	console.log("Entering game over state.");
 	_stage.style.backgroundColor = "darkRed";
-	activeBtns = [ buttons[buttonType.TRYAGAIN] ];
+	activeBtns = [ buttons[buttonType.TRY_AGAIN] ];
 }
 
 function updateGameOver()
@@ -746,28 +774,28 @@ function setCollisionTilesDataFor(tileType,posInRow,posInCol)
                      y:posInCol*tileSize,
                      width:64,
                      height:64,
-                     tileType:SubTileType.TOP_COLLIDABLE
+                     tileType:[SubTileType.TOP_COLLIDABLE,SubTileType.LEFT_COLLIDABLE]
                     };
 
         var tile2 = {x:posInRow*tileSize+64,
                      y:posInCol*tileSize,
                      width:64,
                      height:64,
-                     tileType:SubTileType.TOP_COLLIDABLE
+                     tileType:[SubTileType.TOP_COLLIDABLE,SubTileType.RIGHT_COLLIDABLE]
                     };
 
         var tile3 = {x:posInRow*tileSize,
                      y:posInCol*tileSize+64,
                      width:64,
                      height:64,
-                     tileType:SubTileType.TOP_NOT_COLLIDABLE
+                     tileType:[SubTileType.BOTTOM_COLLIDABLE,SubTileType.LEFT_COLLIDABLE]
                     };
 
         var tile4 = {x:posInRow*tileSize+64,
                      y:posInCol*tileSize+64,
                      width:64,
                      height:64,
-                     tileType:SubTileType.TOP_NOT_COLLIDABLE
+                     tileType:[SubTileType.BOTTOM_COLLIDABLE,SubTileType.RIGHT_COLLIDABLE]
                     };
 
         collidableTiles.push(tile1);
@@ -783,14 +811,14 @@ function setCollisionTilesDataFor(tileType,posInRow,posInCol)
             y:posInCol*tileSize,
             width:64,
             height:64,
-            tileType:SubTileType.TOP_COLLIDABLE
+            tileType:[SubTileType.TOP_COLLIDABLE,SubTileType.BOTTOM_COLLIDABLE,SubTileType.LEFT_COLLIDABLE]
         };
 
         var tile2 = {x:posInRow*tileSize+64,
             y:posInCol*tileSize,
             width:64,
             height:64,
-            tileType:SubTileType.TOP_COLLIDABLE
+            tileType:[SubTileType.TOP_COLLIDABLE,SubTileType.BOTTOM_COLLIDABLE,SubTileType.RIGHT_COLLIDABLE]
         };
 
         collidableTiles.push(tile1);
@@ -798,25 +826,28 @@ function setCollisionTilesDataFor(tileType,posInRow,posInCol)
     }
     else if (tileType==TileType.LAND_TILE_L)
     {
-        var tile1 = {x:posInRow*tileSize,
+        var tile1 = {
+            x:posInRow*tileSize,
             y:posInCol*tileSize,
             width:64,
             height:64,
-            tileType:SubTileType.TOP_COLLIDABLE
+            tileType:[SubTileType.TOP_COLLIDABLE,SubTileType.LEFT_COLLIDABLE,SubTileType.RIGHT_COLLIDABLEs]
         };
 
-        var tile3 = {x:posInRow*tileSize,
+        var tile3 = {
+            x:posInRow*tileSize,
             y:posInCol*tileSize+64,
             width:64,
             height:64,
-            tileType:SubTileType.TOP_NOT_COLLIDABLE
+            tileType:[SubTileType.BOTTOM_COLLIDABLE,SubTileType.LEFT_COLLIDABLE]
         };
 
-        var tile4 = {x:posInRow*tileSize+64,
+        var tile4 = {
+            x:posInRow*tileSize+64,
             y:posInCol*tileSize+64,
             width:64,
             height:64,
-            tileType:SubTileType.TOP_COLLIDABLE
+            tileType:[SubTileType.TOP_COLLIDABLE,SubTileType.RIGHT_COLLIDABLE,SubTileType.BOTTOM_COLLIDABLE]
         };
 
         collidableTiles.push(tile1);
@@ -825,25 +856,26 @@ function setCollisionTilesDataFor(tileType,posInRow,posInCol)
     }
     else if (tileType==TileType.LAND_TILE_L_OPP)
     {
-        var tile1 = {x:posInRow*tileSize,
+        var tile1 = {
+            x:posInRow*tileSize,
             y:posInCol*tileSize,
             width:64,
             height:64,
-            tileType:SubTileType.TOP_COLLIDABLE
+            tileType:[SubTileType.TOP_COLLIDABLE,SubTileType.LEFT_COLLIDABLE,SubTileType.BOTTOM_COLLIDABLE]
         };
 
         var tile2 = {x:posInRow*tileSize+64,
             y:posInCol*tileSize,
             width:64,
             height:64,
-            tileType:SubTileType.TOP_COLLIDABLE
+            tileType:[SubTileType.TOP_COLLIDABLE,SubTileType.RIGHT_COLLIDABLE]
         };
 
         var tile4 = {x:posInRow*tileSize+64,
             y:posInCol*tileSize+64,
             width:64,
             height:64,
-            tileType:SubTileType.TOP_NOT_COLLIDABLE
+            tileType:[SubTileType.BOTTOM_COLLIDABLE,SubTileType.LEFT_COLLIDABLE,SubTileType.RIGHT_COLLIDABLE]
         };
 
         collidableTiles.push(tile1);
@@ -972,7 +1004,7 @@ function render()
 	{
 		surface.drawImage(screens[0], 0, 0, 1024, 768);
 	}
-	if(currState == State.GAMEOVER_STATE)
+	if(currState == State.GAME_OVER_STATE)
 	{
 		surface.drawImage(screens[1], 0, 0, 1024, 768);
 	}
@@ -1061,6 +1093,8 @@ function onExitClick()
 
 function onTryAgainClick()
 {
+    traps = [];
+    collidableTiles = [];
 	changeState(State.GAME_STATE);
 }
 
