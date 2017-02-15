@@ -20,7 +20,9 @@ var CollisionHandler = function(parentClass){
 
                     if (tileTypes[j] == assets.SubTileType.TOP_COLLIDABLE
                         && player.y + player.height-10 >= collidableTiles[i].y
-                        && player.y + player.height -10< collidableTiles[i].y + collidableTiles[i].height)
+                        && player.y + player.height -10 < collidableTiles[i].y + collidableTiles[i].height
+                        && player.x != collidableTiles[i].x + collidableTiles[i].width
+                        && player.x != collidableTiles[i].x - player.width)
 
                     {
                         player.y = collidableTiles[i].y - collidableTiles[i].height;
@@ -28,25 +30,27 @@ var CollisionHandler = function(parentClass){
                     }
                     if(tileTypes[j] == assets.SubTileType.BOTTOM_COLLIDABLE
                         && player.y -10 <= collidableTiles[i].y +collidableTiles[i].height
-                        && player.y + player.height - 10 > collidableTiles[i].y)
+                        && player.y + player.height - 10 > collidableTiles[i].y
+                        && player.x != collidableTiles[i].x + collidableTiles[i].width
+                        && player.x != collidableTiles[i].x - player.width)
 
                     {
                         player.y = collidableTiles[i].y + collidableTiles[i].height;
                     }
-                    // if(tileTypes[j] == assets.SubTileType.LEFT_COLLIDABLE
-                    //     && player.x + player.width -10 <= collidableTiles[i].x
-                    //     && player.x - 10 < collidableTiles[i].x+collidableTiles[i].width)
-                    //
-                    // {
-                    //     player.x = collidableTiles[i].x - player.width;
-                    // }
-                    // if(tileTypes[j] == assets.SubTileType.RIGHT_COLLIDABLE
-                    //     && player.x - 10>= collidableTiles[i].x + collidableTiles[i].width
-                    //     && player.x + player.width - 10 < collidableTiles[i].x+collidableTiles[i].width)
-                    //
-                    // {
-                    //     player.x = collidableTiles[i].x + collidableTiles[i].width;
-                    // }
+                    if(tileTypes[j] == assets.SubTileType.LEFT_COLLIDABLE
+                        && player.x + player.width -10 <= collidableTiles[i].x
+                        && player.x - 10 < collidableTiles[i].x+collidableTiles[i].width)
+
+                    {
+                        player.x = collidableTiles[i].x - player.width;
+                    }
+                    if(tileTypes[j] == assets.SubTileType.RIGHT_COLLIDABLE
+                        && player.x - 10>= collidableTiles[i].x + collidableTiles[i].width
+                        && player.x + player.width - 10 < collidableTiles[i].x+collidableTiles[i].width)
+
+                    {
+                        player.x = collidableTiles[i].x + collidableTiles[i].width;
+                    }
 
                 }
 

@@ -147,7 +147,7 @@ function onKeyUp(event)
             break;
 
         case KeyCode.R:
-            if(currState == State.GAME_STATE)
+            if(stateMachine.currState == stateMachine.State.GAME_STATE)
             {
 		        traps.trapsArray = [];
                 collidableTiles = [];
