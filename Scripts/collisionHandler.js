@@ -58,4 +58,4 @@ var CollisionHandler = function(parentClass){
         }
     }
 
-}
+};

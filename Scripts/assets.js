@@ -137,4 +137,4 @@ var Assets = function (parentClass){
         this.tiles[i-1] = "Resources/Images/Tiles/Tile (" + i + ").png";
     }
 
-}
+};

@@ -58,7 +58,7 @@ var StateMachine = function(parentClass){
     }
 
 
-}
+};
 
 function enterGameOver()
 {

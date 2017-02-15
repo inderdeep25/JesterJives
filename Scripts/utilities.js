@@ -6,4 +6,4 @@ var Utilities = function(parentClass){
         return img;
     }
 
-}
+};

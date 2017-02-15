@@ -262,4 +262,4 @@ var LevelGenerator = function(parentClass){
         }
     }
 
-}
+};

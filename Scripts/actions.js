@@ -13,7 +13,7 @@ var Actions = function(parentClass){
     this.onExitClick = function()
     {
         if (stateMachine.currState == stateMachine.State.GAME_STATE)
-            stateMachine.changeState(State.MENU_STATE);
+            stateMachine.changeState(stateMachine.State.MENU_STATE);
         else if (stateMachine.currState == stateMachine.State.HELP_STATE)
             stateMachine.changeState(stateMachine.State.GAME_STATE);
     }
@@ -37,4 +37,4 @@ var Actions = function(parentClass){
         }
     }
 
-}
+};

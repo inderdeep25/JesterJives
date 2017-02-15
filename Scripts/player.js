@@ -51,4 +51,4 @@ var Player = function(parentClass){
         }
     }
 
-}
+};
