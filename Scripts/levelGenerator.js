@@ -155,9 +155,9 @@ var LevelGenerator = function(parentClass){
                 width:subTileWidth,
                 height:subTileHeight,
                 tileType:[assets.SubTileType.TOP_COLLIDABLE,assets.SubTileType.LEFT_COLLIDABLE],
-                tileTopCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
+                tileTopCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
                 tileBottomCollisionBox:null,
-                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+6,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8},
+                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+10,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8},
                 tileRightCollisionBox:null
             };
 
@@ -166,10 +166,10 @@ var LevelGenerator = function(parentClass){
                 width:subTileWidth,
                 height:subTileHeight,
                 tileType:[assets.SubTileType.TOP_COLLIDABLE,assets.SubTileType.RIGHT_COLLIDABLE],
-                tileTopCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
+                tileTopCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth-10,t:posInCol*tileSize,b:posInCol*tileSize+8},
                 tileBottomCollisionBox:null,
                 tileLeftCollisionBox:null,
-                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-6,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+8,b:posInCol*tileSize+64-8}
+                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-10,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+8,b:posInCol*tileSize+64-8}
             };
 
             var tile3 = {x:posInRow*tileSize,
@@ -178,8 +178,8 @@ var LevelGenerator = function(parentClass){
                 height:subTileHeight,
                 tileType:[assets.SubTileType.BOTTOM_COLLIDABLE,assets.SubTileType.LEFT_COLLIDABLE],
                 tileTopCollisionBox:null,
-                tileBottomCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+2*subTileHeight-6,b:posInCol*tileSize+2*subTileHeight},
-                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+6,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8},
+                tileBottomCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+2*subTileHeight-10,b:posInCol*tileSize+2*subTileHeight},
+                tileLeftCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+10,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8},
                 tileRightCollisionBox:null
             };
 
@@ -189,9 +189,9 @@ var LevelGenerator = function(parentClass){
                 height:subTileHeight,
                 tileType:[assets.SubTileType.BOTTOM_COLLIDABLE,assets.SubTileType.RIGHT_COLLIDABLE],
                 tileTopCollisionBox:null,
-                tileBottomCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth,t:posInCol*tileSize+2*subTileHeight-6,b:posInCol*tileSize+2*subTileHeight},
+                tileBottomCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth-10,t:posInCol*tileSize+2*subTileHeight-10,b:posInCol*tileSize+2*subTileHeight},
                 tileLeftCollisionBox:null,
-                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-6,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8}
+                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-10,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8}
             };
 
             collidableTiles.push(tile1);
@@ -208,9 +208,9 @@ var LevelGenerator = function(parentClass){
                 width:subTileWidth,
                 height:subTileHeight,
                 tileType:[assets.SubTileType.TOP_COLLIDABLE,assets.SubTileType.BOTTOM_COLLIDABLE,assets.SubTileType.LEFT_COLLIDABLE],
-                tileTopCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
-                tileBottomCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+subTileHeight-6,b:posInCol*tileSize+subTileHeight},
-                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+6,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8},
+                tileTopCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
+                tileBottomCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+subTileHeight-10,b:posInCol*tileSize+subTileHeight},
+                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+10,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8},
                 tileRightCollisionBox:null
             };
 
@@ -219,10 +219,10 @@ var LevelGenerator = function(parentClass){
                 width:64,
                 height:64,
                 tileType:[assets.SubTileType.TOP_COLLIDABLE,assets.SubTileType.BOTTOM_COLLIDABLE,assets.SubTileType.RIGHT_COLLIDABLE],
-                tileTopCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
-                tileBottomCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth,t:posInCol*tileSize+subTileHeight-6,b:posInCol*tileSize+subTileHeight},
+                tileTopCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth-10,t:posInCol*tileSize,b:posInCol*tileSize+8},
+                tileBottomCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth-10,t:posInCol*tileSize+subTileHeight-10,b:posInCol*tileSize+subTileHeight},
                 tileLeftCollisionBox:null,
-                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-6,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+8,b:posInCol*tileSize+64-8}
+                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-10,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+8,b:posInCol*tileSize+64-8}
             };
 
             collidableTiles.push(tile1);
@@ -236,10 +236,10 @@ var LevelGenerator = function(parentClass){
                 width:64,
                 height:64,
                 tileType:[assets.SubTileType.TOP_COLLIDABLE,assets.SubTileType.LEFT_COLLIDABLE,assets.SubTileType.RIGHT_COLLIDABLE],
-                tileTopCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
+                tileTopCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+subTileWidth-10,t:posInCol*tileSize,b:posInCol*tileSize+8},
                 tileBottomCollisionBox:null,
-                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+6,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8},
-                tileRightCollisionBox:{l:posInRow*tileSize+subTileWidth-6,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8}
+                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+10,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8},
+                tileRightCollisionBox:{l:posInRow*tileSize+subTileWidth-10,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8}
             };
 
             var tile3 = {
@@ -249,8 +249,8 @@ var LevelGenerator = function(parentClass){
                 height:64,
                 tileType:[assets.SubTileType.BOTTOM_COLLIDABLE,assets.SubTileType.LEFT_COLLIDABLE],
                 tileTopCollisionBox:null,
-                tileBottomCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+2*subTileHeight-6,b:posInCol*tileSize+2*subTileHeight},
-                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+6,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8},
+                tileBottomCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+2*subTileHeight-10,b:posInCol*tileSize+2*subTileHeight},
+                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+10,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8},
                 tileRightCollisionBox:null
             };
 
@@ -260,10 +260,10 @@ var LevelGenerator = function(parentClass){
                 width:64,
                 height:64,
                 tileType:[assets.SubTileType.TOP_COLLIDABLE,assets.SubTileType.RIGHT_COLLIDABLE,assets.SubTileType.BOTTOM_COLLIDABLE],
-                tileTopCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth,t:posInCol*tileSize+subTileHeight,b:posInCol*tileSize+subTileHeight+6},
-                tileBottomCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth,t:posInCol*tileSize+2*subTileHeight-6,b:posInCol*tileSize+2*subTileHeight},
+                tileTopCollisionBox:{l:posInRow*tileSize+subTileWidth+10,r:posInRow*tileSize+2*subTileWidth-10,t:posInCol*tileSize+subTileHeight,b:posInCol*tileSize+subTileHeight+10},
+                tileBottomCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth-10,t:posInCol*tileSize+2*subTileHeight-10,b:posInCol*tileSize+2*subTileHeight},
                 tileLeftCollisionBox:null,
-                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-6,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8}
+                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-10,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8}
             };
 
             collidableTiles.push(tile1);
@@ -278,9 +278,9 @@ var LevelGenerator = function(parentClass){
                 width:64,
                 height:64,
                 tileType:[assets.SubTileType.TOP_COLLIDABLE,assets.SubTileType.LEFT_COLLIDABLE,assets.SubTileType.BOTTOM_COLLIDABLE],
-                tileTopCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
-                tileBottomCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+subTileHeight-6,b:posInCol*tileSize+subTileHeight},
-                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+6,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8},
+                tileTopCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
+                tileBottomCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+subTileWidth-10,t:posInCol*tileSize+subTileHeight-10,b:posInCol*tileSize+subTileHeight},
+                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+10,t:posInCol*tileSize+8,b:posInCol*tileSize+subTileHeight-8},
                 tileRightCollisionBox:null
             };
 
@@ -289,10 +289,10 @@ var LevelGenerator = function(parentClass){
                 width:64,
                 height:64,
                 tileType:[assets.SubTileType.TOP_COLLIDABLE,assets.SubTileType.RIGHT_COLLIDABLE],
-                tileTopCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth,t:posInCol*tileSize,b:posInCol*tileSize+8},
+                tileTopCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth-10,t:posInCol*tileSize,b:posInCol*tileSize+8},
                 tileBottomCollisionBox:null,
                 tileLeftCollisionBox:null,
-                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-6,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+8,b:posInCol*tileSize+64-8}
+                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-10,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+8,b:posInCol*tileSize+64-8}
             };
 
             var tile4 = {x:posInRow*tileSize+subTileWidth,
@@ -301,9 +301,9 @@ var LevelGenerator = function(parentClass){
                 height:subTileHeight,
                 tileType:[assets.SubTileType.BOTTOM_COLLIDABLE,assets.SubTileType.LEFT_COLLIDABLE,assets.SubTileType.RIGHT_COLLIDABLE],
                 tileTopCollisionBox:null,
-                tileBottomCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+2*subTileWidth,t:posInCol*tileSize+2*subTileHeight-6,b:posInCol*tileSize+2*subTileHeight},
-                tileLeftCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+subTileWidth+6,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8},
-                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-6,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8}
+                tileBottomCollisionBox:{l:posInRow*tileSize+subTileWidth+10,r:posInRow*tileSize+2*subTileWidth-10,t:posInCol*tileSize+2*subTileHeight-10,b:posInCol*tileSize+2*subTileHeight},
+                tileLeftCollisionBox:{l:posInRow*tileSize+subTileWidth,r:posInRow*tileSize+subTileWidth+10,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8},
+                tileRightCollisionBox:{l:posInRow*tileSize+tileSize-10,r:posInRow*tileSize+tileSize,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8}
             };
 
             collidableTiles.push(tile1);
