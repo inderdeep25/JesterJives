@@ -54,7 +54,7 @@ var dPressed = false;
 var wPressed = false;
 var sPressed = false;
 var friction = 0.9;
-var gravity = 0.4;
+var gravity = 1;
 
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
@@ -167,7 +167,7 @@ function checkInput()
     if (sPressed == true)
     {
         player.crouching = true;
-        player.height = 30;
+        // player.height = 30;
         player.idle = false;
         player.running = false;
     }
@@ -228,7 +228,7 @@ function checkInput()
 
     if (player.y >= _canvas.height - 64 - tileSize / 2)
     {
-        player.y = _canvas.height - 64 - tileSize / 2;
+        player.y = _canvas.height - 64 - 64;
         player.jumping = false;
     }
     else if(player.y <= 64)

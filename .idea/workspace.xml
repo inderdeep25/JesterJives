@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1a43cac-d004-48c3-a6a7-b09ef574dc30" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/collisionHandler.js" afterPath="$PROJECT_DIR$/Scripts/collisionHandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/jesterJives.js" afterPath="$PROJECT_DIR$/Scripts/jesterJives.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/levelGenerator.js" afterPath="$PROJECT_DIR$/Scripts/levelGenerator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/traps.js" afterPath="$PROJECT_DIR$/Scripts/traps.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,21 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="jesterJives.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="jesterJives.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="217" column="4" lean-forward="false" selection-start-line="217" selection-start-column="4" selection-end-line="217" selection-end-column="4" />
+            <state relative-caret-position="345">
+              <caret line="72" column="26" lean-forward="false" selection-start-line="72" selection-start-column="26" selection-end-line="72" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="collisionHandler.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="collisionHandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/collisionHandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="77" column="36" lean-forward="false" selection-start-line="77" selection-start-column="36" selection-end-line="77" selection-end-column="36" />
+            <state relative-caret-position="240">
+              <caret line="21" column="17" lean-forward="true" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -46,8 +50,8 @@
       <file leaf-file-name="stateMachine.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/stateMachine.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="225" column="27" lean-forward="false" selection-start-line="225" selection-start-column="27" selection-end-line="225" selection-end-column="27" />
+            <state relative-caret-position="-1304">
+              <caret line="155" column="29" lean-forward="true" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -66,8 +70,8 @@
       <file leaf-file-name="levelGenerator.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/levelGenerator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="47" column="62" lean-forward="false" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
+            <state relative-caret-position="106">
+              <caret line="157" column="55" lean-forward="true" selection-start-line="157" selection-start-column="55" selection-end-line="157" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -86,8 +90,8 @@
       <file leaf-file-name="traps.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/traps.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="21" column="40" lean-forward="false" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+            <state relative-caret-position="646">
+              <caret line="63" column="16" lean-forward="false" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -184,13 +188,13 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/Scripts/stateMachine.js" />
         <option value="$PROJECT_DIR$/Scripts/assets.js" />
-        <option value="$PROJECT_DIR$/Scripts/traps.js" />
         <option value="$PROJECT_DIR$/Scripts/utilities.js" />
         <option value="$PROJECT_DIR$/Scripts/actions.js" />
-        <option value="$PROJECT_DIR$/Scripts/levelGenerator.js" />
         <option value="$PROJECT_DIR$/Scripts/player.js" />
-        <option value="$PROJECT_DIR$/Scripts/jesterJives.js" />
         <option value="$PROJECT_DIR$/Scripts/collisionHandler.js" />
+        <option value="$PROJECT_DIR$/Scripts/levelGenerator.js" />
+        <option value="$PROJECT_DIR$/Scripts/traps.js" />
+        <option value="$PROJECT_DIR$/Scripts/jesterJives.js" />
       </list>
     </option>
   </component>
@@ -371,12 +375,12 @@
       <workItem from="1487014693981" duration="123000" />
       <workItem from="1487181168278" duration="2460000" />
       <workItem from="1487261406575" duration="6206000" />
-      <workItem from="1487274144807" duration="2814000" />
+      <workItem from="1487274144807" duration="5485000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73435000" />
+    <option name="totallyTimeSpent" value="76106000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="803" extended-state="6" />
@@ -408,7 +412,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -713,22 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/levelGenerator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="47" column="62" lean-forward="false" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/traps.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="21" column="40" lean-forward="false" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Scripts/player.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
@@ -739,24 +727,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Scripts/stateMachine.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="225" column="27" lean-forward="false" selection-start-line="225" selection-start-column="27" selection-end-line="225" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="217" column="4" lean-forward="false" selection-start-line="217" selection-start-column="4" selection-end-line="217" selection-end-column="4" />
+        <state relative-caret-position="-1304">
+          <caret line="155" column="29" lean-forward="true" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Scripts/collisionHandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="77" column="36" lean-forward="false" selection-start-line="77" selection-start-column="36" selection-end-line="77" selection-end-column="36" />
+        <state relative-caret-position="240">
+          <caret line="21" column="17" lean-forward="true" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scripts/levelGenerator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="157" column="55" lean-forward="true" selection-start-line="157" selection-start-column="55" selection-end-line="157" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scripts/traps.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="63" column="16" lean-forward="false" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="72" column="26" lean-forward="false" selection-start-line="72" selection-start-column="26" selection-end-line="72" selection-end-column="26" />
           <folding />
         </state>
       </provider>

@@ -178,8 +178,8 @@ var LevelGenerator = function(parentClass){
                 height:subTileHeight,
                 tileType:[assets.SubTileType.BOTTOM_COLLIDABLE,assets.SubTileType.LEFT_COLLIDABLE],
                 tileTopCollisionBox:null,
-                tileBottomCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+2*subTileHeight-10,b:posInCol*tileSize+2*subTileHeight},
-                tileLeftCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+10,t:posInCol*tileSize+64+8,b:posInCol*tileSize+tileSize-8},
+                tileBottomCollisionBox:{l:posInRow*tileSize+10,r:posInRow*tileSize+subTileWidth,t:posInCol*tileSize+2*subTileHeight-10,b:posInCol*tileSize+2*subTileHeight},
+                tileLeftCollisionBox:{l:posInRow*tileSize,r:posInRow*tileSize+6,t:posInCol*tileSize+64+8,b:posInCol*tileSize+subTileHeight+64-8},
                 tileRightCollisionBox:null
             };
 

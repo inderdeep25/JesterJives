@@ -92,7 +92,7 @@ var CollisionHandler = function(parentClass){
 
             if(!firstCheck && !secondCheck && !thirdCheck && !fourthCheck)
             {
-                player.y = tile.y -player.height;
+                player.y = tile.y - player.height;
                 player.jumping = false;
                 player.velY = 0;
             }

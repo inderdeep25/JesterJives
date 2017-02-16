@@ -56,4 +56,12 @@ var Traps = function(parentClass){
             }
         };
 
+    this.spike =
+        {
+            isTrap: true,
+            img:utilities.getImageForPath(assets.tiles[this.TrapTileType.FIRE_TILE]),
+            x: 0,//used for finding collision
+            y: 0
+        }
+
 };
