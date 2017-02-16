@@ -3,57 +3,93 @@ var CollisionHandler = function(parentClass){
 
     this.handleCollisionWithTiles = function()
     {
-
-
         for(var i = 0; i < collidableTiles.length ; i++)
         {
-            var firstChk = (player.y + 2 > collidableTiles[i].y + collidableTiles[i].height);
-            var secondChk = (player.y + player.height - 2 < collidableTiles[i].y);
-            var thirdChk = (player.x + 2 > collidableTiles[i].x + collidableTiles[i].width);
-            var fourthChk = (player.x + player.width - 2 < collidableTiles[i].x);
-
-            if (!firstChk && !secondChk && !thirdChk && ! fourthChk)
+            var tile = collidableTiles[i];
+            for(var j = 0 ; j < tile.tileType.length; j++)
             {
-                var tileTypes = collidableTiles[i].tileType;
-                for(var j = 0 ; j < tileTypes.length;j++)
+                if(tile.tileType[j] == assets.SubTileType.TOP_COLLIDABLE)
                 {
-
-                    if (tileTypes[j] == assets.SubTileType.TOP_COLLIDABLE
-                        && player.y + player.height-10 >= collidableTiles[i].y
-                        && player.y + player.height -10 < collidableTiles[i].y + collidableTiles[i].height
-                        && player.x != collidableTiles[i].x + collidableTiles[i].width
-                        && player.x != collidableTiles[i].x - player.width)
-
-                    {
-                        player.y = collidableTiles[i].y - collidableTiles[i].height;
-                        player.jumping = false;
-                    }
-                    if(tileTypes[j] == assets.SubTileType.BOTTOM_COLLIDABLE
-                        && player.y -10 <= collidableTiles[i].y +collidableTiles[i].height
-                        && player.y + player.height - 10 > collidableTiles[i].y
-                        && player.x != collidableTiles[i].x + collidableTiles[i].width
-                        && player.x != collidableTiles[i].x - player.width)
-
-                    {
-                        player.y = collidableTiles[i].y + collidableTiles[i].height;
-                    }
-                    if(tileTypes[j] == assets.SubTileType.LEFT_COLLIDABLE
-                        && player.x + player.width -10 <= collidableTiles[i].x
-                        && player.x - 10 < collidableTiles[i].x+collidableTiles[i].width)
-
-                    {
-                        player.x = collidableTiles[i].x - player.width;
-                    }
-                    if(tileTypes[j] == assets.SubTileType.RIGHT_COLLIDABLE
-                        && player.x - 10>= collidableTiles[i].x + collidableTiles[i].width
-                        && player.x + player.width - 10 < collidableTiles[i].x+collidableTiles[i].width)
-
-                    {
-                        player.x = collidableTiles[i].x + collidableTiles[i].width;
-                    }
-
+                    checkCollisionForTopBoundOf(tile);
                 }
+                if(tile.tileType[j] == assets.SubTileType.LEFT_COLLIDABLE)
+                {
+                    checkCollisionForLeftBoundOf(tile);
+                }
+                if(tile.tileType[j] == assets.SubTileType.RIGHT_COLLIDABLE)
+                {
+                    checkCollisionForRightBoundOf(tile);
+                }
+                if(tile.tileType[j] == assets.SubTileType.BOTTOM_COLLIDABLE)
+                {
+                    checkCollisionForBottomBoundOf(tile);
+                }
+            }
+        }
+    }
 
+    function checkCollisionForLeftBoundOf(tile)
+    {
+        if(tile.tileLeftCollisionBox != null)
+        {
+            var firstCheck = player.y > tile.tileLeftCollisionBox.b;
+            var secondCheck = player.y + player.height < tile.tileLeftCollisionBox.t;
+            var thirdCheck = player.x > tile.tileLeftCollisionBox.r;
+            var fourthCheck = player.x + player.width < tile.tileLeftCollisionBox.l;
+
+            if(!firstCheck && !secondCheck && !thirdCheck && !fourthCheck)
+            {
+                player.x = tile.x - player.width;
+            }
+        }
+
+    }
+
+    function checkCollisionForRightBoundOf(tile)
+    {
+        if(tile.tileRightCollisionBox != null)
+        {
+            var firstCheck = player.y > tile.tileRightCollisionBox.b;
+            var secondCheck = player.y + player.height < tile.tileRightCollisionBox.t;
+            var thirdCheck = player.x > tile.tileRightCollisionBox.r;
+            var fourthCheck = player.x + player.width < tile.tileRightCollisionBox.l;
+
+            if(!firstCheck && !secondCheck && !thirdCheck && !fourthCheck)
+            {
+                player.x = tile.x + tile.width;
+            }
+        }
+    }
+
+    function checkCollisionForBottomBoundOf(tile)
+    {
+        if(tile.tileBottomCollisionBox != null)
+        {
+            var firstCheck = player.y > tile.tileBottomCollisionBox.b;
+            var secondCheck = player.y + player.height < tile.tileBottomCollisionBox.t;
+            var thirdCheck = player.x > tile.tileBottomCollisionBox.r;
+            var fourthCheck = player.x + player.width < tile.tileBottomCollisionBox.l;
+
+            if(!firstCheck && !secondCheck && !thirdCheck && !fourthCheck)
+            {
+                player.y = tile.y + tile.height;
+            }
+        }
+    }
+
+    function checkCollisionForTopBoundOf(tile)
+    {
+        if(tile.tileTopCollisionBox != null)
+        {
+            var firstCheck = player.y > tile.tileTopCollisionBox.b;
+            var secondCheck = player.y + player.height < tile.tileTopCollisionBox.t;
+            var thirdCheck = player.x > tile.tileTopCollisionBox.r;
+            var fourthCheck = player.x + player.width < tile.tileTopCollisionBox.l;
+
+            if(!firstCheck && !secondCheck && !thirdCheck && !fourthCheck)
+            {
+                player.y = tile.y -player.height;
+                player.jumping = false;
             }
         }
     }
