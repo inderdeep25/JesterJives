@@ -73,6 +73,10 @@ var CollisionHandler = function(parentClass){
             if(!firstCheck && !secondCheck && !thirdCheck && !fourthCheck)
             {
                 player.y = tile.y + tile.height;
+                if(player.velY < 0)
+                {
+                    player.velY = 0;
+                }
             }
         }
     }
