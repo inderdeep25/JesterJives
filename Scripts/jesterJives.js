@@ -54,7 +54,7 @@ var dPressed = false;
 var wPressed = false;
 var sPressed = false;
 var friction = 0.9;
-var gravity = 0.3;
+var gravity = 0.4;
 
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
@@ -162,12 +162,12 @@ function checkInput()
     if(sPressed == false)
     {
         player.crouching = false;
-        player.height = 64;
+        player.height = 60;
     }
     if (sPressed == true)
     {
         player.crouching = true;
-        player.height = 32;
+        player.height = 30;
         player.idle = false;
         player.running = false;
     }
@@ -217,16 +217,23 @@ function checkInput()
     player.velX *= friction;
     player.velY += gravity;
 
-    if (player.x >= _canvas.width - player.width - tileSize / 2) {
+    if (player.x >= _canvas.width - player.width - tileSize / 2)
+    {
         player.x = _canvas.width - player.width - tileSize / 2;
     }
-    else if (player.x <= tileSize / 2) {
+    else if (player.x <= tileSize / 2)
+    {
         player.x = tileSize / 2;
     }
 
-    if (player.y >= _canvas.height - 64 - tileSize / 2) {
+    if (player.y >= _canvas.height - 64 - tileSize / 2)
+    {
         player.y = _canvas.height - 64 - tileSize / 2;
         player.jumping = false;
+    }
+    else if(player.y <= 64)
+    {
+        player.y = 64;
     }
 
     collisionHandler.handleCollisionWithTiles();

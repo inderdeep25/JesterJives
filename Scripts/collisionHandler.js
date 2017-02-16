@@ -90,6 +90,7 @@ var CollisionHandler = function(parentClass){
             {
                 player.y = tile.y -player.height;
                 player.jumping = false;
+                player.velY = 0;
             }
         }
     }
