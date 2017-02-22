@@ -36,7 +36,8 @@ var LevelGenerator = function(parentClass){
                 {
                     data = {
                         img:utilities.getImageForPath(assets.tiles[assets.TileType.LAND_TILE_4]),
-                        tileDetails:assets.TileDetails[assets.LandTile.WITH_4_SUB_TILES]
+                        tileDetails:assets.TileDetails[assets.LandTile.WITH_4_SUB_TILES],
+                        isTrap:false
                     };
 
                     numOfLandTilesInCurrentRow++;
@@ -46,7 +47,8 @@ var LevelGenerator = function(parentClass){
                 {
                     data = {
                         img:utilities.getImageForPath(assets.tiles[assets.TileType.LAND_TILE_2]),
-                        tileDetails:assets.TileDetails[assets.LandTile.WITH_2_SUB_TILES]
+                        tileDetails:assets.TileDetails[assets.LandTile.WITH_2_SUB_TILES],
+                        isTrap:false
                     };
 
                     numOfLandTilesInCurrentRow++;
@@ -56,7 +58,8 @@ var LevelGenerator = function(parentClass){
                 {
                     data = {
                         img:utilities.getImageForPath(assets.tiles[assets.TileType.LAND_TILE_L]),
-                        tileDetails:assets.TileDetails[assets.LandTile.WITH_3_SUB_TILES]
+                        tileDetails:assets.TileDetails[assets.LandTile.WITH_3_SUB_TILES],
+                        isTrap:false
                     };
 
                     numOfLandTilesInCurrentRow++;
@@ -66,21 +69,19 @@ var LevelGenerator = function(parentClass){
                 {
                     data = {
                         img:utilities.getImageForPath(assets.tiles[assets.TileType.LAND_TILE_L_OPP]),
-                        tileDetails:assets.TileDetails[assets.LandTile.WITH_3_SUB_TILES_OPP]
+                        tileDetails:assets.TileDetails[assets.LandTile.WITH_3_SUB_TILES_OPP],
+                        isTrap:false
                     };
 
                     numOfLandTilesInCurrentRow++;
                     previousTileType = assets.TileType.LAND_TILE_L_OPP;
                 }
-                else if(rand % 2 == 0 && rand > 2 && rand < 8)//Traps
+                else if(rand % 2 == 0 && rand > 2 && rand < 8)//To Generate Traps
                 {
-                    data = Object.create(traps.fire);
-                    data.x = j*tileSize;
-                    data.y = i*tileSize;
-                    traps.trapsArray.push(data);
-
+                    data = getRandomTrap(i,j);
                     numOfTrapsInCurrentRow++;
-                    previousTileType = traps.TrapTileType.FIRE_TILE;
+                    if(data!="empty")
+                        traps.trapsArray.push(data);
                 }
 
                 if(data != "empty")
@@ -93,6 +94,27 @@ var LevelGenerator = function(parentClass){
             }
             numOfLandTilesInCurrentRow = 0;
         }
+    }
+
+    function getRandomTrap(i,j)
+    {
+        var rand = Math.round(Math.random() * 10);
+        var result = "empty";
+        if (previousTileType != traps.TrapTileType.FIRE_TILE && rand > 0 && rand < 5)
+        {
+            result = Object.create(traps.fire);
+            result.x = j*tileSize;
+            result.y = i*tileSize;
+            previousTileType = traps.TrapTileType.FIRE_TILE;
+        }
+        else if (previousTileType != traps.TrapTileType.SPIKE_TILE && rand >= 5 && rand < 10)
+        {
+            result = Object.create(traps.spike);
+            result.x = j*tileSize;
+            result.y = i*tileSize;
+            previousTileType = traps.TrapTileType.SPIKE_TILE;
+        }
+        return result;
     }
 
     function generateBackground()

@@ -54,7 +54,7 @@ var dPressed = false;
 var wPressed = false;
 var sPressed = false;
 var friction = 0.9;
-var gravity = 1;
+var gravity = 0.4;
 
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);

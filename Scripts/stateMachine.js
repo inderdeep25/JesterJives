@@ -200,9 +200,17 @@ function render()
         {
             for (var j = 0 ; j < numOfColumns ; j++)
             {
-                if(tileMap[i][j].isTrap == true)
+                console.log(tileMap[i][j]);
+                if(tileMap[i][j] !== "empty" && tileMap[i][j].isTrap == true)
                 {
-                    surface.drawImage(tileMap[i][j].img, tileMap[i][j].frameIndex*64, 0, 64, 64, j * tileSize, i * tileSize, 64, 64);
+                    if(tileMap[i][j].trapType == traps.TrapTileType.FIRE_TILE)
+                    {
+                        surface.drawImage(tileMap[i][j].img, tileMap[i][j].frameIndex*64, 0, 64, 64, j * tileSize, i * tileSize, 64, 64);
+                    }
+                    else if(tileMap[i][j].trapType == traps.TrapTileType.SPIKE_TILE)
+                    {
+                        surface.drawImage(tileMap[i][j].img, j * tileSize, i * tileSize);
+                    }
                 }
                 else if(tileMap[i][j] !== "empty" && tileMap[i][j].isTrap !== true)
                 {
