@@ -110,6 +110,7 @@ function updateGame()
     checkInput();
     updateAnimation();
     activateTraps();
+    changeRoom();
 }
 
 function exitGame()
@@ -219,6 +220,11 @@ function render()
             }
         }
 
+        //DRAW DOORS
+        surface.drawImage(doorN.img, 440, 0);
+        surface.drawImage(doorS.img, 440, 640);
+        surface.drawImage(doorE.img, 960, 320);
+        surface.drawImage(doorW.img, 0, 320);
 
         //DRAW PLAYER
         if (player.idle == true)
@@ -289,4 +295,52 @@ function renderBorderTiles()
     {
         surface.drawImage(utilities.getImageForPath(assets.tiles[assets.TileType.RIGHT_VERTICAL]) , 7.5*tileSize, j*tileSize/2 );
     }
+}
+
+function changeRoom()
+{
+    if
+    (player.y < doorN.y+64
+        && player.y+64 > doorN.y
+        && player.x < doorN.x+64
+        && player.x+64 > doorN.x)
+    {
+        player.x = 480;
+        player.y = 640;
+        nextRoom();
+    }
+    else if (player.y < doorS.y+64
+        && player.y+64 > doorS.y
+        && player.x < doorS.x+64
+        && player.x+64 > doorS.x)
+    {
+        player.x =480;
+        player.y = 64;
+        nextRoom();
+    }
+    else if (player.y < doorW.y+64
+        && player.y+64 > doorW.y
+        && player.x < doorW.x+64
+        && player.x+64 > doorW.x)
+    {
+        player.x =850;
+        player.y =340;
+        nextRoom();
+    }
+    else if (player.y < doorE.y+64
+        && player.y+64 > doorE.y
+        && player.x < doorE.x+64
+        && player.x+64 > doorE.x)
+    {
+        player.x = 80;
+        player.y = 340;
+        nextRoom();
+    }
+}
+
+function nextRoom()
+{
+    traps.trapsArray = [];
+    collidableTiles = [];
+    actions.onStartClick();
 }

@@ -62,6 +62,22 @@ window.addEventListener("load",start);
 _canvas.addEventListener("mousemove", updateMouse);
 _canvas.addEventListener("click", actions.onMouseClick);
 
+// Mac's code start here
+var doorN = { x: 440, y: 1, img: null };
+doorN.img = new Image();
+doorN.img.src = "Resources/Images/door.png";
+
+var doorS = { x: 440, y: 639, img: null };
+doorS.img = new Image();
+doorS.img.src = "Resources/Images/door.png";
+
+var doorE = { x: 910, y: 340, img: null };
+doorE.img = new Image();
+doorE.img.src = "Resources/Images/door.png";
+
+var doorW = { x: 1, y: 340, img: null };
+doorW.img = new Image();
+doorW.img.src = "Resources/Images/door.png";
 
 function start(event)
 {
