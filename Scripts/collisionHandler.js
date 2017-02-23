@@ -77,6 +77,8 @@ var CollisionHandler = function(parentClass){
                 {
                     player.velY = 0;
                 }
+                player.jumping = false;
+                player.idle = true;
             }
         }
     }
