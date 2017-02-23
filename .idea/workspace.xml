@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1a43cac-d004-48c3-a6a7-b09ef574dc30" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resources/Images/door.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/assets.js" afterPath="$PROJECT_DIR$/Scripts/assets.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/jesterJives.js" afterPath="$PROJECT_DIR$/Scripts/jesterJives.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/levelGenerator.js" afterPath="$PROJECT_DIR$/Scripts/levelGenerator.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/stateMachine.js" afterPath="$PROJECT_DIR$/Scripts/stateMachine.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/traps.js" afterPath="$PROJECT_DIR$/Scripts/traps.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,8 +30,8 @@
       <file leaf-file-name="jesterJives.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2001">
-              <caret line="240" column="5" lean-forward="true" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
+            <state relative-caret-position="153">
+              <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -39,8 +40,8 @@
       <file leaf-file-name="assets.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/assets.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+            <state relative-caret-position="68">
+              <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -59,8 +60,8 @@
       <file leaf-file-name="stateMachine.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/stateMachine.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="709">
-              <caret line="343" column="13" lean-forward="false" selection-start-line="343" selection-start-column="13" selection-end-line="343" selection-end-column="13" />
+            <state relative-caret-position="318">
+              <caret line="193" column="59" lean-forward="true" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -69,14 +70,9 @@
       <file leaf-file-name="player.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/player.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
+            <state relative-caret-position="390">
               <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-              <folding>
-                <marker date="1487880556442" expanded="true" signature="34:1515" ph="{...}" />
-                <marker date="1487880556442" expanded="true" signature="1233:1512" ph="{...}" />
-                <marker date="1487880556442" expanded="true" signature="1326:1506" ph="{...}" />
-                <marker date="1487880556442" expanded="true" signature="1444:1496" ph="{...}" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -84,9 +80,16 @@
       <file leaf-file-name="levelGenerator.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/levelGenerator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="104" column="33" lean-forward="true" selection-start-line="104" selection-start-column="33" selection-end-line="104" selection-end-column="33" />
-              <folding />
+            <state relative-caret-position="323">
+              <caret line="35" column="182" lean-forward="false" selection-start-line="35" selection-start-column="182" selection-end-line="35" selection-end-column="182" />
+              <folding>
+                <element signature="e#1070#1528#0" expanded="false" />
+                <element signature="e#1741#2199#0" expanded="false" />
+                <element signature="e#2412#2870#0" expanded="false" />
+                <element signature="e#3088#3558#0" expanded="false" />
+                <element signature="e#3696#3899#0" expanded="false" />
+                <element signature="e#3953#4040#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,24 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jesterJives.js" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Desktop/JesterJives-master (2)/JesterJives-master/Scripts/jesterJives.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="1027" column="45" lean-forward="true" selection-start-line="1023" selection-start-column="8" selection-end-line="1027" selection-end-column="45" />
-              <folding>
-                <element signature="n#!!block;n#changeRoom#0" expanded="false" />
-                <element signature="n#!!block;n#nextRoom#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="traps.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/traps.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+            <state relative-caret-position="663">
+              <caret line="132" column="36" lean-forward="true" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -207,12 +197,12 @@
         <option value="$PROJECT_DIR$/Scripts/actions.js" />
         <option value="$PROJECT_DIR$/Scripts/player.js" />
         <option value="$PROJECT_DIR$/Scripts/collisionHandler.js" />
+        <option value="$USER_HOME$/Desktop/JesterJives-master (2)/JesterJives-master/Scripts/jesterJives.js" />
         <option value="$PROJECT_DIR$/Scripts/assets.js" />
         <option value="$PROJECT_DIR$/Scripts/traps.js" />
-        <option value="$USER_HOME$/Desktop/JesterJives-master (2)/JesterJives-master/Scripts/jesterJives.js" />
-        <option value="$PROJECT_DIR$/Scripts/jesterJives.js" />
-        <option value="$PROJECT_DIR$/Scripts/levelGenerator.js" />
         <option value="$PROJECT_DIR$/Scripts/stateMachine.js" />
+        <option value="$PROJECT_DIR$/Scripts/levelGenerator.js" />
+        <option value="$PROJECT_DIR$/Scripts/jesterJives.js" />
       </list>
     </option>
   </component>
@@ -286,6 +276,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JesterJives" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JesterJives" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tiles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -419,12 +431,12 @@
       <workItem from="1487261406575" duration="6206000" />
       <workItem from="1487274144807" duration="5485000" />
       <workItem from="1487784132001" duration="3897000" />
-      <workItem from="1487880576296" duration="1472000" />
+      <workItem from="1487880576296" duration="2875000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81475000" />
+    <option name="totallyTimeSpent" value="82878000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -456,13 +468,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/Scripts/stateMachine.js</url>
-          <line>204</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
@@ -705,19 +710,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-          <folding>
-            <marker date="1487880556442" expanded="true" signature="34:1515" ph="{...}" />
-            <marker date="1487880556442" expanded="true" signature="1233:1512" ph="{...}" />
-            <marker date="1487880556442" expanded="true" signature="1326:1506" ph="{...}" />
-            <marker date="1487880556442" expanded="true" signature="1444:1496" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Scripts/collisionHandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -739,14 +731,6 @@
     <entry file="file://$PROJECT_DIR$/Resources/Images/Tiles/Tile (20).png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/assets.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
@@ -786,34 +770,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/levelGenerator.js">
+    <entry file="file://$PROJECT_DIR$/Scripts/assets.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="104" column="33" lean-forward="true" selection-start-line="104" selection-start-column="33" selection-end-line="104" selection-end-column="33" />
+        <state relative-caret-position="68">
+          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Scripts/traps.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+        <state relative-caret-position="663">
+          <caret line="132" column="36" lean-forward="true" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Scripts/stateMachine.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="709">
-          <caret line="343" column="13" lean-forward="false" selection-start-line="343" selection-start-column="13" selection-end-line="343" selection-end-column="13" />
+        <state relative-caret-position="318">
+          <caret line="193" column="59" lean-forward="true" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scripts/player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scripts/levelGenerator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="35" column="182" lean-forward="false" selection-start-line="35" selection-start-column="182" selection-end-line="35" selection-end-column="182" />
+          <folding>
+            <element signature="e#1070#1528#0" expanded="false" />
+            <element signature="e#1741#2199#0" expanded="false" />
+            <element signature="e#2412#2870#0" expanded="false" />
+            <element signature="e#3088#3558#0" expanded="false" />
+            <element signature="e#3696#3899#0" expanded="false" />
+            <element signature="e#3953#4040#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2001">
-          <caret line="240" column="5" lean-forward="true" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
+        <state relative-caret-position="153">
+          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
           <folding />
         </state>
       </provider>

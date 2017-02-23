@@ -7,6 +7,8 @@ var tileSize = 128;
 var numOfColumns = _canvas.width/tileSize;
 var numOfRows = _canvas.height/tileSize;
 var numOfMaxLandTilesInRow = 3;
+var numOfMaxLandTiles = 12;
+var numOfTraps = 9;
 var previousTileType = -1;
 var screens = [new Image(), new Image()];
 

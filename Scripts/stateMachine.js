@@ -208,7 +208,8 @@ function render()
                     {
                         surface.drawImage(tileMap[i][j].img, tileMap[i][j].frameIndex*64, 0, 64, 64, j * tileSize, i * tileSize, 64, 64);
                     }
-                    else if(tileMap[i][j].trapType == traps.TrapTileType.SPIKE_TILE)
+                    else if(tileMap[i][j].trapType == traps.TrapTileType.SPIKE_TILE
+                        || tileMap[i][j].trapType == traps.TrapTileType.TELEPORT_TILE)
                     {
                         surface.drawImage(tileMap[i][j].img, j * tileSize, i * tileSize);
                     }

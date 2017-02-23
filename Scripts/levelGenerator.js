@@ -23,6 +23,7 @@ var LevelGenerator = function(parentClass){
     function generateRandomLandTiles()
     {
         var numOfLandTilesInCurrentRow = 0;
+        var numOfTotalLandTiles = 0;
         var numOfTrapsInCurrentRow = 0;
 
         for(var i = 1 ; i < numOfRows - 1; i++)
@@ -32,7 +33,7 @@ var LevelGenerator = function(parentClass){
                 var rand = Math.round(Math.random() * 13);
                 var data = "empty";
 
-                if(previousTileType != assets.TileType.LAND_TILE_4 && rand > 0 && rand < 3 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
+                if(previousTileType != assets.TileType.LAND_TILE_4 && rand > 0 && rand < 3 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow && numOfTotalLandTiles < numOfMaxLandTiles)
                 {
                     data = {
                         img:utilities.getImageForPath(assets.tiles[assets.TileType.LAND_TILE_4]),
@@ -41,9 +42,10 @@ var LevelGenerator = function(parentClass){
                     };
 
                     numOfLandTilesInCurrentRow++;
+                    numOfTotalLandTiles++;
                     previousTileType = assets.TileType.LAND_TILE_4;
                 }
-                else if(previousTileType != assets.TileType.LAND_TILE_2 && rand > 3 && rand < 6 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
+                else if(previousTileType != assets.TileType.LAND_TILE_2 && rand > 3 && rand < 6 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow && numOfTotalLandTiles < numOfMaxLandTiles)
                 {
                     data = {
                         img:utilities.getImageForPath(assets.tiles[assets.TileType.LAND_TILE_2]),
@@ -52,9 +54,10 @@ var LevelGenerator = function(parentClass){
                     };
 
                     numOfLandTilesInCurrentRow++;
+                    numOfTotalLandTiles++;
                     previousTileType = assets.TileType.LAND_TILE_2;
                 }
-                else if(previousTileType != assets.TileType.LAND_TILE_L && rand > 6 && rand < 9 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
+                else if(previousTileType != assets.TileType.LAND_TILE_L && rand > 6 && rand < 9 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow && numOfTotalLandTiles < numOfMaxLandTiles)
                 {
                     data = {
                         img:utilities.getImageForPath(assets.tiles[assets.TileType.LAND_TILE_L]),
@@ -63,9 +66,10 @@ var LevelGenerator = function(parentClass){
                     };
 
                     numOfLandTilesInCurrentRow++;
+                    numOfTotalLandTiles++;
                     previousTileType = assets.TileType.LAND_TILE_L;
                 }
-                else if(previousTileType != assets.TileType.LAND_TILE_L_OPP && rand > 9 && rand < 12 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow)
+                else if(previousTileType != assets.TileType.LAND_TILE_L_OPP && rand > 9 && rand < 12 && numOfLandTilesInCurrentRow <= numOfMaxLandTilesInRow && numOfTotalLandTiles < numOfMaxLandTiles)
                 {
                     data = {
                         img:utilities.getImageForPath(assets.tiles[assets.TileType.LAND_TILE_L_OPP]),
@@ -74,9 +78,10 @@ var LevelGenerator = function(parentClass){
                     };
 
                     numOfLandTilesInCurrentRow++;
+                    numOfTotalLandTiles++;
                     previousTileType = assets.TileType.LAND_TILE_L_OPP;
                 }
-                else if(rand % 2 == 0 && rand > 2 && rand < 8)//To Generate Traps
+                else if(numOfTrapsInCurrentRow < numOfTraps && rand % 2 == 0 && rand > 2 && rand < 8)//To Generate Traps
                 {
                     data = getRandomTrap(i,j);
                     numOfTrapsInCurrentRow++;
@@ -98,7 +103,7 @@ var LevelGenerator = function(parentClass){
 
     function getRandomTrap(i,j)
     {
-        var rand = Math.round(Math.random() * 10);
+        var rand = Math.round(Math.random() * 15);
         var result = "empty";
         if (previousTileType != traps.TrapTileType.FIRE_TILE && rand > 0 && rand < 5)
         {
@@ -113,6 +118,13 @@ var LevelGenerator = function(parentClass){
             result.x = j*tileSize;
             result.y = i*tileSize;
             previousTileType = traps.TrapTileType.SPIKE_TILE;
+        }
+        else if (previousTileType != traps.TrapTileType.TELEPORT_TILE && rand >= 10 && rand < 15)
+        {
+            result = Object.create(traps.teleport);
+            result.x = j*tileSize;
+            result.y = i*tileSize;
+            previousTileType = traps.TrapTileType.TELEPORT_TILE;
         }
         return result;
     }

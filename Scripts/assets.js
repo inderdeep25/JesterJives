@@ -2,7 +2,7 @@ var actions = new window.Actions(this);
 var Assets = function (parentClass){
 
     this.tiles = [];
-    this.numOfTotalTiles = 30;
+    this.numOfTotalTiles = 31;
 
     this.TileType = {
         TOP_LEFT : 16,
