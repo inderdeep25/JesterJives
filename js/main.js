@@ -666,6 +666,9 @@ function clickHandler()
 					console.log("check3");
 					changeState(1);
 					break;
+                case buttons[1]:
+                    changeState(1);
+                    break;
 			}
 		}
 	}
@@ -1013,7 +1016,8 @@ var activeButtons = -1;
 
 var buttons =
 [
-	/*0*/{ x:140, y:213, width:360, height:110, over:false, img:"images/ui/startButton.png", imgO: "images/ui/startButtonO.png" },//Start
+	/*0*/{ x:180, y:213, width:300, height:87, over:false, img:"images/ui/startButton.png", imgO: "images/ui/startButtonO.png" },//Start
+	/*1*/{ x:180, y:213, width:300, height:87, over:false, img:"images/ui/newButton.png", imgO: "images/ui/newButtonO.png" }//newGame
 ]
 
 function checkButtonOverlap()
@@ -1131,13 +1135,14 @@ function updateHelp()
 function enterGameOver()
 {
 	canvas.style.backgroundColor = "#000000";
-	activeButtons = [ buttons[0] ];
+	activeButtons = [ buttons[1] ];
 	gameLoop = window.setInterval(updateGameOver, FPS);
 }
 
 function updateGameOver()
 {
 	render();
+    checkButtonOverlap();
 	console.log("game over");
 }
 
