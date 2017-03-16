@@ -314,7 +314,7 @@ var arrowSpawn =
 				player.y < this.arrows[i].y+this.arrows[i].height &&
 				player.y+player.height > this.arrows[i].y)
 			{
-				window.setTimeout(die, 100);
+				die();
 			}
 			if(this.arrows[i] !== "undefined" && this.arrows[i].x < SIZE)
 				this.arrows.splice(i, 1);
