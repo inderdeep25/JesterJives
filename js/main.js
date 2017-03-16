@@ -52,6 +52,7 @@ var ROWS = 16;
 var COLS = 16;
 var BROWS = 18;
 var BCOLS = 18;
+var numOfLevelsPassed = 0;
 
 var friction = 0.7;
 var gravity = 0.26;
@@ -697,20 +698,22 @@ function keyDownHandler(e)
 			if(leftPressed === false)
 				leftPressed = true;
 			break;
-		case key.C:
-			if(currentLevelTheme === levelTheme.DARK_STONE)
-                currentLevelTheme = levelTheme.WHITE_STONE;
-			else if (currentLevelTheme === levelTheme.WHITE_STONE)
-                currentLevelTheme = levelTheme.DARK_STONE;
-            traps = [];
-            platforms = [];
-            background = [];
-            arrowSpawn.arrows=[];
-            generateRoom();
-            generateBackground();
-            player.velY = 0;
-			break;
 	}
+}
+
+function changeTheme()
+{
+    if(currentLevelTheme === levelTheme.DARK_STONE)
+        currentLevelTheme = levelTheme.WHITE_STONE;
+    else if (currentLevelTheme === levelTheme.WHITE_STONE)
+        currentLevelTheme = levelTheme.DARK_STONE;
+    traps = [];
+    platforms = [];
+    background = [];
+    arrowSpawn.arrows=[];
+    generateRoom();
+    generateBackground();
+    player.velY = 0;
 }
 
 function keyUpHandler(e)
@@ -952,6 +955,10 @@ function switchRoom()
 		generateBackground();
 		player.velY = 0;
 		player.y = SIZE+1;
+		numOfLevelsPassed++;
+		if(numOfLevelsPassed === 3){
+            changeTheme();
+		}
 	}
 	if(player.x+player.width < doors[1].x+doors[1].width && player.x > doors[1].x && player.y < SIZE/2)//Top door
 	{
@@ -964,6 +971,10 @@ function switchRoom()
 		player.velY = 0;
 		player.y = canvas.height-SIZE-player.height;
 		player.x = doors[3].x-player.width;
+        numOfLevelsPassed++;
+        if(numOfLevelsPassed === 3){
+            changeTheme();
+        }
 	}
 	if(player.x < SIZE && player.y > doors[0].y && player.y+player.height < doors[0].y+doors[0].height && player.y > doors[0].y)//Left door
 	{
@@ -975,6 +986,10 @@ function switchRoom()
 		generateBackground();
 		player.x = canvas.width-SIZE-player.width-1;
 		player.velX = 0;
+        numOfLevelsPassed++;
+        if(numOfLevelsPassed === 3){
+            changeTheme();
+        }
 	}
 	if(player.x+player.width > doors[2].x && player.y+player.height < doors[2].y+doors[2].height && player.y > doors[2].y)//Right door
 	{
@@ -985,6 +1000,10 @@ function switchRoom()
 		generateRoom();
 		generateBackground();
 		player.x = 0+SIZE+1;
+        numOfLevelsPassed++;
+        if(numOfLevelsPassed === 3){
+            changeTheme();
+        }
 	}
 }
 
