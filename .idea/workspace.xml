@@ -1,8 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a1a43cac-d004-48c3-a6a7-b09ef574dc30" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/collisionHandler.js" afterPath="$PROJECT_DIR$/Scripts/collisionHandler.js" />
+    <list default="true" id="3d19ad00-53ce-4a6a-80d7-eb59986750fb" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/Jestrer Jives.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.nojekyll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/ArrowSign.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/Bush (1).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/Bush (2).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/Crate.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/DeadBush.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/Sign.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/Skeleton.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/TombStone (1).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/TombStone (2).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Objects/Tree.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Player/playerLeft2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Player/playerRight2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (1).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (10).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (11).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (12).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (13).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (14).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (15).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (16).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (17).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (18).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (19).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (2).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (20).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (21).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (22).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (23).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (24).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (25).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (26).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (27).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (28).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (29).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (3).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (30).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (31).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (4).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (5).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (6).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (7).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (8).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/Tiles/Tile (9).png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnExit.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnExitO.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnHelp.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnHelpO.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnStart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnStart1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnStartO.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnStartO1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnTryAgain.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/btnTryAgainO.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/buttonPressed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/door.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/gameOverScreen.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/playerProto1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/playerProto2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/section_c_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Images/titleScreen.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Scripts/actions.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Scripts/assets.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Scripts/collisionHandler.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Scripts/jesterJives.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Scripts/levelGenerator.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Scripts/player.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Scripts/stateMachine.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Scripts/traps.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Scripts/utilities.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Styles/jesterJivesStyles.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/_config.yml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,158 +98,20 @@
     <favorites_list name="JesterJives" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="jesterJives.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="573">
-              <caret line="254" column="5" lean-forward="true" selection-start-line="237" selection-start-column="4" selection-end-line="254" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="assets.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Scripts/assets.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="collisionHandler.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Scripts/collisionHandler.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="80" column="35" lean-forward="false" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="stateMachine.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Scripts/stateMachine.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="193" column="59" lean-forward="true" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="player.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Scripts/player.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="levelGenerator.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Scripts/levelGenerator.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="35" column="182" lean-forward="false" selection-start-line="35" selection-start-column="182" selection-end-line="35" selection-end-column="182" />
-              <folding>
-                <element signature="e#1070#1528#0" expanded="false" />
-                <element signature="e#1741#2199#0" expanded="false" />
-                <element signature="e#2412#2870#0" expanded="false" />
-                <element signature="e#3088#3558#0" expanded="false" />
-                <element signature="e#3696#3899#0" expanded="false" />
-                <element signature="e#3953#4040#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="actions.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Scripts/actions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="11" lean-forward="false" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="traps.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Scripts/traps.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="132" column="36" lean-forward="true" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CSS File" />
-        <option value="HTML File" />
-        <option value="JavaScript File" />
-      </list>
-    </option>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>generateBackground</find>
-      <find>gene</find>
-      <find>:</find>
-      <find>var</find>
-      <find>player</find>
-      <find>player.direction</find>
-      <find>dir</find>
-      <find>player.dir</find>
-      <find>traps[</find>
-      <find>TRAP_TILE</find>
-      <find>getima</find>
-      <find>tiles</find>
-      <find>TileType</find>
-      <find>SubTileType</find>
-      <find>buttonType</find>
-      <find>TileDetails</find>
-      <find>SubTileCoordinates</find>
-      <find>activeBtns</find>
-      <find>LandTile</find>
-      <find>R</find>
-      <find>activateTraps</find>
-      <find>activate</find>
-      <find>getImageForPath</find>
-      <find>enter</find>
-      <find>generateMap</find>
-      <find>6</find>
-      <find>player.y</find>
-      <find>player.velY</find>
-      <find>fire</find>
-      <find>changeRoom</find>
+      <find>arrow</find>
+      <find>arrows</find>
+      <find>images</find>
+      <find>door</find>
+      <find>die</find>
+      <find>key.C</find>
+      <find>images[1</find>
+      <find>images[</find>
+      <find>images[rand</find>
     </findStrings>
-    <replaceStrings>
-      <replace>Resources/Images</replace>
-      <replace>stateContainer</replace>
-      <replace>=</replace>
-      <replace>this.</replace>
-      <replace>assets.tiles</replace>
-      <replace>assets.TileType</replace>
-      <replace>assets.SubTileType</replace>
-      <replace>10</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -181,24 +119,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/Downloads/jesterJives.js" />
-        <option value="$PROJECT_DIR$/Styles/jesterJivesStyles.css" />
-        <option value="$PROJECT_DIR$/../newAssets/jesterJives.js" />
-        <option value="$PROJECT_DIR$/Scripts/bla" />
-        <option value="$PROJECT_DIR$/Scripts/Player.js" />
-        <option value="$PROJECT_DIR$/Scripts/Traps.js" />
-        <option value="$PROJECT_DIR$/Scripts/Utilities.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/Scripts/utilities.js" />
-        <option value="$PROJECT_DIR$/Scripts/actions.js" />
-        <option value="$PROJECT_DIR$/Scripts/player.js" />
-        <option value="$USER_HOME$/Desktop/JesterJives-master (2)/JesterJives-master/Scripts/jesterJives.js" />
-        <option value="$PROJECT_DIR$/Scripts/assets.js" />
-        <option value="$PROJECT_DIR$/Scripts/traps.js" />
-        <option value="$PROJECT_DIR$/Scripts/stateMachine.js" />
-        <option value="$PROJECT_DIR$/Scripts/levelGenerator.js" />
-        <option value="$PROJECT_DIR$/Scripts/jesterJives.js" />
-        <option value="$PROJECT_DIR$/Scripts/collisionHandler.js" />
+        <option value="$PROJECT_DIR$/js/main.js" />
       </list>
     </option>
   </component>
@@ -229,8 +150,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -253,52 +172,22 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JesterJives" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JesterJives" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="js.eslint.eslintPackage" value="" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="SearchEverywhereHistoryKey" value="updateGa&#9;null&#9;null&#10;player.y&#9;null&#9;null" />
+    <property name="js.eslint.eslintPackage" value="" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Projects\JesterJives\Resources\Images" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Resources/Images" />
-    </key>
-  </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html">
-    <configuration default="false" name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" engineId="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" uri="http://localhost:63342/JesterJives/index.html">
-      <method />
-    </configuration>
-    <configuration default="false" name="stateMachine.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="stateMachine.js" working-dir="$PROJECT_DIR$/Scripts">
-      <method />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -330,12 +219,6 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -358,75 +241,43 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
-      <item index="1" class="java.lang.String" itemvalue="Node.js.stateMachine.js" />
-    </list>
-    <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.stateMachine.js" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a1a43cac-d004-48c3-a6a7-b09ef574dc30" name="Default" comment="" />
-      <created>1484946356970</created>
+      <changelist id="3d19ad00-53ce-4a6a-80d7-eb59986750fb" name="Default" comment="" />
+      <created>1489673861948</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1484946356970</updated>
-      <workItem from="1484946358758" duration="812000" />
-      <workItem from="1484947187360" duration="2013000" />
-      <workItem from="1485193847974" duration="1415000" />
-      <workItem from="1485365719656" duration="4185000" />
-      <workItem from="1485464542208" duration="1443000" />
-      <workItem from="1485466004800" duration="3516000" />
-      <workItem from="1485789735445" duration="4721000" />
-      <workItem from="1485799407226" duration="2102000" />
-      <workItem from="1485874503176" duration="5265000" />
-      <workItem from="1485967820848" duration="11921000" />
-      <workItem from="1486051174528" duration="5406000" />
-      <workItem from="1486057026131" duration="1379000" />
-      <workItem from="1486401236424" duration="4795000" />
-      <workItem from="1486999989068" duration="11426000" />
-      <workItem from="1487014693981" duration="123000" />
-      <workItem from="1487181168278" duration="2460000" />
-      <workItem from="1487261406575" duration="6206000" />
-      <workItem from="1487274144807" duration="5485000" />
-      <workItem from="1487784132001" duration="3897000" />
-      <workItem from="1487880576296" duration="4423000" />
+      <updated>1489673861948</updated>
+      <workItem from="1489673863108" duration="3650000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84426000" />
+    <option name="totallyTimeSpent" value="3650000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19453125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39918256" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970026" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -437,360 +288,24 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="3" />
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
+    <entry file="file://$PROJECT_DIR$/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="18" lean-forward="true" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2625">
-          <caret line="175" column="9" lean-forward="true" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Images/Tiles/Tile (15).png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa0.658/game_script.js" />
-    <entry file="file://$USER_HOME$/Downloads/jesterJives.js" />
-    <entry file="file://$USER_HOME$/Downloads/jesterJives (1).js" />
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa0.632/mario.js" />
-    <entry file="file://$PROJECT_DIR$/../newAssets/jesterJives.js" />
-    <entry file="file://$PROJECT_DIR$/Scripts/bla" />
-    <entry file="file://$PROJECT_DIR$/Styles/jesterJivesStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMEvents.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="457" column="0" lean-forward="false" selection-start-line="457" selection-start-column="0" selection-end-line="457" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/utilities.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="2" lean-forward="false" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Images/Player/playerLeft2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Images/Tiles/Tile (18).png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Images/Tiles/Tile (19).png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Images/Tiles/Tile (20).png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/JesterJives-master (2)/JesterJives-master/Scripts/win thing.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="379">
+          <caret line="440" column="1" lean-forward="true" selection-start-line="440" selection-start-column="1" selection-end-line="440" selection-end-column="1" />
           <folding>
-            <element signature="n#!!doc" expanded="false" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/JesterJives-master (2)/JesterJives-master/Scripts/jesterJives.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="1027" column="45" lean-forward="true" selection-start-line="1023" selection-start-column="8" selection-end-line="1027" selection-end-column="45" />
-          <folding>
-            <element signature="n#!!block;n#changeRoom#0" expanded="false" />
-            <element signature="n#!!block;n#nextRoom#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/actions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="11" lean-forward="false" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/traps.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="132" column="36" lean-forward="true" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/stateMachine.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="193" column="59" lean-forward="true" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/levelGenerator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="35" column="182" lean-forward="false" selection-start-line="35" selection-start-column="182" selection-end-line="35" selection-end-column="182" />
-          <folding>
-            <element signature="e#1070#1528#0" expanded="false" />
-            <element signature="e#1741#2199#0" expanded="false" />
-            <element signature="e#2412#2870#0" expanded="false" />
-            <element signature="e#3088#3558#0" expanded="false" />
-            <element signature="e#3696#3899#0" expanded="false" />
-            <element signature="e#3953#4040#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/assets.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/collisionHandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="80" column="35" lean-forward="false" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/jesterJives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="254" column="5" lean-forward="true" selection-start-line="237" selection-start-column="4" selection-end-line="254" selection-end-column="5" />
+        <state relative-caret-position="85">
+          <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
           <folding />
         </state>
       </provider>
