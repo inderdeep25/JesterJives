@@ -247,8 +247,16 @@ var teleporter =
 			player.x < this.x+16 &&
 			player.x+16 > this.x)
 		{
-			player.x = Math.floor((Math.random()*canvas.width-SIZE)+SIZE/2);
-			player.y = Math.floor((Math.random()*canvas.height-SIZE)+SIZE/2);
+			var randX = Math.floor((Math.random()*canvas.width-SIZE)+SIZE/2);
+			var randY = Math.floor((Math.random()*canvas.height-SIZE)+SIZE/2);
+			
+			while(findTile(randX+1, randY+1).img != "empty")
+			{
+				randX = Math.floor((Math.random()*canvas.width-SIZE)+SIZE/2);
+				randY = Math.floor((Math.random()*canvas.height-SIZE)+SIZE/2);
+			}
+			player.x = randX;
+			player.y = randY;
 			player.velX = 0;
 			player.velY = 0;
 		}
@@ -312,7 +320,7 @@ var arrowSpawn =
 			if(player.x < this.arrows[i].x+this.arrows[i].width &&
 				player.x+player.width > this.arrows[i].x &&
 				player.y < this.arrows[i].y+this.arrows[i].height &&
-				player.y+player.height > this.arrows[i].y)
+				player.y+player.height > this.arrows[i].y+SIZE-SIZE/4)
 			{
 				die();
 			}
@@ -327,6 +335,22 @@ var arrowSpawn =
 
 			if(this.arrows[i] !== "undefined" && this.arrows[i].y+this.arrows[i].height > canvas.height-SIZE)
 				this.arrows.splice(i, 1);
+			
+			for(var j = 0; j < ROWS; j++)
+			{
+				for(var k = 0; k < COLS; k++)
+				{
+					if(this.arrows[i].x < platforms[j][k].x+platforms[j][k].width && 
+						this.arrows[i].x+this.arrows[i].width > platforms[j][k].x &&
+						this.arrows[i].y < platforms[j][k].y+platforms[j][k].height &&
+						this.arrows[i].y+this.arrows[i].height > platforms[j][k].y &&
+						platforms[j][k].isTrap === false &&
+						platforms[j][k].img != "empty")
+					{
+						this.arrows.splice(i, 1);
+					}
+				}
+			}
 		}
 	},
 
@@ -394,6 +418,7 @@ var arrowSpawn =
 			};
 		}
 		this.arrows.push(arrow);
+		playSound("shoot");
 	}
 };
 
@@ -950,6 +975,7 @@ function jumpFromRightWall()
     }
     player.velY = -player.jumpSpeed * 2;
     rightPressed = false;
+	playSound("jump");
 }
 
 function jumpFromLeftWall()
@@ -964,6 +990,7 @@ function jumpFromLeftWall()
     }
     player.velY = -player.jumpSpeed * 2;
     rightPressed = false;
+	playSound("jump");
 }
 
 //*****ROOM SWITCHING*****//
@@ -1134,6 +1161,43 @@ function headOwned()
 }
 
 //*****UTILITIES*****//
+
+
+	var bgAudio;
+function playBackgroundSound(nameOfSound,shouldLoop)
+{
+	bgAudio = new Audio("sounds/"+nameOfSound+".mp3");
+
+	if(shouldLoop)
+	{
+		bgAudio.loop = true;
+	}
+
+	bgAudio.play();
+}
+
+function toggleBackgroundMusic()
+{
+	if(bgAudio.paused)
+	{
+		bgAudio.play();
+	}
+	else
+	{
+		bgAudio.pause();
+	}
+}
+
+function resetBackgroundMusicTo(time)
+{
+	bgAudio.currentTime = time;
+}
+
+function playSound(nameOfSound)
+{
+	var audio = new Audio("sounds/"+nameOfSound+".mp3");
+	audio.play();
+}
 
 //Finds the tile that the x and y overlap
 function findTile(x, y)
@@ -1679,6 +1743,7 @@ function onAssetLoad(e)
 		//Initializes game after all assets are loaded
 		initGame();
 	}
+	//TODO:playBackgroundSound("backgroundMusic",true);
 }
 
 //Initial Function Call
