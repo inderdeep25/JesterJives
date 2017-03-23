@@ -91,7 +91,7 @@ var trap =
 	collidable: false, //If this is true, trap will collide like normal platforms
 	width: SIZE,
 	height: SIZE,
-	
+
 	img: undefined,
 	spriteWidth: SIZE,
 	spriteHeight: SIZE,
@@ -112,7 +112,7 @@ var trap =
             }
         }
 	},
-	
+
 	activate:
 	function()
 	{
@@ -131,7 +131,7 @@ var fire =
 	collidable: false,
 	width: SIZE,
 	height: SIZE,
-	
+
 	img: undefined,
 	spriteWidth: SIZE,
 	spriteHeight: SIZE,
@@ -152,7 +152,7 @@ var fire =
             }
         }
     },
-	
+
 	activate:
 	function()
 	{
@@ -174,7 +174,7 @@ var spikes =
 	collidable: false, //If this is true, trap will collide like normal platforms
 	width: SIZE,
 	height: SIZE,
-	
+
 	img: undefined,
 	spriteWidth: SIZE,
 	spriteHeight: SIZE,
@@ -195,7 +195,7 @@ var spikes =
             }
         }
 	},
-	
+
 	activate:
 	function()
 	{
@@ -217,7 +217,7 @@ var teleporter =
 	collidable: false, //If this is true, trap will collide like normal platforms
 	width: SIZE,
 	height: SIZE,
-	
+
 	img: undefined,
 	spriteWidth: SIZE,
 	spriteHeight: SIZE,
@@ -238,7 +238,7 @@ var teleporter =
             }
         }
 	},
-	
+
 	activate:
 	function()
 	{
@@ -265,7 +265,7 @@ var arrowSpawn =
 	width: SIZE,
 	height: SIZE,
 	dir: dir.WEST,
-	
+
 	img: undefined,
 	spriteWidth: SIZE,
 	spriteHeight: SIZE,
@@ -286,7 +286,7 @@ var arrowSpawn =
             }
         }*/
 	},
-	
+
 	counter: 0,
 	arrows: [],
 	activate:
@@ -329,7 +329,7 @@ var arrowSpawn =
 				this.arrows.splice(i, 1);
 		}
 	},
-	
+
 	shoot:
 	function()
 	{	var arrow = "undefined";
@@ -435,7 +435,7 @@ function generateBackground()
 				y: i*SIZE+32,
 				img: images[randNum]
 			}
-			
+
 			background[i][j] = temp;
 		}
 	}
@@ -443,7 +443,7 @@ function generateBackground()
 
 function generateRoom()
 {
-	
+
 	for(var i = 0; i < ROWS; i++)
 	{
 		platforms[i] = [];
@@ -459,7 +459,7 @@ function generateRoom()
 				img: "empty",
 				collidable: false
 			}
-			
+
 			var tileChance = Math.floor(Math.random()*100);
 			if( (i === 7 && j === 0) || (i === 8 && j === 0) )
 			{
@@ -499,7 +499,7 @@ function generateRoom()
                             temp.img = images[31];
 						break;
 				}
-				
+
 				temp.collidable = true;
 			}
 			else if(tileChance > 24 && tileChance <= 28)
@@ -545,7 +545,7 @@ function generateRoom()
 				}
 				temp.x = i*SIZE+SIZE*2;
 				temp.y = j*SIZE+SIZE*2;
-				
+
 				traps.push(temp);
 			}
 			else
@@ -573,7 +573,7 @@ var player =
 	jumpSpeed: 3,
 	speed: 1.5,
 	coll: false, //if collided
-	
+
 	//Animation methods/properties
 	img: undefined,
 	dir: dir.EAST,
@@ -584,8 +584,8 @@ var player =
 	frameIndex: 0,
     currentFrame: 0,
     framesPerSprite: 6, //the number of frames the individual sprite will be drawn for
-	
-	animate: 
+
+	animate:
 	function() //animates the player, gets called from updateAnimation function
     {
         this.currentFrame++;
@@ -641,7 +641,8 @@ var key =
 	LEFT_ARROW: 37,
 	DOWN_ARROW: 40,
 	RIGHT_ARROW: 39,
-	C:67
+	C:67,
+	ESC: 27
 }
 
 var mouse = { x: 0, y:0 };
@@ -651,6 +652,12 @@ function updateMouse(e)
 	var rect = canvas.getBoundingClientRect();
 	mouse.x = e.clientX - rect.left;
     mouse.y = e.clientY - rect.top;
+
+	if (mouseDown == true
+		&& (mouse.x >= minSliderX && mouse.x <= maxSliderX))
+	{
+		images[43].x = mouse.x - SIZE/2;
+	}
 }
 
 function clickHandler()
@@ -662,17 +669,38 @@ function clickHandler()
 		{
 			switch(activeButtons[i])
 			{
-				case buttons[0]:
-					console.log("check3");
-					changeState(1);
+				case buttons[0]: //Start
+                    console.log("Check1");
+                    changeState(1);
 					break;
-                case buttons[1]:
+				case buttons[1]: //Help
+                    console.log("Check2");
+                    changeState(2);
+					break;
+				case buttons[2]: //Settings
+                    console.log("Check4");
+                    changeState(4);
+					break;
+				case buttons[3]: //Exit
+                    console.log("Check5");
+                    changeState(5);
+					break;
+				case buttons[4]: //Main Menu
+					console.log("Check4");
+                    changeState(0);
+					break;
+				case buttons[5]: //New
+                    console.log("Check5");
+                    changeState(1);
+                    break;
+				case buttons[6]: //Return
+                    console.log("Check6");
                     changeState(1);
                     break;
 			}
 		}
 	}
-	
+
 	console.log(findTile(mouse.x, mouse.y));
 }
 
@@ -701,6 +729,8 @@ function keyDownHandler(e)
 			if(leftPressed === false)
 				leftPressed = true;
 			break;
+		case key.ESC:
+			paused = !paused;
 	}
 }
 
@@ -797,7 +827,7 @@ function movePlayer()
             player.velY = -player.jumpSpeed*2;
         }
     }
-	
+
     player.x += player.velX;
     player.y += player.velY;
     player.velX *= friction;
@@ -849,7 +879,7 @@ function playerCollision()
 		else
 			player.x = canvas.width - SIZE - player.width;
 	}
-	
+
 	for(var i = 0; i < ROWS; i++)
 	{
 		for(var j = 0; j < COLS; j++)
@@ -875,7 +905,7 @@ function playerCollision()
 				player.y = platforms[i][j].y+SIZE;
 				player.velY = 0;
 			}
-			//Right 
+			//Right
 			else if(platforms[i][j].collidable === true &&
 				player.x < platforms[i][j].x+SIZE &&
 				player.x > platforms[i][j].x+SIZE-SIZE/4 &&
@@ -1016,8 +1046,13 @@ var activeButtons = -1;
 
 var buttons =
 [
-	/*0*/{ x:180, y:213, width:300, height:87, over:false, img:"images/ui/startButton.png", imgO: "images/ui/startButtonO.png" },//Start
-	/*1*/{ x:180, y:213, width:300, height:87, over:false, img:"images/ui/newButton.png", imgO: "images/ui/newButtonO.png" }//newGame
+	/*0*/{ x:230, y:220, width:180, height:53, over:false, img:"images/ui/startButton.png", imgO: "images/ui/startButtonO.png" },//Start
+	/*1*/{ x:230, y:500,  width:180, height:53, over:false, img:"images/ui/helpButton.png", imgO: "images/ui/helpButtonO.png"},//Sample Help, 2
+    /*2*/{ x:230, y:400,  width:180, height:53, over:false, img:"images/ui/settingsButton.png", imgO: "images/ui/settingsButtonO.png"},//Sample Settings, 3
+    /*3*/{ x:230, y:200,  width:180, height:53, over:false, img:"images/ui/exitButton.png", imgO: "images/ui/exitButtonO.png"}, //Sample Exit, 4
+    /*4*/{ x:230, y:100,  width:180, height:53, over:false, img:"images/ui/mainmenuButton.png", imgO: "images/ui/mainmenuButtonO.png"}, //Main Menu Button, 5
+    /*5*/{ x:230, y:200,  width:180, height:53, over:false, img:"images/ui/newButton.png", imgO: "images/ui/newButtonO.png"},// New Game button, 6
+    /*6*/{ x:230, y:200, width:180, height:53, over:false, img:"images/ui/returnButton.png", imgO: "images/ui/returnButtonO.png"}//Return, 7
 ]
 
 function checkButtonOverlap()
@@ -1033,6 +1068,69 @@ function checkButtonOverlap()
 			activeButtons[i].over = false;
 		}
 	}
+}
+
+
+/*
+var logo =
+[
+]
+
+var mouseDown = false;
+var slider = { x:270, y:500, width:100, height:3, img:"images/ui/slider.png"}//Slider
+var sliderPlaceholder = { x:230, y:450, width:180, height:53, img:"images/ui/sliderPlaceholder.png"}//Placeholder
+var slidable = { x:270, y:500,  width:32, height:32, img:"images/ui/jSlider.png"}//Slidable
+
+var minSliderX = slider.x;
+var maxSliderX = slider.x + 100;
+
+function onMouseDown()
+{
+	if (mouseDown == false
+		&& (mouse.x >= minSliderX && mouse.x <= maxSliderX))
+	{
+		mouseDown = true;
+		images[43].x = mouse.x - SIZE/2;
+	}
+}
+
+function onMouseUp()
+{
+	mouseDown = false;
+}
+*/
+
+//*****EIGHT HEADS*****//
+
+var activeHeads = -1;
+
+var heads =
+[
+    /*0*/ { x:30, y:610, width:34, height:30,  own:false, img:"images/heads/one.png", imgO: "images/heads/oneD.png"},
+    /*1*/ { x:60, y:610, width:34, height:30,  own:false, img:"images/heads/two.png", imgO: "images/heads/twoD.png"},
+    /*2*/ { x:90, y:610, width:34, height:30, own:false, img:"images/heads/three.png", imgO: "images/heads/threeD.png"},
+    /*3*/ { x:120, y:610, width:34, height:30, own:false, img:"images/heads/four.png", imgO: "images/heads/fourD.png"},
+    /*4*/ { x:150, y:610, width:34, height:30, own:false, img:"images/heads/five.png", imgO: "images/heads/fiveD.png"},
+    /*5*/ { x:180, y:610, width:34, height:30, own:false, img:"images/heads/six.png", imgO: "images/heads/sixD.png"},
+    /*6*/ { x:210, y:610, width:34, height:30, own:false, img:"images/heads/seven.png", imgO: "images/heads/sevenD.png"},
+    /*7*/ { x:240, y:610, width:34, height:30, own:false, img:"images/heads/eight.png", imgO: "images/heads/eightD.png"}
+]
+
+
+function headOwned()
+{
+    // Temp over func, for checking ui
+    for (var i = 0; i < activeHeads.length; i++)
+    {
+        if(mouse.x < activeHeads[i].x+activeHeads[i].width && mouse.x > activeHeads[i].x && mouse.y < activeHeads[i].y+activeHeads[i].height && mouse.y > activeHeads[i].y )
+        {
+            activeHeads[i].over = true;
+        }
+        if(!(mouse.x < activeHeads[i].x+activeHeads[i].width && mouse.x > activeHeads[i].x && mouse.y < activeHeads[i].y+activeHeads[i].height && mouse.y > activeHeads[i].y ))
+        {
+            activeHeads[i].over = false;
+        }
+    }
 }
 
 //*****UTILITIES*****//
@@ -1060,6 +1158,35 @@ function findTile(x, y)
 	}
 }
 
+//*****MENU GENERATION*****//
+var menuBackground = [];
+
+function generateBackgroundMenu()
+{
+	for(var i = 0; i < 22; i++)
+	{
+		menuBackground[i] = [];
+		for(var j = 0; j < 22; j++)
+		{
+			var mRandNum = Math.floor(Math.random()*4+36);
+			var menuTemp =
+			{
+				x: j*SIZE,
+				y: i*SIZE,
+				img: images[mRandNum]
+			}
+			menuBackground[i][j] = menuTemp;
+		}
+	}
+}
+
+
+
+//*****PAUSE BOOL*****//
+
+var paused = false;
+
+
 //*****STATE MACHINE*****//
 
 var gameLoop = -1; //Variable to hold the update interval
@@ -1068,10 +1195,13 @@ var lastState = -1;
 
 var states =
 [
-	{ enter: enterMenu, update: updateMenu },//Main menu state
-	{ enter: enterGame, update: updateGame },//Game state
-	{ enter: enterHelp, update: updateHelp },//Help state
-	{ enter: enterGameOver, update: updateGameOver}//Game over state
+	{ enter: enterMenu, update: updateMenu },//Main menu state, 0
+	{ enter: enterGame, update: updateGame },//Game state, 1
+	{ enter: enterHelp, update: updateHelp },//Help state, 2
+	{ enter: enterGameOver, update: updateGameOver},//Game over state, 3
+	{ enter: enterSettings, update: updateSettings}, //Settings State, 4
+	{ enter: enterExitMenu, update: updateExitMenu },//Exit, 5
+	{ enter: enterWin, update: updateWin} //Win State, 6
 ];
 
 function changeState(newState)
@@ -1080,6 +1210,7 @@ function changeState(newState)
 	if(newState >= 0 && newState <= states.length)
 	{
 		activeButtons = -1;
+        activeHeads = -1;
 		window.clearInterval(gameLoop);
 		lastState = currState;
 		currState = newState;
@@ -1089,61 +1220,173 @@ function changeState(newState)
 		console.log("Invalid state");
 }
 
-function enterMenu()
+function enterMenu() //0
 {
+	generateBackgroundMenu();
 	gameLoop = window.setInterval(updateMenu, FPS);
 	canvas.style.backgroundColor = "#000000";
-	activeButtons = [ buttons[0] ];
+	activeButtons = [ buttons[0], buttons [1], buttons[2] ];//New Game, Continue/Start Game, Help, Settings, Exit
+
+	buttons[2].y = 280;
+    buttons[1].y = 340;
+    //////////////////////////////////////
 }
 
-function updateMenu()
+function updateMenu() //0
 {
-	console.log("In Menu");
+	console.log("In Main Menu");
 	checkButtonOverlap();
 	render();
 }
 
-function enterGame()
+function enterGame() //1
 {
+
 	canvas.style.backgroundColor = "#36454f";
 	gameLoop = window.setInterval(updateGame, FPS);
 	activeButtons = [];
+    activeHeads = [];
 	generateBackground();
 	generateRoom();
 }
 
-function updateGame()
+
+function updateGame() //1
 {
-	animate();
+    if(paused)
+    {
+        console.log("in IGM");
+        checkButtonOverlap();
+        menuBackground = [];
+        activeButtons = [buttons[4], buttons[1], buttons[2], buttons[3] ]; // Main Menu, Help, Settings, Exit
+
+        buttons[4].x = 230;
+        buttons[4].y = 185;
+        buttons[1].y = 250;
+        buttons[2].y = 315;
+        buttons[3].y = 380;
+        render();
+    }
+    else
+    {
+
+        activeButtons = [];
+        activeHeads = [heads[0], heads[1], heads[2], heads[3], heads[4], heads[5], heads[6],heads[7]];
+        headOwned();
+        animate();
+        render();
+        movePlayer();
+        switchRoom();
+        activateTraps();
+        playerCollision();
+    }
+}
+
+
+
+function enterHelp() //2
+{
+	canvas.style.backgroundColor = "green"; //TEMP
+	activeButtons = [buttons [6], buttons[4]]; // Main Menu, Return
+	gameLoop = window.setInterval(updateHelp, FPS);
+
+   generateBackgroundMenu();
+
+    surface.drawImage(images[40], 200, 300);
+
+    buttons[4].y = 100;
+    buttons[4].x = 80;
+    buttons[6].y = 160;
+    buttons[6].x = 80;
+}
+
+function updateHelp() //2
+{
+
+	console.log("in help");
+	checkButtonOverlap();
 	render();
-	movePlayer();
-	switchRoom();
-	activateTraps();
-	playerCollision();
+
 }
 
-function enterHelp()
+function enterGameOver() //3
 {
-	gameLoop = window.setInterval(updateHelp, false);
-}
-
-function updateHelp()
-{
-	render();
-}
-
-function enterGameOver()
-{
+	generateBackgroundMenu();
 	canvas.style.backgroundColor = "#000000";
-	activeButtons = [ buttons[1] ];
+	activeButtons = [ buttons[4]];
 	gameLoop = window.setInterval(updateGameOver, FPS);
+
+
+    ////////////////////////////////////////////////////
+    //make a logo
+    buttons[4].x = 230;
+    buttons[4].y = 300;
 }
 
-function updateGameOver()
+function updateGameOver() //3
 {
 	render();
     checkButtonOverlap();
 	console.log("game over");
+}
+
+function enterSettings() // State 4
+{
+
+	canvas.style.backgroundColor = "red"; //TEMP
+	gameLoop = window.setInterval(updateSettings, FPS);
+    activeButtons = [buttons [6], buttons[4]]; // Main Menu, Return
+
+
+   generateBackgroundMenu();
+
+    buttons[4].y = 100;
+    buttons[4].x = 80;
+    buttons[6].y = 160;
+    buttons[6].x = 80;
+}
+
+function updateSettings() // 4
+{
+	console.log("in settings");
+	checkButtonOverlap();
+	render();
+}
+
+function enterExitMenu() // 6
+{
+	gameLoop = window.setInterval(updateExitMenu, FPS);
+	generateBackgroundMenu();
+	activeButtons = [ buttons[4]];
+
+    buttons[4].x = 230;
+    buttons[4].y = 300;
+}
+
+function updateExitMenu()// 6
+{
+	console.log("in Exit");
+	checkButtonOverlap();
+
+	render();
+}
+
+function enterWin() // State 7
+{
+	activeButtons = [ buttons[5], buttons[4] ]; //to go back to main menu
+	gameLoop = window.setInterval(updateWin, FPS);
+
+    buttons[5].x = 230;
+    buttons[5].y = 240;
+    buttons[4].x = 230;
+    buttons[4].y = 300;
+}
+
+function updateWin() // 7
+{
+	render();
+	checkButtonOverlap();
+	console.log("victory!");
 }
 
 //*****RENDERING*****//
@@ -1157,25 +1400,44 @@ function animate()
 	}
 }
 
+
 function render()
 {
 	surface.clearRect(0, 0, canvas.width, canvas.height);
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+	// MENU BACKGROUND //
+	if(currState !== 1)
+	{
+		for(var m = 0; m < 22; m++)
+		{
+			for(var b = 0; b < 22; b++)
+			{
+				if(menuBackground.length !== 0)
+					surface.drawImage(menuBackground[m][b].img, menuBackground[m][b].x, menuBackground[m][b].y);
+			}
+		}
+
+		surface.drawImage(images[43], 570, 570);
+	}
+
+
+
 	//~~~MENU STATE~~~//
 	if(currState === 0)
 	{
 		surface.drawImage(images[13], 140, 0);
+
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	//~~~GAME STATE~~~//
 	else if(currState === 1)
 	{
@@ -1188,7 +1450,8 @@ function render()
 					surface.drawImage(background[i][j].img, background[i][j].x, background[i][j].y);
 			}
 		}
-		
+
+
 		//DRAW PLATFORMS//
 		for(var i = 0; i < ROWS; i++)
 		{
@@ -1198,21 +1461,41 @@ function render()
 					surface.drawImage(platforms[i][j].img, platforms[i][j].x, platforms[i][j].y);
 			}
 		}
-		
+
+
 		//DRAW BORDER//
 		surface.drawImage(images[5], 0, 0);
-		
+
 		//DRAW DOORS//
 		for(var i = 0; i < doors.length; i++)
 		{
 			surface.drawImage(doors[i].img, doors[i].x, doors[i].y);
 		}
-		
+
+		//DRAW HEAD HOLDER//
+		surface.drawImage(images[42], 15, 605);
+
+		for(var i = 0; i < activeHeads.length; i++)
+		{
+			// still need an owned function. if not yet owned, draw dark, if, highlight with original
+			if(activeHeads[i].over === true)
+			{
+				//surface.drawImage(activeHeads[i].imgO, activeHeads[i].x, activeHeads[i].y);
+				surface.drawImage(activeHeads[i].img, activeHeads[i].x, activeHeads[i].y);
+			}
+			else if(activeHeads[i].over === false)
+			{
+			// surface.drawImage(activeHeads[i].img, activeHeads[i].x, activeHeads[i].y);
+				surface.drawImage(activeHeads[i].imgO, activeHeads[i].x, activeHeads[i].y);
+			}
+		}
+
+
 		//DRAW TRAPS
-		
+
 		for(var i = 0; i < traps.length; i++)
 		{
-			surface.drawImage(traps[i].img, 
+			surface.drawImage(traps[i].img,
 				traps[i].frameIndex*traps[i].spriteWidth, 0, traps[i].spriteWidth, traps[i].spriteHeight,
 				traps[i].x, traps[i].y, traps[i].spriteWidth, traps[i].spriteHeight);
 			if(traps[i].isArrowTrap === true)
@@ -1223,7 +1506,7 @@ function render()
 				}
 			}
 		}
-		
+
 		//DRAW PLAYER//
         if (player.idle == true)
         {
@@ -1244,18 +1527,36 @@ function render()
                 player.frameIndex*player.spriteWidth, 64, player.spriteWidth, player.spriteHeight,
                 player.x-9, player.y, player.spriteWidth, player.spriteHeight);
 	}
-	
-	
-	
-	
-	
+
+
+	if (currState === 2)
+    {
+        surface.drawImage(images[40], 200, 300);
+    }
+
+	if (currState === 4) // Slider!
+	{
+		//surface.drawImage(slider.img, slider.x, slider.y)
+		surface.drawImage(images[44], 230, 400);
+		surface.drawImage(images[45], 305, 408);
+
+	}
+
+    // if currstate 7 win, logo
+
+
+
 	//~~~ALL STATES~~~//
-	
+	if(paused && currState === 1) //Dimmer
+	{
+		surface.drawImage(images[41],0 ,0);
+	}
+
 	//DRAW BUTTONS//
 	for(var i = 0; i < activeButtons.length; i++)
-	{
-		if(activeButtons[i].over === true)
 		{
+			if(activeButtons[i].over === true)
+			{
 			surface.drawImage(activeButtons[i].imgO, activeButtons[i].x, activeButtons[i].y);
 		}
 		else if(activeButtons[i].over === false)
@@ -1263,6 +1564,7 @@ function render()
 			surface.drawImage(activeButtons[i].img, activeButtons[i].x, activeButtons[i].y);
 		}
 	}
+
 }
 
 //*****GAME INTIALIZATION*****//
@@ -1270,6 +1572,8 @@ function render()
 function eListeners()
 {
 	mouseMove = window.addEventListener("mousemove", updateMouse, false);
+	//mouseDown = window.addEventListener("mousedown", onMouseDown, false);
+	//mouseUp = window.addEventListener("mouseup", onMouseUp, false);
 	click = window.addEventListener("click", clickHandler, false);
 	keyDown = window.addEventListener("keydown", keyDownHandler, false);
 	keyUp = window.addEventListener("keyup", keyUpHandler, false);
@@ -1290,8 +1594,8 @@ function initGame()
 
 //----Asset Loading-----//
 
-var imgNames = 
-[ 
+var imgNames =
+[
 	/*0*/"images/ui/splashScreen.png", /*1*/"images/1.png", /*2*/"images/2.png",
 	/*3*/"images/3.png", /*4*/"images/4.png", /*5*/"images/5.png",
 	/*6*/"images/6.png", /*7*/"images/7.png", /*8*/"images/8.png",
@@ -1303,7 +1607,13 @@ var imgNames =
 	/*24*/"images/24.png", /*25*/"images/25.png", /*26*/"images/26.png",
 	/*27*/"images/27.png",/*28*/"images/28.png",/*29*/"images/29.png",
 	/*30*/"images/30.png",/*31*/"images/31.png",/*32*/"images/32.png",
-	/*33*/"images/33.png",/*34*/"images/34.png",/*35*/"images/35.png"
+	/*33*/"images/33.png",/*34*/"images/34.png",/*35*/"images/35.png",
+
+    /*36*/"images/36.png", /*37*/"images/37.png", /*38*/"images/38.png",
+    /*39*/"images/39.png", /*40*/"images/ui/help.png", /*41*/"images/ui/dimScreen.png",
+	/*42*/"images/ui/headHolder.png", /*43*/"images/logo/logo1.png",
+
+	"images/ui/sliderfull.png", "images/ui/jSlider.png"
 ];
 
 var images = [];
@@ -1318,24 +1628,46 @@ function loadAssets()
 		temp.addEventListener("load", onAssetLoad, false);
 		images.push(temp);
 	}
+
 	for(var j = 0; j < buttons.length; j++)
 	{
 		var b = new Image();
 		b.src = buttons[j].img;
 		b.addEventListener("load", onAssetLoad, false);
-		buttons[j].img = b;	
+		buttons[j].img = b;
 		var c = new Image();
 		c.src = buttons[j].imgO;
 		c.addEventListener("load", onAssetLoad, false);
 		buttons[j].imgO = c;
 	}
+
+	/*for(var z = 0; z < logo.length; z++)
+	{
+		var y = new Image();
+		y.src = logo[z].img;
+		y.addEventListener("load", onAssetLoad, false);
+		logo[z].img = y;
+	}
+	//adsfgh
+*/
+    for(var k = 0; k < heads.length; k++)
+    {
+        var h = new Image();
+        h.src = heads[k].img;
+        h.addEventListener("load", onAssetLoad, false);
+        heads[k].img = h;
+        var d = new Image();
+        d.src = heads[k].imgO;
+        d.addEventListener("load", onAssetLoad, false);
+        heads[k].imgO = d;
+    }
 }
 
 function onAssetLoad(e)
 {
 	console.log("Asset loaded");
 	assetsLoaded++;
-	if(assetsLoaded === imgNames.length + (buttons.length*2))
+	if(assetsLoaded === imgNames.length + (buttons.length*2) + (heads.length*2))
 	{
 		//Defines some images for objects
 		player.img = images[10];
@@ -1343,7 +1675,7 @@ function onAssetLoad(e)
 		doors[1].img = images[15];
 		doors[2].img = images[16];
 		doors[3].img = images[17];
-		
+
 		//Initializes game after all assets are loaded
 		initGame();
 	}
