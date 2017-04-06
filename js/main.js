@@ -431,6 +431,7 @@ function activateTraps()
     {
         traps[i].activate();
     }
+    eyeTrap.activate();
 }
 
 //*****LEVEL GENERATION****//
@@ -583,210 +584,183 @@ function generateRoom()
     }
 }
 
-//*****JESTER*****//
-var jesterState =
-{
-    PATROLLING:0,
-    CHASING:1,
-    FIGHTING:2
-};
-var jester =
-{
-    x: 0,
-    y: 576,
-    width: 30,
-    height: 28,
-    img:undefined,
-    spriteWidth: 32,
-    spriteHeight:32,
-    velX:0,
-    velY:0,
-    dir:dir.EAST,
-    jumpSpeed:3,
-    speed:1.5,
-    coll:false,
-    jumping: false,
-    running: true,
-    frameIndex: 0,
-    currentFrame: 0,
-    framesPerSprite: 6,
-    playerInSight: false,
-    currentState:jesterState.PATROLLING,
-    previousDir:dir.EAST,
-    arrow:undefined,
-    animate:
-        function()
-        {
-            //TODO:animation code here.
-        },
-    chase:
-        function ()
-        {
-            // //TODO:Chasing code here.
-            // this.checkLineOfSite();
-            // if(this.currentState === jesterState.CHASING && this.playerInSight)
-            // {
-            //     this.running = true;
-            //     if(this.x < player.x)
-            //     {
-            //         this.xdir = dir.EAST;
-            //     }
-            //     if(this.x > player.x)
-            //     {
-            //         this.xdir = dir.WEST;
-            //     }
-            //     if(this.y < player.y)
-            //     {
-            //         this.ydir = dir.NORTH;
-            //     }
-            //     if(this.y > player.y)
-            //     {
-            //         this.ydir = dir.SOUTH;
-            //     }
-            //     if(this.xdir == dir.EAST)
-            //     {
-            //         //TODO:this.img = "right-image"
-            //         if(this.velX < this.speed)
-            //         {
-            //             this.velX += 0.01;
-            //         }
-            //
-            //     }
-            //     else if(this.xdir == dir.WEST)
-            //     {
-            //         //TODO:this.img = "left-image"
-            //         if(this.velX > -this.speed)
-            //         {
-            //             this.velX -= 0.01;
-            //         }
-            //     }
-            //     if(this.ydir == dir.NORTH)
-            //     {
-            //         //TODO:this.img = "right-image"
-            //         if(this.velY < this.speed && this.y <= canvas.height - SIZE)
-            //         {
-            //             this.velY += 0.01;
-            //         }
-            //
-            //     }
-            //     else if(this.ydir == dir.SOUTH)
-            //     {
-            //         //TODO:this.img = "left-image"
-            //         if(this.velY > -this.speed && this.y >= 0)
-            //         {
-            //             this.velY -= 0.01;
-            //         }
-            //     }
-            //     this.x += this.velX;
-            //     this.y += this.velY;
-            // }
-        },
-    fight:
-        function ()
-        {
-            //TODO: Fighting code here.
-            this.checkLineOfSite();
-            console.log("attack");
-            if(this.arrow === undefined && this.dir === dir.WEST)
+//*****Eye Trap*****//
+var eyeTrapState =
+    {
+        PATROLLING:0,
+        FIGHTING:1
+    };
+var eyeTrap =
+    {
+        x: 0,
+        y: 576,
+        width: 30,
+        height: 28,
+        counter:0,
+        img:undefined,
+        spriteWidth: 32,
+        spriteHeight:32,
+        velX:0,
+        velY:0,
+        dir:dir.EAST,
+        shootDir:dir.EAST,
+        jumpSpeed:3,
+        speed:1.5,
+        coll:false,
+        jumping: false,
+        running: true,
+        frameIndex: 0,
+        currentFrame: 0,
+        framesPerSprite: 6,
+        playerInSight: false,
+        currentState:eyeTrapState.PATROLLING,
+        previousDir:dir.EAST,
+        arrows:[],
+        hasShot:false,
+        isActivated:false,
+        animate:
+            function()
             {
-                this.arrow =
-                    {
-                        isTrap: true,
-                        x: this.x,
-                        y: this.y+13,
-                        dir: dir.WEST,
-                        speed: 1,
-                        collidable: false, //If this is true, trap will collide like normal platforms
-                        width: 22,
-                        height: 6,
-                        img: images[20]
-                    };
-            }
-            else if(this.arrow === undefined && this.dir === dir.NORTH)
+                //TODO:animation code here.
+            },
+        shoot:
+            function ()
             {
-                this.arrow =
-                    {
-                        isTrap: true,
-                        x: this.x+13,
-                        y: this.y,
-                        dir: dir.NORTH,
-                        speed: 1,
-                        collidable: false, //If this is true, trap will collide like normal platforms
-                        width: 6,
-                        height: 16,
-                        img: images[22]
-                    };
-            }
-            else if( this.arrow === undefined &&this.dir === dir.EAST)
-            {
-                this.arrow =
-                    {
-                        isTrap: true,
-                        x: this.x,
-                        y: this.y+13,
-                        dir: dir.EAST,
-                        speed: 1,
-                        collidable: false, //If this is true, trap will collide like normal platforms
-                        width: 22,
-                        height: 6,
-                        img: images[23]
-                    };
-            }
-            else if( this.arrow === undefined &&this.dir === dir.SOUTH)
-            {
-                this.arrow =
-                    {
-                        isTrap: true,
-                        x: this.x+13,
-                        y: this.y,
-                        dir: dir.SOUTH,
-                        speed: 1,
-                        collidable: false, //If this is true, trap will collide like normal platforms
-                        width: 6,
-                        height: 16,
-                        img: images[24]
-                    };
-            }
-            playSound("shoot");
-
-                if(this.arrow.dir === dir.WEST)
-                    this.arrow.x -= this.arrow.speed;
-                if(this.arrow.dir === dir.NORTH)
-                    this.arrow.y -= this.arrow.speed;
-                if(this.arrow.dir === dir.EAST)
-                    this.arrow.x += this.arrow.speed;
-                if(this.arrow.dir === dir.SOUTH)
-                    this.arrow.y += this.arrow.speed;
-
-                if(player.x < this.arrow.x+this.arrow.width &&
-                    player.x+player.width > this.arrow.x &&
-                    player.y < this.arrow.y+this.arrow.height &&
-                    player.y+player.height > this.arrow.y+SIZE-SIZE/4)
+                //TODO: Fighting code here.
+                var arrow;
+                this.checkLineOfSite();
+                console.log("attack");
+                if(arrow === undefined && this.shootDir === dir.WEST)
                 {
-                    die();
-                }
-
-                for(var j = 0; j < ROWS; j++) {
-                    for (var k = 0; k < COLS; k++) {
-                        if (this.arrow.x < platforms[j][k].x + platforms[j][k].width &&
-                            this.arrow.x + this.arrow.width > platforms[j][k].x &&
-                            this.arrow.y < platforms[j][k].y + platforms[j][k].height &&
-                            this.arrow.y + this.arrow.height > platforms[j][k].y &&
-                            platforms[j][k].isTrap === false &&
-                            platforms[j][k].img != "empty")
+                    arrow =
                         {
-                            this.arrow = undefined;
+                            isTrap: true,
+                            x: this.x,
+                            y: this.y+13,
+                            dir: dir.WEST,
+                            speed: 3,
+                            collidable: false, //If this is true, trap will collide like normal platforms
+                            width: 22,
+                            height: 6,
+                            img: images[20]
+                        };
+                }
+                else if(arrow === undefined && this.shootDir === dir.NORTH)
+                {
+                    arrow =
+                        {
+                            isTrap: true,
+                            x: this.x+13,
+                            y: this.y,
+                            dir: dir.NORTH,
+                            speed: 3,
+                            collidable: false, //If this is true, trap will collide like normal platforms
+                            width: 6,
+                            height: 16,
+                            img: images[22]
+                        };
+                }
+                else if( arrow === undefined &&this.shootDir === dir.EAST)
+                {
+                    arrow =
+                        {
+                            isTrap: true,
+                            x: this.x,
+                            y: this.y+13,
+                            dir: dir.EAST,
+                            speed: 3,
+                            collidable: false, //If this is true, trap will collide like normal platforms
+                            width: 22,
+                            height: 6,
+                            img: images[23]
+                        };
+                }
+                else if( this.arrow === undefined &&this.shootDir === dir.SOUTH)
+                {
+                    arrow =
+                        {
+                            isTrap: true,
+                            x: this.x+13,
+                            y: this.y,
+                            dir: dir.SOUTH,
+                            speed: 3,
+                            collidable: false, //If this is true, trap will collide like normal platforms
+                            width: 6,
+                            height: 16,
+                            img: images[24]
+                        };
+                }
+                this.arrows.push(arrow);
+                playSound("shoot");
+            },
+        activate:
+            function()
+            {
+                for(var i = 0; i < this.arrows.length; i++)
+                {
+                    if(this.arrows[i].dir === dir.WEST)
+                        this.arrows[i].x -= this.arrows[i].speed;
+                    if(this.arrows[i].dir === dir.NORTH)
+                        this.arrows[i].y -= this.arrows[i].speed;
+                    if(this.arrows[i].dir === dir.EAST)
+                        this.arrows[i].x += this.arrows[i].speed;
+                    if(this.arrows[i].dir === dir.SOUTH)
+                        this.arrows[i].y += this.arrows[i].speed;
+
+                    if(player.x < this.arrows[i].x+this.arrows[i].width &&
+                        player.x+player.width > this.arrows[i].x &&
+                        player.y < this.arrows[i].y+this.arrows[i].height &&
+                        player.y+player.height > this.arrows[i].y+SIZE-SIZE/4)
+                    {
+                        die();
+                    }
+                    if(this.arrows[i] !== "undefined" && this.arrows[i].x < SIZE)
+                    {
+                        this.hasShot = false;
+                        this.arrows.splice(i, 1);
+                    }
+
+                    if(this.arrows[i] !== "undefined" && this.arrows[i].y < SIZE)
+                    {
+                        this.hasShot = false;
+                        this.arrows.splice(i, 1);
+                    }
+
+                    if(this.arrows[i] !== "undefined" && this.arrows[i].x+this.arrows[i].width > canvas.width-SIZE)
+                    {
+                        this.hasShot = false;
+                        this.arrows.splice(i, 1);
+                    }
+
+                    if(this.arrows[i] !== "undefined" && this.arrows[i].y+this.arrows[i].height > canvas.height-SIZE)
+                    {
+                        this.hasShot = false;
+                        this.arrows.splice(i, 1);
+                    }
+
+                    for(var j = 0; j < ROWS; j++)
+                    {
+                        for(var k = 0; k < COLS; k++)
+                        {
+                            if(this.arrows[i].x < platforms[j][k].x+platforms[j][k].width &&
+                                this.arrows[i].x+this.arrows[i].width > platforms[j][k].x &&
+                                this.arrows[i].y < platforms[j][k].y+platforms[j][k].height &&
+                                this.arrows[i].y+this.arrows[i].height > platforms[j][k].y &&
+                                platforms[j][k].isTrap === false &&
+                                platforms[j][k].img != "empty")
+                            {
+                                this.hasShot = false;
+                                this.arrows.splice(i, 1);
+                            }
                         }
                     }
                 }
-        },
-    patrol:
-        function ()
-        {
-            //TODO: Patrolling code here.
-            this.checkLineOfSite();
-            if(this.currentState === jesterState.PATROLLING)
+            },
+        patrol:
+            function ()
             {
+                //TODO: Patrolling code here.
+                this.checkLineOfSite();
                 this.running = true;
 
                 if(this.dir == dir.EAST)
@@ -827,180 +801,199 @@ var jester =
                     this.y += this.velY;
                 }
 
-                if(this.x >= canvas.width - SIZE - this.width ) //i.e. jester cannot go Right
+                if(this.x >= canvas.width - SIZE - this.width ) //i.e. eyeTrap cannot go Right
                 {
                     this.x = canvas.width - SIZE - this.width - 2;
                     // this.y = canvas.height - SIZE - this.height - 2;
                     this.dir = dir.NORTH;
                 }
-                else if(this.y <= 32 ) //i.e. jester cannot go Up!
+                else if(this.y <= 32 ) //i.e. eyeTrap cannot go Up!
                 {
                     this.y = 34;
                     // this.x = canvas.width - SIZE - this.width - 2;
                     this.dir = dir.WEST;
                 }
-                else if(this.x <= 32 ) //i.e. jester cannot go Left!
+                else if(this.x <= 32 ) //i.e. eyeTrap cannot go Left!
                 {
                     this.x = 34;
                     // this.y = 34;
                     this.dir = dir.SOUTH;
                 }
-                else if(this.y >= 576 ) //i.e. jester cannot go Down!
+                else if(this.y >= 576 ) //i.e. eyeTrap cannot go Down!
                 {
                     this.y = canvas.height - SIZE - this.height - 2;
                     // this.y = canvas.height - SIZE - this.height - 1;
                     this.dir = dir.EAST;
                 }
-
-
-            }
-
-        },
-    checkLineOfSite:
-        function()
-        {
-            //TODO: Check if player is in any line of sight.
-
-            // if((this.x >= player.x && this.x <= player.x+player.width)
-            //     || (this.y >= player.y && this.y <= player.y+player.height) )
-            // {
-            //     for(var i = 0 ; i < ROWS; i++)
-            //     {
-            //         for (var j = 0 ; j < COLS; j++)
-            //         {
-            //             if (!(this.x >= platforms[i][j].x && this.x <= platforms[i][j].x + platforms[i][j].width)
-            //                 || !(this.y >= platforms[i][j].y && this.y <= platforms[i][j].y + platforms[i][j].height))
-            //             {
-            //                 this.playerInSight = true;
-            //                 this.currentState = jesterState.CHASING;
-            //                 this.fight();
-            //             }
-            //             else
-            //             {
-            //                 this.playerInSight = false;
-            //                 this.currentState = jesterState.PATROLLING;
-            //                 console.log("I was in else of check line of sight");
-            //             }
-            //         }
-            //     }
-            // }
-
-            //vertical line of sight check
-            //LOS : LineOfSight
-
-            var playerBottom = player.y + player.height;
-            var playerTop = player.y;
-            var playerRight = player.x + player.width;
-            var playerLeft = player.x;
-
-            var verticalLOSTop = this.y - canvas.height;
-            var verticalLOSBottom = this.y + canvas.height;
-            var verticalLOSLeft = this.x + this.width/2 - 5;
-            var verticalLOSRight = this.x + this.width/2 + 5;
-
-            var horizontalLOSTop = this.y + this.width/2 - 5;
-            var horizontalLOSBottom = this.y + this.width/2 + 5;
-            var horizontalLOSLeft = this.x - canvas.width;
-            var horizontalLOSRight = this.x + canvas.width;
-
-            if( !(verticalLOSTop > playerBottom) &&
-                !(verticalLOSBottom < playerTop) &&
-                !(verticalLOSLeft > playerRight) &&
-                !(verticalLOSRight < playerLeft))
+            },
+        checkLineOfSite:
+            function()
             {
-                var isAnyPlatformBlocking = false;
-                for(var i = 0 ; i < ROWS; i++)
-                {
-                    for (var j = 0 ; j < COLS; j++)
-                    {
-                        var platformBottom = platforms[i][j].y + platforms[i][j].height;
-                        var platformTop = platforms[i][j].y;
-                        var platformRight = platforms[i][j].x + platforms[i][j].width;
-                        var platformLeft = platforms[i][j].x;
-                        if( !(verticalLOSTop > platformBottom) &&
-                            !(verticalLOSBottom < platformTop) &&
-                            !(verticalLOSLeft > platformRight) &&
-                            !(verticalLOSRight < platformLeft))
-                        {
+                //TODO: Check if player is in any line of sight.
 
-                            if(player.y > this.y)//i.e. player is below us
+                // if((this.x >= player.x && this.x <= player.x+player.width)
+                //     || (this.y >= player.y && this.y <= player.y+player.height) )
+                // {
+                //     for(var i = 0 ; i < ROWS; i++)
+                //     {
+                //         for (var j = 0 ; j < COLS; j++)
+                //         {
+                //             if (!(this.x >= platforms[i][j].x && this.x <= platforms[i][j].x + platforms[i][j].width)
+                //                 || !(this.y >= platforms[i][j].y && this.y <= platforms[i][j].y + platforms[i][j].height))
+                //             {
+                //                 this.playerInSight = true;
+                //                 this.currentState = eyeTrapState.CHASING;
+                //                 this.fight();
+                //             }
+                //             else
+                //             {
+                //                 this.playerInSight = false;
+                //                 this.currentState = eyeTrapState.PATROLLING;
+                //                 console.log("I was in else of check line of sight");
+                //             }
+                //         }
+                //     }
+                // }
+
+                //vertical line of sight check
+                //LOS : LineOfSight
+
+                var playerBottom = player.y + player.height;
+                var playerTop = player.y;
+                var playerRight = player.x + player.width;
+                var playerLeft = player.x;
+
+                var verticalLOSTop = this.y - canvas.height;
+                var verticalLOSBottom = this.y + canvas.height;
+                var verticalLOSLeft = this.x + this.width/2 - 5;
+                var verticalLOSRight = this.x + this.width/2 + 5;
+
+                var horizontalLOSTop = this.y + this.width/2 - 5;
+                var horizontalLOSBottom = this.y + this.width/2 + 5;
+                var horizontalLOSLeft = this.x - canvas.width;
+                var horizontalLOSRight = this.x + canvas.width;
+
+                if( !(verticalLOSTop > playerBottom) &&
+                    !(verticalLOSBottom < playerTop) &&
+                    !(verticalLOSLeft > playerRight) &&
+                    !(verticalLOSRight < playerLeft))
+                {
+                    var isAnyPlatformBlocking = false;
+                    for(var i = 0 ; i < ROWS; i++)
+                    {
+                        for (var j = 0 ; j < COLS; j++)
+                        {
+                            var platformBottom = platforms[i][j].y + platforms[i][j].height;
+                            var platformTop = platforms[i][j].y;
+                            var platformRight = platforms[i][j].x + platforms[i][j].width;
+                            var platformLeft = platforms[i][j].x;
+                            if( !(verticalLOSTop > platformBottom) &&
+                                !(verticalLOSBottom < platformTop) &&
+                                !(verticalLOSLeft > platformRight) &&
+                                !(verticalLOSRight < platformLeft))
                             {
-                                if(player.y > platforms[i][j].y) // true = platform is between player and jester
+
+                                if(player.y > this.y)//i.e. player is below us
                                 {
-                                    isAnyPlatformBlocking = true;
+                                    if(player.y > platforms[i][j].y) // true = platform is between player and eyeTrap
+                                    {
+                                        isAnyPlatformBlocking = true;
+                                    }
                                 }
-                            }
-                            else if(player.y < this.y)//i.e. player is above us
-                            {
-                                if(player.y < platforms[i][j].y) // true = platform is between player and jester
+                                else if(player.y < this.y)//i.e. player is above us
                                 {
-                                    isAnyPlatformBlocking = true;
+                                    if(player.y < platforms[i][j].y) // true = platform is between player and eyeTrap
+                                    {
+                                        isAnyPlatformBlocking = true;
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                if(!isAnyPlatformBlocking)
-                {
-                    console.log("player right above or below me..");
-                    this.currentState = jesterState.FIGHTING;
-                    this.playerInSight = true;
-                }
-            }
-            else if( !(horizontalLOSTop > playerBottom) &&
-                !(horizontalLOSBottom < playerTop) &&
-                !(horizontalLOSLeft > playerRight) &&
-                !(horizontalLOSRight < playerLeft))
-            {
-
-                var isAnyPlatformBlocking = false;
-                for(var i = 0 ; i < ROWS; i++)
-                {
-                    for (var j = 0 ; j < COLS; j++)
+                    if(!isAnyPlatformBlocking)
                     {
-                        var platformBottom = platforms[i][j].y + platforms[i][j].height;
-                        var platformTop = platforms[i][j].y;
-                        var platformRight = platforms[i][j].x + platforms[i][j].width;
-                        var platformLeft = platforms[i][j].x;
-                        if( !(verticalLOSTop > platformBottom) &&
-                            !(verticalLOSBottom < platformTop) &&
-                            !(verticalLOSLeft > platformRight) &&
-                            !(verticalLOSRight < platformLeft))
+                        console.log("player right above or below me..");
+                        this.currentState = eyeTrapState.FIGHTING;
+                        this.playerInSight = true;
+                        if(player.y > this.y)
                         {
+                            this.shootDir = dir.SOUTH;
+                        }
+                        else
+                        {
+                            this.shootDir = dir.NORTH;
+                        }
+                    }
+                }
+                else if( !(horizontalLOSTop > playerBottom) &&
+                    !(horizontalLOSBottom < playerTop) &&
+                    !(horizontalLOSLeft > playerRight) &&
+                    !(horizontalLOSRight < playerLeft))
+                {
 
-                            if(player.x > this.x)//i.e. player is on jester's right side
+                    var isAnyPlatformBlocking = false;
+                    for(var i = 0 ; i < ROWS; i++)
+                    {
+                        for (var j = 0 ; j < COLS; j++)
+                        {
+                            var platformBottom = platforms[i][j].y + platforms[i][j].height;
+                            var platformTop = platforms[i][j].y;
+                            var platformRight = platforms[i][j].x + platforms[i][j].width;
+                            var platformLeft = platforms[i][j].x;
+                            if( !(verticalLOSTop > platformBottom) &&
+                                !(verticalLOSBottom < platformTop) &&
+                                !(verticalLOSLeft > platformRight) &&
+                                !(verticalLOSRight < platformLeft))
                             {
-                                if(player.x > platforms[i][j].x) // true = platform is between player and jester
+
+                                if(player.x > this.x)//i.e. player is on eyeTrap's right side
                                 {
-                                    isAnyPlatformBlocking = true;
+                                    if(player.x > platforms[i][j].x) // true = platform is between player and eyeTrap
+                                    {
+                                        isAnyPlatformBlocking = true;
+                                    }
                                 }
-                            }
-                            else if(player.x < this.x)//i.e. player is on jester's left side
-                            {
-                                if(player.x < platforms[i][j].x) // true = platform is between player and jester
+                                else if(player.x < this.x)//i.e. player is on eyeTrap's left side
                                 {
-                                    isAnyPlatformBlocking = true;
+                                    if(player.x < platforms[i][j].x) // true = platform is between player and eyeTrap
+                                    {
+                                        isAnyPlatformBlocking = true;
+                                    }
                                 }
                             }
                         }
                     }
+                    if(!isAnyPlatformBlocking)
+                    {
+                        console.log("player right in front or behind me..");
+                        this.currentState = eyeTrapState.FIGHTING;
+                        this.playerInSight = true;
+                        if(player.x > this.x)
+                        {
+                            this.shootDir = dir.EAST;
+                        }
+                        else
+                        {
+                            this.shootDir = dir.WEST;
+                        }
+                    }
                 }
-                if(!isAnyPlatformBlocking)
+                else
                 {
-                    console.log("player right in front or behind me..");
-                    this.currentState = jesterState.FIGHTING;
-                    this.playerInSight = true;
+                    this.currentState = eyeTrapState.PATROLLING;
+                    this.playerInSight = false;
                 }
-            }
-            else
+
+            },
+        resetTrap:
+            function()
             {
-                this.currentState = jesterState.PATROLLING;
-                this.playerInSight = false;
+                this.x = 0;
+                this.y=576;
+                this.arrows = [];
             }
 
-        }
-
-};
+    };
 
 //*****PLAYER*****//
 
@@ -1052,6 +1045,7 @@ function die()
     platforms = [];
     background = [];
     arrowSpawn.arrows=[];
+    eyeTrap.resetTrap();
     player.x = 576;
     player.y = 576;
     player.velY = 0;
@@ -1101,7 +1095,7 @@ function updateMouse(e)
     if (mouseDown == true
         && (mouse.x >= minSliderX && mouse.x <= maxSliderX))
     {
-        images[43].x = mouse.x - SIZE/2;
+        slider[2].x = mouse.x - SIZE/2;
     }
 }
 
@@ -1140,7 +1134,7 @@ function clickHandler()
                     break;
                 case buttons[6]: //Return
                     console.log("Check6");
-                    changeState(1);
+                    changeState(lastState);
                     break;
             }
         }
@@ -1189,9 +1183,11 @@ function changeTheme()
     platforms = [];
     background = [];
     arrowSpawn.arrows=[];
+    eyeTrap.resetTrap();
     generateRoom();
     generateBackground();
     player.velY = 0;
+    eyeTrap.isActivated = true;
 }
 
 function keyUpHandler(e)
@@ -1284,28 +1280,28 @@ function movePlayer()
 function jesterCollision()
 {
     //Walls, floor, and roof collision
-    if(jester.y > canvas.height-SIZE*2)//Floor
+    if(eyeTrap.y > canvas.height-SIZE*2)//Floor
     {
-        jester.jumping = false;
-        jester.y = canvas.height-SIZE*2;
+        eyeTrap.jumping = false;
+        eyeTrap.y = canvas.height-SIZE*2;
     }
-    if(jester.y < SIZE && jester.x+jester.width > 352)//Roof right side
+    if(eyeTrap.y < SIZE && eyeTrap.x+eyeTrap.width > 352)//Roof right side
     {
-        jester.velY = 0;
-        jester.y = SIZE;
+        eyeTrap.velY = 0;
+        eyeTrap.y = SIZE;
     }
-    if(jester.y < SIZE && jester.x < 288)//Roof right side
+    if(eyeTrap.y < SIZE && eyeTrap.x < 288)//Roof right side
     {
-        jester.velY = 0;
-        jester.y = SIZE;
+        eyeTrap.velY = 0;
+        eyeTrap.y = SIZE;
     }
-    if(jester.x < SIZE)//Left wall top
+    if(eyeTrap.x < SIZE)//Left wall top
     {
-        jester.x = SIZE;
+        eyeTrap.x = SIZE;
     }
-    if(jester.x+jester.width > canvas.width-SIZE)//Right wall
+    if(eyeTrap.x+eyeTrap.width > canvas.width-SIZE)//Right wall
     {
-        jester.x = canvas.width - SIZE - jester.width;
+        eyeTrap.x = canvas.width - SIZE - eyeTrap.width;
     }
 
     for(var i = 0; i < ROWS; i++)
@@ -1314,42 +1310,42 @@ function jesterCollision()
         {
             //Top
             if(platforms[i][j].collidable === true &&
-                jester.x < platforms[i][j].x+SIZE &&
-                jester.x+jester.width > platforms[i][j].x &&
-                jester.y+jester.height > platforms[i][j].y+SIZE-4 &&
-                jester.y+jester.height < platforms[i][j].y+SIZE/4+SIZE)
+                eyeTrap.x < platforms[i][j].x+SIZE &&
+                eyeTrap.x+eyeTrap.width > platforms[i][j].x &&
+                eyeTrap.y+eyeTrap.height > platforms[i][j].y+SIZE-4 &&
+                eyeTrap.y+eyeTrap.height < platforms[i][j].y+SIZE/4+SIZE)
             {
-                jester.y = platforms[i][j].y-jester.height+SIZE-4;
-                jester.jumping = false;
-                jester.velY = 0;
+                eyeTrap.y = platforms[i][j].y-eyeTrap.height+SIZE-4;
+                eyeTrap.jumping = false;
+                eyeTrap.velY = 0;
             }
             //Bottom
             else if(platforms[i][j].collidable === true &&
-                jester.x < platforms[i][j].x+SIZE-4 &&
-                jester.x+jester.width > platforms[i][j].x+4 &&
-                jester.y < platforms[i][j].y+SIZE &&
-                jester.y > platforms[i][j].y+SIZE-SIZE/4)
+                eyeTrap.x < platforms[i][j].x+SIZE-4 &&
+                eyeTrap.x+eyeTrap.width > platforms[i][j].x+4 &&
+                eyeTrap.y < platforms[i][j].y+SIZE &&
+                eyeTrap.y > platforms[i][j].y+SIZE-SIZE/4)
             {
-                jester.y = platforms[i][j].y+SIZE;
-                jester.velY = 0;
+                eyeTrap.y = platforms[i][j].y+SIZE;
+                eyeTrap.velY = 0;
             }
             //Right
             else if(platforms[i][j].collidable === true &&
-                jester.x < platforms[i][j].x+SIZE &&
-                jester.x > platforms[i][j].x+SIZE-SIZE/4 &&
-                jester.y < platforms[i][j].y+SIZE-SIZE/4 &&
-                jester.y+jester.height > platforms[i][j].y+SIZE/4+SIZE)
+                eyeTrap.x < platforms[i][j].x+SIZE &&
+                eyeTrap.x > platforms[i][j].x+SIZE-SIZE/4 &&
+                eyeTrap.y < platforms[i][j].y+SIZE-SIZE/4 &&
+                eyeTrap.y+eyeTrap.height > platforms[i][j].y+SIZE/4+SIZE)
             {
-                jester.x = platforms[i][j].x+SIZE;
+                eyeTrap.x = platforms[i][j].x+SIZE;
             }
             //Left
             else if(platforms[i][j].collidable === true &&
-                jester.x+jester.width > platforms[i][j].x &&
-                jester.x+jester.width < platforms[i][j].x+SIZE/4 &&
-                jester.y < platforms[i][j].y+SIZE-SIZE/4 &&
-                jester.y+jester.height > platforms[i][j].y+SIZE/4+SIZE)
+                eyeTrap.x+eyeTrap.width > platforms[i][j].x &&
+                eyeTrap.x+eyeTrap.width < platforms[i][j].x+SIZE/4 &&
+                eyeTrap.y < platforms[i][j].y+SIZE-SIZE/4 &&
+                eyeTrap.y+eyeTrap.height > platforms[i][j].y+SIZE/4+SIZE)
             {
-                jester.x = platforms[i][j].x-jester.width;
+                eyeTrap.x = platforms[i][j].x-eyeTrap.width;
             }
         }
     }
@@ -1505,6 +1501,7 @@ function switchRoom()
         platforms = [];
         background = [];
         arrowSpawn.arrows=[];
+        eyeTrap.resetTrap();
         generateRoom();
         generateBackground();
         player.velY = 0;
@@ -1520,6 +1517,7 @@ function switchRoom()
         platforms = [];
         background = [];
         arrowSpawn.arrows=[];
+        eyeTrap.resetTrap();
         generateRoom();
         generateBackground();
         player.velY = 0;
@@ -1536,6 +1534,7 @@ function switchRoom()
         platforms = [];
         background = [];
         arrowSpawn.arrows=[];
+        eyeTrap.resetTrap();
         generateRoom();
         generateBackground();
         player.x = canvas.width-SIZE-player.width-1;
@@ -1551,6 +1550,7 @@ function switchRoom()
         platforms = [];
         background = [];
         arrowSpawn.arrows=[];
+        eyeTrap.resetTrap();
         generateRoom();
         generateBackground();
         player.x = 0+SIZE+1;
@@ -1591,35 +1591,63 @@ function checkButtonOverlap()
     }
 }
 
+ //*****VOLUME SLIDER*****//
 
-/*
- var logo =
- [
- ]
+var slider = -1;
+var mouseDown = false;
 
- var mouseDown = false;
- var slider = { x:270, y:500, width:100, height:3, img:"images/ui/slider.png"}//Slider
- var sliderPlaceholder = { x:230, y:450, width:180, height:53, img:"images/ui/sliderPlaceholder.png"}//Placeholder
- var slidable = { x:270, y:500,  width:32, height:32, img:"images/ui/jSlider.png"}//Slidable
+var volumeslider =
+    [
+        { x:230, y:400, width:180, height:53, img:"images/ui/sliderPlaceholder.png"}, // Placeholder
+        { x:270, y:425, width:100, height:3, img:"images/ui/slider.png"}, // Slider
+        { x:305, y:408,  width:32, height:32, img:"images/ui/jSlider.png"} // Slidable
+    ]
 
- var minSliderX = slider.x;
- var maxSliderX = slider.x + 100;
+var minSliderX = volumeslider[1].x;
+var maxSliderX = volumeslider[1].x + 100;
 
- function onMouseDown()
- {
- if (mouseDown == false
- && (mouse.x >= minSliderX && mouse.x <= maxSliderX))
- {
- mouseDown = true;
- images[43].x = mouse.x - SIZE/2;
- }
- }
+var volume = 0.5;
 
- function onMouseUp()
- {
- mouseDown = false;
- }
- */
+function calculateVol()
+{
+    //RANGES 270 - 370
+    if (slider[2].x < 280)
+        volume = 0.1;
+    else if (slider[2].x <= 290 && slider[2].x > 280)
+        volume = 0.2;
+    else if (slider[2].x <= 300 && slider[2].x > 290)
+        volume = 0.3;
+    else if (slider[2].x <= 310 && slider[2].x > 300)
+        volume = 0.4;
+    else if (slider[2].x <= 320 && slider[2].x > 310)
+        volume = 0.5;
+    else if (slider[2].x <= 330 && slider[2].x > 320)
+        volume = 0.6;
+    else if (slider[2].x <= 340 && slider[2].x > 330)
+        volume = 0.7;
+    else if (slider[2].x <= 350 && slider[2].x > 340)
+        volume = 0.8;
+    else if (slider[2].x <= 360 && slider[2].x > 350)
+        volume = 0.9;
+    else if (slider[2].x <= 370)
+        volume = 1.0;
+}
+
+function onMouseDown()
+{
+    if (mouseDown == false
+        && (mouse.x >= minSliderX && mouse.x <= maxSliderX))
+    {
+        mouseDown = true;
+        slider[2].x = mouse.x - SIZE/2;
+    }
+}
+
+function onMouseUp()
+{
+    mouseDown = false;
+}
+
 
 //*****EIGHT HEADS*****//
 
@@ -1837,14 +1865,18 @@ function updateGame() //1
         switchRoom();
         activateTraps();
         playerCollision();
-        jesterCollision();
-        if(jester.currentState === jesterState.PATROLLING)
+        if(eyeTrap.isActivated)
         {
-            jester.patrol();
-        }
-        else if (jester.currentState === jesterState.FIGHTING)
-        {
-            jester.fight();
+            jesterCollision();
+            eyeTrap.patrol();
+            if (eyeTrap.currentState === eyeTrapState.FIGHTING)
+            {
+                if(!eyeTrap.hasShot)
+                {
+                    eyeTrap.shoot();
+                    eyeTrap.hasShot = true;
+                }
+            }
         }
     }
 }
@@ -1853,7 +1885,6 @@ function updateGame() //1
 
 function enterHelp() //2
 {
-    canvas.style.backgroundColor = "green"; //TEMP
     activeButtons = [buttons [6], buttons[4]]; // Main Menu, Return
     gameLoop = window.setInterval(updateHelp, FPS);
 
@@ -1879,7 +1910,7 @@ function updateHelp() //2
 function enterGameOver() //3
 {
     generateBackgroundMenu();
-    canvas.style.backgroundColor = "#000000";
+
     activeButtons = [ buttons[4]];
     gameLoop = window.setInterval(updateGameOver, FPS);
 
@@ -1900,9 +1931,12 @@ function updateGameOver() //3
 function enterSettings() // State 4
 {
 
-    canvas.style.backgroundColor = "red"; //TEMP
+
     gameLoop = window.setInterval(updateSettings, FPS);
     activeButtons = [buttons [6], buttons[4]]; // Main Menu, Return
+
+   slider = [volumeslider[0], volumeslider[1], volumeslider[2]];
+    generateBackgroundMenu();
 
 
     generateBackgroundMenu();
@@ -1920,17 +1954,19 @@ function updateSettings() // 4
     render();
 }
 
-function enterExitMenu() // 6
+function enterExitMenu() // 5
 {
     gameLoop = window.setInterval(updateExitMenu, FPS);
     generateBackgroundMenu();
-    activeButtons = [ buttons[4]];
+    activeButtons = [ buttons[4], buttons[6]];
 
-    buttons[4].x = 230;
+    buttons[4].x = 130;
     buttons[4].y = 300;
+    buttons[6].x = 330;
+    buttons[6].y = 300;
 }
 
-function updateExitMenu()// 6
+function updateExitMenu()// 5
 {
     console.log("in Exit");
     checkButtonOverlap();
@@ -1938,7 +1974,7 @@ function updateExitMenu()// 6
     render();
 }
 
-function enterWin() // State 7
+function enterWin() // State 6
 {
     activeButtons = [ buttons[5], buttons[4] ]; //to go back to main menu
     gameLoop = window.setInterval(updateWin, FPS);
@@ -1949,7 +1985,7 @@ function enterWin() // State 7
     buttons[4].y = 300;
 }
 
-function updateWin() // 7
+function updateWin() // 6
 {
     render();
     checkButtonOverlap();
@@ -2094,15 +2130,18 @@ function render()
                 player.frameIndex*player.spriteWidth, 64, player.spriteWidth, player.spriteHeight,
                 player.x-9, player.y, player.spriteWidth, player.spriteHeight);
 
-        //DRAW JESTER//
-        if (jester.running)
+        if(eyeTrap.isActivated)
         {
-            surface.drawImage(jester.img, jester.x, jester.y);
-        }
+            //DRAW EYE TRAP//
+            surface.drawImage(eyeTrap.img, eyeTrap.x, eyeTrap.y);
 
-        //DRAW JESTER ARROW//
-        if(jester.arrow !== undefined)
-        surface.drawImage(jester.arrow.img, jester.arrow.x, jester.arrow.y);
+            //DRAW EYE TRAP ARROW//
+            if (eyeTrap.arrows.length !== 0) {
+                for (var j = 0; j < eyeTrap.arrows.length; j++) {
+                    surface.drawImage(eyeTrap.arrows[j].img, eyeTrap.arrows[j].x, eyeTrap.arrows[j].y);
+                }
+            }
+        }
 
 
     }
@@ -2110,18 +2149,39 @@ function render()
 
     if (currState === 2)
     {
-        surface.drawImage(images[40], 200, 300);
+        surface.drawImage(images[40], 200, 300); // help
     }
 
     if (currState === 4) // Slider!
     {
-        //surface.drawImage(slider.img, slider.x, slider.y)
-        surface.drawImage(images[44], 230, 400);
-        surface.drawImage(images[45], 305, 408);
+        surface.drawImage(images[47], 220, 350); // sound logo
+
+        for (var i = 0; i < slider.length; i++)
+        {
+        surface.drawImage(slider[i].img, slider[i].x, slider[i].y); // slider
+        }
 
     }
 
-    // if currstate 7 win, logo
+    if (currState === 5)
+    {
+        surface.drawImage(images[48], 100, 310);
+        surface.drawImage(images[49], 510, 310);
+        surface.drawImage(images[50], 108, 145);
+        //surface.drawImage(images[51], 400, 270, 60, 60);
+    }
+
+
+     if (currState === 6)
+     {
+     surface.drawImage(images[44], 213, 100); // win logo
+     }
+
+     if (currState === 3)
+     {
+     surface.drawImage(images[45], 170, 120); // gameover
+     }
+
 
 
 
@@ -2151,8 +2211,8 @@ function render()
 function eListeners()
 {
     mouseMove = window.addEventListener("mousemove", updateMouse, false);
-    //mouseDown = window.addEventListener("mousedown", onMouseDown, false);
-    //mouseUp = window.addEventListener("mouseup", onMouseUp, false);
+    mouseDown = window.addEventListener("mousedown", onMouseDown, false);
+    mouseUp = window.addEventListener("mouseup", onMouseUp, false);
     click = window.addEventListener("click", clickHandler, false);
     keyDown = window.addEventListener("keydown", keyDownHandler, false);
     keyUp = window.addEventListener("keyup", keyUpHandler, false);
@@ -2190,8 +2250,10 @@ var imgNames =
         /*36*/"images/36.png", /*37*/"images/37.png", /*38*/"images/38.png",
         /*39*/"images/39.png", /*40*/"images/ui/help.png", /*41*/"images/ui/dimScreen.png",
         /*42*/"images/ui/headHolder.png", /*43*/"images/logo/logo1.png",
-        /*44*/"images/ui/sliderfull.png",/*45*/ "images/ui/jSlider.png",
-        /*46*/"images/jester.png"
+        /*44*/"images/ui/win.png",/*45*/ "images/ui/gameOver.png",
+        /*46*/"images/eye.png",  /*47*/ "images/ui/sound.png",
+        /*48*/"images/ui/flame1.png", /*49*/ "images/ui/flame2.png",
+        /*50*/"images/ui/leave.png", /*51*/"images/ui/grim.png"
     ];
 
 var images = [];
@@ -2228,6 +2290,15 @@ function loadAssets()
      }
      //adsfgh
      */
+
+    for(var s = 0; s < volumeslider.length; s++)
+    {
+        var v = new Image();
+        v.src = volumeslider[s].img;
+        v.addEventListener("load", onAssetLoad, false);
+        volumeslider[s].img = v;
+    }
+
     for(var k = 0; k < heads.length; k++)
     {
         var h = new Image();
@@ -2249,7 +2320,7 @@ function onAssetLoad(e)
     {
         //Defines some images for objects
         player.img = images[10];
-        jester.img = images[46];
+        eyeTrap.img = images[46];
         doors[0].img = images[14];
         doors[1].img = images[15];
         doors[2].img = images[16];
