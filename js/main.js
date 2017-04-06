@@ -755,6 +755,25 @@ var eyeTrap =
                         }
                     }
                 }
+
+                // var eyeTop = this.y;
+                // var eyeBottom = this.y + this.height;
+                // var eyeLeft = this.x;
+                // var eyeRight = this.x + this.width;
+                //
+                // var playerTop = player.y;
+                // var playerBottom = player.y + player.height;
+                // var playerLeft = player.x;
+                // var playerRight = player.x + player.width;
+                //
+                //
+                // if(!(eyeTop > playerBottom)
+                //     && !(eyeBottom < playerTop)
+                //     && !(eyeLeft > playerRight)
+                //     && !(eyeRight < playerLeft))
+                // {
+                //     die();
+                // }
             },
         patrol:
             function ()
@@ -995,6 +1014,202 @@ var eyeTrap =
 
     };
 
+//*****JESTER*****//
+var jesterState =
+    {
+        PATROLLING:0,
+        CHASING:1,
+        FIGHTING:2
+    };
+var jester =
+    {
+        x: 0,
+        y: 576,
+        width: 34,
+        height: 28,
+        img:undefined,
+        spriteWidth: 32,
+        spriteHeight:32,
+        velX:0,
+        velY:0,
+        xdir:dir.EAST,
+        ydir:dir.NORTH,
+        jumpSpeed:3,
+        speed:0.5,
+        coll:false,
+        jumping: false,
+        running: true,
+        frameIndex: 0,
+        currentFrame: 0,
+        framesPerSprite: 6,
+        playerInSight: false,
+        currentState:jesterState.PATROLLING,
+        animate:
+            function()
+            {
+                //TODO:animation code here.
+            },
+        chase:
+            function ()
+            {
+                //TODO:Chasing code here.
+                if(this.currentState === jesterState.CHASING && this.playerInSight)
+                {
+                    this.running = true;
+                    if(this.x < player.x)
+                    {
+                        this.xdir = dir.EAST;
+                    }
+                    if(this.x > player.x)
+                    {
+                        this.xdir = dir.WEST;
+                    }
+                    if(this.y < player.y)
+                    {
+                        this.ydir = dir.NORTH;
+                    }
+                    if(this.y > player.y)
+                    {
+                        this.ydir = dir.SOUTH;
+                    }
+                    if(this.xdir == dir.EAST)
+                    {
+                        //TODO:this.img = "right-image"
+                        if(this.velX < this.speed)
+                        {
+                            this.velX += 0.01;
+                        }
+
+                    }
+                    else if(this.xdir == dir.WEST)
+                    {
+                        //TODO:this.img = "left-image"
+                        if(this.velX > -this.speed)
+                        {
+                            this.velX -= 0.01;
+                        }
+                    }
+                    if(this.ydir == dir.NORTH)
+                    {
+                        //TODO:this.img = "right-image"
+                        if(this.velY < this.speed && this.y <= canvas.height - SIZE)
+                        {
+                            this.velY += 0.01;
+                        }
+
+                    }
+                    else if(this.ydir == dir.SOUTH)
+                    {
+                        //TODO:this.img = "left-image"
+                        if(this.velY > -this.speed && this.y >= 0)
+                        {
+                            this.velY -= 0.01;
+                        }
+                    }
+                    this.x += this.velX;
+                    this.y += this.velY;
+                }
+            },
+        fight:
+            function ()
+            {
+                //TODO: Fighting code here.
+                console.log("attack");
+            },
+        patrol:
+            function ()
+            {
+                //TODO: Patrolling code here.
+                this.checkLineOfSite();
+                if(this.currentState === jesterState.PATROLLING)
+                {
+                    this.running = true;
+
+                    if(this.x <=32 ) //i.e. jester cannot go left so he has to move right!
+                    {
+                        this.xdir = dir.EAST;
+                    }
+                    else if(this.x>=576)//i.e. jester cannot go right so he has to move left!
+                    {
+                        this.xdir = dir.WEST;
+                    }
+
+                    if(this.xdir == dir.EAST)
+                    {
+                        //TODO:this.img = "right-image"
+                        if(this.velX < this.speed)
+                        {
+                            this.velX += 0.02;
+                        }
+
+                    }
+                    else if(this.xdir == dir.WEST)
+                    {
+                        //TODO:this.img = "left-image"
+                        if(this.velX > -this.speed)
+                        {
+                            this.velX -= 0.02;
+                        }
+                    }
+                    this.x += this.velX;
+
+                }
+
+            },
+        checkLineOfSite:
+            function()
+            {
+                //TODO: Check if player is in any line of sight.
+                if((this.x >= player.x && this.x <= player.x+player.width) || (this.y >= player.y && this.y <= player.y+player.height) )
+                {
+                    for(var i = 0 ; i < ROWS; i++)
+                    {
+                        for (var j = 0 ; j < COLS; j++)
+                        {
+                            if (!(this.x >= platforms[i][j].x && this.x <= platforms[i][j].x + platforms[i][j].width)
+                                || !(this.y >= platforms[i][j].y && this.y <= platforms[i][j].y + platforms[i][j].height))
+                            {
+                                this.playerInSight = true;
+                                this.currentState = jesterState.CHASING;
+                                this.fight();
+                            }
+                            else
+                            {
+                                this.playerInSight = false;
+                                this.currentState = jesterState.PATROLLING;
+                                console.log("I was in else of check line of sight");
+                            }
+                        }
+                    }
+                }
+            },
+        resetFromTopDoor:
+            function()
+            {
+                this.x = doors[1].x;
+                this.y=doors[1].y;
+            },
+        resetFromLeftDoor:
+            function()
+            {
+                this.x = doors[0].x;
+                this.y=doors[0].y;
+            },
+        resetFromRightDoor:
+            function()
+            {
+                this.x = doors[2].x;
+                this.y=doors[2].y;
+            },
+        resetFromBottomDoor:
+            function()
+            {
+                this.x = doors[3].x;
+                this.y=doors[3].y;
+            }
+
+    };
+
 //*****PLAYER*****//
 
 var player =
@@ -1187,7 +1402,6 @@ function changeTheme()
     generateRoom();
     generateBackground();
     player.velY = 0;
-    eyeTrap.isActivated = true;
 }
 
 function keyUpHandler(e)
@@ -1277,7 +1491,7 @@ function movePlayer()
 
 //****COLLISION*****//
 
-function jesterCollision()
+function eyeTrapCollision()
 {
     //Walls, floor, and roof collision
     if(eyeTrap.y > canvas.height-SIZE*2)//Floor
@@ -1346,6 +1560,102 @@ function jesterCollision()
                 eyeTrap.y+eyeTrap.height > platforms[i][j].y+SIZE/4+SIZE)
             {
                 eyeTrap.x = platforms[i][j].x-eyeTrap.width;
+            }
+        }
+    }
+}
+
+function jesterCollision()
+{
+    if(jester.x !== -1000 && jester.y !== -1000)
+    {
+        var jesterTop = jester.y;
+        var jesterBottom = jester.y + jester.height;
+        var jesterLeft = jester.x;
+        var jesterRight = jester.x + jester.width;
+
+        var playerTop = player.y;
+        var playerBottom = player.y + player.height;
+        var playerLeft = player.x;
+        var playerRight = player.x + player.width;
+
+
+        if(!(jesterTop > playerBottom)
+            && !(jesterBottom < playerTop)
+            && !(jesterLeft > playerRight)
+            && !(jesterRight < playerLeft))
+        {
+            die();
+        }
+
+        //Walls, floor, and roof collision
+        if(jester.y > canvas.height-SIZE*2)//Floor
+        {
+            jester.jumping = false;
+            jester.y = canvas.height-SIZE*2;
+        }
+        if(jester.y < SIZE && jester.x+jester.width > 352)//Roof right side
+        {
+            jester.velY = 0;
+            jester.y = SIZE;
+        }
+        if(jester.y < SIZE && jester.x < 288)//Roof right side
+        {
+            jester.velY = 0;
+            jester.y = SIZE;
+        }
+        if(jester.x < SIZE)//Left wall top
+        {
+            jester.x = SIZE;
+        }
+        if(jester.x+jester.width > canvas.width-SIZE)//Right wall
+        {
+            jester.x = canvas.width - SIZE - jester.width;
+        }
+
+        for(var i = 0; i < ROWS; i++)
+        {
+            for(var j = 0; j < COLS; j++)
+            {
+                //Top
+                if(platforms[i][j].collidable === true &&
+                    jester.x < platforms[i][j].x+SIZE &&
+                    jester.x+jester.width > platforms[i][j].x &&
+                    jester.y+jester.height > platforms[i][j].y+SIZE-4 &&
+                    jester.y+jester.height < platforms[i][j].y+SIZE/4+SIZE)
+                {
+                    jester.y = platforms[i][j].y-jester.height+SIZE-4;
+                    jester.jumping = false;
+                    jester.velY = 0;
+                }
+                //Bottom
+                else if(platforms[i][j].collidable === true &&
+                    jester.x < platforms[i][j].x+SIZE-4 &&
+                    jester.x+jester.width > platforms[i][j].x+4 &&
+                    jester.y < platforms[i][j].y+SIZE &&
+                    jester.y > platforms[i][j].y+SIZE-SIZE/4)
+                {
+                    jester.y = platforms[i][j].y+SIZE;
+                    jester.velY = 0;
+                }
+                //Right
+                else if(platforms[i][j].collidable === true &&
+                    jester.x < platforms[i][j].x+SIZE &&
+                    jester.x > platforms[i][j].x+SIZE-SIZE/4 &&
+                    jester.y < platforms[i][j].y+SIZE-SIZE/4 &&
+                    jester.y+jester.height > platforms[i][j].y+SIZE/4+SIZE)
+                {
+                    jester.x = platforms[i][j].x+SIZE;
+                }
+                //Left
+                else if(platforms[i][j].collidable === true &&
+                    jester.x+jester.width > platforms[i][j].x &&
+                    jester.x+jester.width < platforms[i][j].x+SIZE/4 &&
+                    jester.y < platforms[i][j].y+SIZE-SIZE/4 &&
+                    jester.y+jester.height > platforms[i][j].y+SIZE/4+SIZE)
+                {
+                    jester.x = platforms[i][j].x-jester.width;
+                }
             }
         }
     }
@@ -1497,6 +1807,8 @@ function switchRoom()
 {
     if(player.x+player.width < doors[3].x+doors[3].width && player.x > doors[3].x && player.y+player.height > canvas.height-SIZE/2)//Bottom door
     {
+        jester.x = -1000;
+        jester.y = -1000;
         traps = [];
         platforms = [];
         background = [];
@@ -1506,13 +1818,22 @@ function switchRoom()
         generateBackground();
         player.velY = 0;
         player.y = SIZE+1;
+        setTimeout(jester.resetFromBottomDoor(),15000);
         numOfLevelsPassed++;
         if(numOfLevelsPassed === 3){
             changeTheme();
         }
+        if(numOfLevelsPassed >= 3){
+            setTimeout(
+                function(){
+                    eyeTrap.isActivated = true;
+                },3000);
+        }
     }
     if(player.x+player.width < doors[1].x+doors[1].width && player.x > doors[1].x && player.y < SIZE/2)//Top door
     {
+        jester.x = -1000;
+        jester.y = -1000;
         traps = [];
         platforms = [];
         background = [];
@@ -1523,13 +1844,22 @@ function switchRoom()
         player.velY = 0;
         player.y = canvas.height-SIZE-player.height;
         player.x = doors[3].x-player.width;
+        setTimeout(jester.resetFromTopDoor(),15000);
         numOfLevelsPassed++;
         if(numOfLevelsPassed === 3){
             changeTheme();
         }
+        if(numOfLevelsPassed >= 3){
+            setTimeout(
+                function(){
+                    eyeTrap.isActivated = true;
+                },3000);
+        }
     }
     if(player.x < SIZE && player.y > doors[0].y && player.y+player.height < doors[0].y+doors[0].height && player.y > doors[0].y)//Left door
     {
+        jester.x = -1000;
+        jester.y = -1000;
         traps = [];
         platforms = [];
         background = [];
@@ -1539,13 +1869,22 @@ function switchRoom()
         generateBackground();
         player.x = canvas.width-SIZE-player.width-1;
         player.velX = 0;
+        setTimeout(jester.resetFromLeftDoor(),15000);
         numOfLevelsPassed++;
         if(numOfLevelsPassed === 3){
             changeTheme();
         }
+        if(numOfLevelsPassed >= 3){
+            setTimeout(
+                function(){
+                    eyeTrap.isActivated = true;
+                },3000);
+        }
     }
     if(player.x+player.width > doors[2].x && player.y+player.height < doors[2].y+doors[2].height && player.y > doors[2].y)//Right door
     {
+        jester.x = -1000;
+        jester.y = -1000;
         traps = [];
         platforms = [];
         background = [];
@@ -1553,10 +1892,17 @@ function switchRoom()
         eyeTrap.resetTrap();
         generateRoom();
         generateBackground();
+        setTimeout(jester.resetFromRightDoor(),15000);
         player.x = 0+SIZE+1;
         numOfLevelsPassed++;
         if(numOfLevelsPassed === 3){
             changeTheme();
+        }
+        if(numOfLevelsPassed >= 3){
+            setTimeout(
+                function(){
+                    eyeTrap.isActivated = true;
+                },3000);
         }
     }
 }
@@ -1865,9 +2211,18 @@ function updateGame() //1
         switchRoom();
         activateTraps();
         playerCollision();
+        jesterCollision();
+        if(jester.currentState === jesterState.PATROLLING)
+        {
+            jester.patrol();
+        }
+        else if (jester.currentState === jesterState.CHASING)
+        {
+            jester.chase();
+        }
         if(eyeTrap.isActivated)
         {
-            jesterCollision();
+            eyeTrapCollision();
             eyeTrap.patrol();
             if (eyeTrap.currentState === eyeTrapState.FIGHTING)
             {
@@ -2130,6 +2485,12 @@ function render()
                 player.frameIndex*player.spriteWidth, 64, player.spriteWidth, player.spriteHeight,
                 player.x-9, player.y, player.spriteWidth, player.spriteHeight);
 
+        //DRAW JESTER//
+        if (jester.running)
+        {
+            surface.drawImage(jester.img, jester.x, jester.y);
+        }
+
         if(eyeTrap.isActivated)
         {
             //DRAW EYE TRAP//
@@ -2253,7 +2614,8 @@ var imgNames =
         /*44*/"images/ui/win.png",/*45*/ "images/ui/gameOver.png",
         /*46*/"images/eye.png",  /*47*/ "images/ui/sound.png",
         /*48*/"images/ui/flame1.png", /*49*/ "images/ui/flame2.png",
-        /*50*/"images/ui/leave.png", /*51*/"images/ui/grim.png"
+        /*50*/"images/ui/leave.png", /*51*/"images/ui/grim.png",
+        /*52*/"images/jester.png"
     ];
 
 var images = [];
@@ -2321,6 +2683,7 @@ function onAssetLoad(e)
         //Defines some images for objects
         player.img = images[10];
         eyeTrap.img = images[46];
+        jester.img = images[52];
         doors[0].img = images[14];
         doors[1].img = images[15];
         doors[2].img = images[16];
