@@ -10,9 +10,6 @@
 //**** INDERDEEP SINGH KHANNA ****//
 //******* SHERALD LINQUICO *******//
 //********* MAC MAUNDER **********//
-//********** ANDY TSE ************//
-//********* MALVIK RAVAL *********//
-//******** JEAN BORBERLY *********//
 //********************************//
 
 //********************************//
@@ -65,12 +62,7 @@ var dir =
     WEST: 4
 };
 
-var levelTheme =
-{
-    DARK_STONE : 1,
-    WHITE_STONE : 2
-};
-var currentLevelTheme = levelTheme.DARK_STONE;
+var currentLevelTheme = 1;
 
 //-----Canvas Setup-----//
 
@@ -450,11 +442,34 @@ function generateBackground()
         background[i] = [];
         for(var j = 0; j < BCOLS; j++)
         {
-            var randNum;
-            if(currentLevelTheme === levelTheme.DARK_STONE)
-                randNum = Math.floor(Math.random()*4+1);
-            else
-                randNum = Math.floor(Math.random()*4+32);
+            var randNum = -1;
+			switch(currentLevelTheme)
+			{
+				case 1:
+					randNum = Math.floor(Math.random()*4+1);
+					break;
+				case 2:
+					randNum = Math.floor(Math.random()*4+32);
+					break;
+				case 3:
+					randNum = Math.floor(Math.random()*7+58);
+					break;
+				case 4:
+					randNum = Math.floor(Math.random()*4+69);
+					break;
+				case 5:
+					randNum = Math.floor(Math.random()*4+77);
+					break;
+				case 6:
+					randNum = Math.floor(Math.random()*4+85);
+					break;
+				case 7:
+					randNum = Math.floor(Math.random()*4+93);
+					break;
+				case 8:
+					randNum = Math.floor(Math.random()*4+97);
+					break;
+			}
 
             var temp =
                 {
@@ -470,7 +485,10 @@ function generateBackground()
 
 function generateRoom()
 {
-
+	//Reset head
+	midHead.active = true;
+	midHead.img = images[53];
+	
     for(var i = 0; i < ROWS; i++)
     {
         platforms[i] = [];
@@ -490,40 +508,159 @@ function generateRoom()
             var tileChance = Math.floor(Math.random()*100);
             if( (i === 7 && j === 0) || (i === 8 && j === 0) )
             {
-                if(currentLevelTheme === levelTheme.DARK_STONE)
-                    temp.img = images[6];
-                else if (currentLevelTheme === levelTheme.WHITE_STONE)
-                    temp.img = images[28];
+				switch(currentLevelTheme)
+				{
+					case 1:
+						temp.img = images[6];
+						break;
+					case 2:
+						temp.img = images[28];
+						break;
+					case 3:
+						temp.img = images[54];
+						break;
+					case 4:
+						temp.img = images[65];
+						break;
+					case 5:
+						temp.img = images[73];
+						break;
+					case 6:
+						temp.img = images[81];
+						break;
+					case 7:
+						temp.img = images[89];
+						break;
+					case 8:
+						temp.img = images[101];
+						break;
+				}
                 temp.collidable = true;
             }
+			else if( (i === 7 && j === 7) || (i === 7 && j === 8) || (i === 8 && j === 7) || (i === 8 && j === 8) )
+			{
+				temp.img = "empty";
+			}
             else if(tileChance <= 24)
             {
                 var randNum = Math.floor(Math.random()*4);
                 switch(randNum)
                 {
                     case 0:
-                        if(currentLevelTheme === levelTheme.DARK_STONE)
-                            temp.img = images[6];
-                        else if (currentLevelTheme === levelTheme.WHITE_STONE)
-                            temp.img = images[28];
+                        switch(currentLevelTheme)
+						{
+							case 1:
+								temp.img = images[6];
+								break;
+							case 2:
+								temp.img = images[28];
+								break;
+							case 3:
+								temp.img = images[54];
+								break;
+							case 4:
+								temp.img = images[65];
+								break;
+							case 5:
+								temp.img = images[73];
+								break;
+							case 6:
+								temp.img = images[81];
+								break;
+							case 7:
+								temp.img = images[89];
+								break;
+							case 8:
+								temp.img = images[101];
+								break;
+						}
                         break;
                     case 1:
-                        if(currentLevelTheme === levelTheme.DARK_STONE)
-                            temp.img = images[7];
-                        else if (currentLevelTheme === levelTheme.WHITE_STONE)
-                            temp.img = images[29];
+                        switch(currentLevelTheme)
+						{
+							case 1:
+								temp.img = images[7];
+								break;
+							case 2:
+								temp.img = images[29];
+								break;
+							case 3:
+								temp.img = images[55];
+								break;
+							case 4:
+								temp.img = images[66];
+								break;
+							case 5:
+								temp.img = images[74];
+								break;
+							case 6:
+								temp.img = images[82];
+								break;
+							case 7:
+								temp.img = images[90];
+								break;
+							case 8:
+								temp.img = images[102];
+								break;
+						}
                         break;
                     case 2:
-                        if(currentLevelTheme === levelTheme.DARK_STONE)
-                            temp.img = images[8];
-                        else if (currentLevelTheme === levelTheme.WHITE_STONE)
-                            temp.img = images[30];
+                        switch(currentLevelTheme)
+						{
+							case 1:
+								temp.img = images[8];
+								break;
+							case 2:
+								temp.img = images[30];
+								break;
+							case 3:
+								temp.img = images[56];
+								break;
+							case 4:
+								temp.img = images[67];
+								break;
+							case 5:
+								temp.img = images[75];
+								break;
+							case 6:
+								temp.img = images[83];
+								break;
+							case 7:
+								temp.img = images[91];
+								break;
+							case 8:
+								temp.img = images[103];
+								break;
+						}
                         break;
                     case 3:
-                        if(currentLevelTheme === levelTheme.DARK_STONE)
-                            temp.img = images[9];
-                        else if (currentLevelTheme === levelTheme.WHITE_STONE)
-                            temp.img = images[31];
+						switch(currentLevelTheme)
+						{
+							case 1:
+								temp.img = images[9];
+								break;
+							case 2:
+								temp.img = images[31];
+								break;
+							case 3:
+								temp.img = images[57];
+								break;
+							case 4:
+								temp.img = images[68];
+								break;
+							case 5:
+								temp.img = images[76];
+								break;
+							case 6:
+								temp.img = images[84];
+								break;
+							case 7:
+								temp.img = images[92];
+								break;
+							case 8:
+								temp.img = images[104];
+								break;
+						}
                         break;
                 }
 
@@ -1035,7 +1172,7 @@ var jester =
         xdir:dir.EAST,
         ydir:dir.NORTH,
         jumpSpeed:3,
-        speed:0.5,
+        speed:2,
         coll:false,
         jumping: false,
         running: true,
@@ -1044,11 +1181,20 @@ var jester =
         framesPerSprite: 6,
         playerInSight: false,
         currentState:jesterState.PATROLLING,
-        animate:
-            function()
+		animate:
+        function() //animates the player, gets called from updateAnimation function
+        {
+            this.currentFrame++;
+            if(this.currentFrame === this.framesPerSprite)
             {
-                //TODO:animation code here.
-            },
+                this.frameIndex++;
+                this.currentFrame = 0;
+                if(this.frameIndex == 4)
+                {
+                    this.frameIndex = 0;
+                }
+            }
+        },
         chase:
             function ()
             {
@@ -1256,6 +1402,7 @@ var player =
 
 function die()
 {
+	playSound("death");
     traps = [];
     platforms = [];
     background = [];
@@ -1388,12 +1535,9 @@ function keyDownHandler(e)
     }
 }
 
-function changeTheme()
+function changeTheme(l)
 {
-    if(currentLevelTheme === levelTheme.DARK_STONE)
-        currentLevelTheme = levelTheme.WHITE_STONE;
-    else if (currentLevelTheme === levelTheme.WHITE_STONE)
-        currentLevelTheme = levelTheme.DARK_STONE;
+    currentLevelTheme = l;
     traps = [];
     platforms = [];
     background = [];
@@ -1807,22 +1951,20 @@ function switchRoom()
 {
     if(player.x+player.width < doors[3].x+doors[3].width && player.x > doors[3].x && player.y+player.height > canvas.height-SIZE/2)//Bottom door
     {
+		playSound("teleport");
+		changeTheme(headsOwned+1);
         jester.x = -1000;
         jester.y = -1000;
         traps = [];
         platforms = [];
         background = [];
-        arrowSpawn.arrows=[];
+        arrowSpawn.arrows = [];
         eyeTrap.resetTrap();
         generateRoom();
         generateBackground();
         player.velY = 0;
         player.y = SIZE+1;
         setTimeout(jester.resetFromBottomDoor(),15000);
-        numOfLevelsPassed++;
-        if(numOfLevelsPassed === 3){
-            changeTheme();
-        }
         if(numOfLevelsPassed >= 3){
             setTimeout(
                 function(){
@@ -1832,6 +1974,8 @@ function switchRoom()
     }
     if(player.x+player.width < doors[1].x+doors[1].width && player.x > doors[1].x && player.y < SIZE/2)//Top door
     {
+		playSound("teleport");
+		changeTheme(headsOwned+1);
         jester.x = -1000;
         jester.y = -1000;
         traps = [];
@@ -1845,10 +1989,6 @@ function switchRoom()
         player.y = canvas.height-SIZE-player.height;
         player.x = doors[3].x-player.width;
         setTimeout(jester.resetFromTopDoor(),15000);
-        numOfLevelsPassed++;
-        if(numOfLevelsPassed === 3){
-            changeTheme();
-        }
         if(numOfLevelsPassed >= 3){
             setTimeout(
                 function(){
@@ -1858,6 +1998,8 @@ function switchRoom()
     }
     if(player.x < SIZE && player.y > doors[0].y && player.y+player.height < doors[0].y+doors[0].height && player.y > doors[0].y)//Left door
     {
+		playSound("teleport");
+		changeTheme(headsOwned+1);
         jester.x = -1000;
         jester.y = -1000;
         traps = [];
@@ -1870,10 +2012,6 @@ function switchRoom()
         player.x = canvas.width-SIZE-player.width-1;
         player.velX = 0;
         setTimeout(jester.resetFromLeftDoor(),15000);
-        numOfLevelsPassed++;
-        if(numOfLevelsPassed === 3){
-            changeTheme();
-        }
         if(numOfLevelsPassed >= 3){
             setTimeout(
                 function(){
@@ -1883,6 +2021,8 @@ function switchRoom()
     }
     if(player.x+player.width > doors[2].x && player.y+player.height < doors[2].y+doors[2].height && player.y > doors[2].y)//Right door
     {
+		playSound("teleport");
+		changeTheme(headsOwned+1);
         jester.x = -1000;
         jester.y = -1000;
         traps = [];
@@ -1894,10 +2034,6 @@ function switchRoom()
         generateBackground();
         setTimeout(jester.resetFromRightDoor(),15000);
         player.x = 0+SIZE+1;
-        numOfLevelsPassed++;
-        if(numOfLevelsPassed === 3){
-            changeTheme();
-        }
         if(numOfLevelsPassed >= 3){
             setTimeout(
                 function(){
@@ -1994,40 +2130,6 @@ function onMouseUp()
     mouseDown = false;
 }
 
-
-//*****EIGHT HEADS*****//
-
-var activeHeads = -1;
-
-var heads =
-[
-    /*0*/ { x:30, y:610, width:34, height:30,  own:false, img:"images/heads/one.png", imgO: "images/heads/oneD.png"},
-    /*1*/ { x:60, y:610, width:34, height:30,  own:false, img:"images/heads/two.png", imgO: "images/heads/twoD.png"},
-    /*2*/ { x:90, y:610, width:34, height:30, own:false, img:"images/heads/three.png", imgO: "images/heads/threeD.png"},
-    /*3*/ { x:120, y:610, width:34, height:30, own:false, img:"images/heads/four.png", imgO: "images/heads/fourD.png"},
-    /*4*/ { x:150, y:610, width:34, height:30, own:false, img:"images/heads/five.png", imgO: "images/heads/fiveD.png"},
-    /*5*/ { x:180, y:610, width:34, height:30, own:false, img:"images/heads/six.png", imgO: "images/heads/sixD.png"},
-    /*6*/ { x:210, y:610, width:34, height:30, own:false, img:"images/heads/seven.png", imgO: "images/heads/sevenD.png"},
-    /*7*/ { x:240, y:610, width:34, height:30, own:false, img:"images/heads/eight.png", imgO: "images/heads/eightD.png"}
-]
-
-
-function headOwned()
-{
-    // Temp over func, for checking ui
-    for (var i = 0; i < activeHeads.length; i++)
-    {
-        if(mouse.x < activeHeads[i].x+activeHeads[i].width && mouse.x > activeHeads[i].x && mouse.y < activeHeads[i].y+activeHeads[i].height && mouse.y > activeHeads[i].y )
-        {
-            activeHeads[i].over = true;
-        }
-        if(!(mouse.x < activeHeads[i].x+activeHeads[i].width && mouse.x > activeHeads[i].x && mouse.y < activeHeads[i].y+activeHeads[i].height && mouse.y > activeHeads[i].y ))
-        {
-            activeHeads[i].over = false;
-        }
-    }
-}
-
 //*****UTILITIES*****//
 
 
@@ -2043,6 +2145,7 @@ function playBackgroundSound(nameOfSound,shouldLoop)
 
     bgAudio.play();
 }
+
 
 function toggleBackgroundMusic()
 {
@@ -2141,6 +2244,17 @@ function changeState(newState)
     console.log("Game state changed");
     if(newState >= 0 && newState <= states.length)
     {
+		midHead.reset();
+		headsOwned = 0;
+		changeTheme(1);
+		for(var i = 0; i <  heads.length; i++)
+		{
+			heads[i].own = false;
+		}
+		jester.y = 576;
+		jester.x = 0;
+		traps = [];
+		
         activeButtons = -1;
         activeHeads = -1;
         window.clearInterval(gameLoop);
@@ -2201,12 +2315,11 @@ function updateGame() //1
     }
     else
     {
-
         activeButtons = [];
         activeHeads = [heads[0], heads[1], heads[2], heads[3], heads[4], heads[5], heads[6],heads[7]];
-        headOwned();
         animate();
         render();
+		checkHeads();
         movePlayer();
         switchRoom();
         activateTraps();
@@ -2351,6 +2464,7 @@ function updateWin() // 6
 
 function animate()
 {
+	jester.animate();
     player.animate();
     for(var i = 0; i < traps.length; i++)
     {
@@ -2429,22 +2543,27 @@ function render()
         {
             surface.drawImage(doors[i].img, doors[i].x, doors[i].y);
         }
+		//DRAW MIDDLE HEAD
+		if(midHead.active === true)
+		{
+			surface.drawImage(midHead.img, midHead.sprtX, midHead.sprtY, midHead.width, midHead.height, midHead.x, midHead.y, midHead.width, midHead.height);
+		}
 
         //DRAW HEAD HOLDER//
         surface.drawImage(images[42], 15, 605);
 
-        for(var i = 0; i < activeHeads.length; i++)
+        for(var i = 0; i < heads.length; i++)
         {
             // still need an owned function. if not yet owned, draw dark, if, highlight with original
-            if(activeHeads[i].over === true)
+            if(heads[i].own === true)
             {
                 //surface.drawImage(activeHeads[i].imgO, activeHeads[i].x, activeHeads[i].y);
-                surface.drawImage(activeHeads[i].img, activeHeads[i].x, activeHeads[i].y);
+                surface.drawImage(heads[i].img, heads[i].x, heads[i].y);
             }
-            else if(activeHeads[i].over === false)
+            else if(heads[i].own === false)
             {
                 // surface.drawImage(activeHeads[i].img, activeHeads[i].x, activeHeads[i].y);
-                surface.drawImage(activeHeads[i].imgO, activeHeads[i].x, activeHeads[i].y);
+                surface.drawImage(heads[i].imgO, heads[i].x, heads[i].y);
             }
         }
 
@@ -2488,7 +2607,7 @@ function render()
         //DRAW JESTER//
         if (jester.running)
         {
-            surface.drawImage(jester.img, jester.x, jester.y);
+            surface.drawImage(jester.img, jester.frameIndex*jester.spriteWidth, 0, jester.spriteWidth, jester.spriteHeight, jester.x, jester.y, jester.width, jester.height);
         }
 
         if(eyeTrap.isActivated)
@@ -2582,6 +2701,8 @@ function eListeners()
 function initSplash()//Draws the splash screen and clears it, then changes to the menu state
 {
     surface.drawImage(images[0], 0, 0);
+	playBackgroundSound("mainMusic", true);
+	bgAudio.volume = 0.3;
     window.setTimeout(function(){surface.clearRect(0,0,canvas.width, canvas.height); changeState(0);}, 1500);
 }
 
@@ -2590,6 +2711,61 @@ function initGame()
     window.setTimeout(initSplash, 25);
     console.log("Initializing game...");
     eListeners();
+}
+
+//*****LEVEL PROGRESSION*****//
+var activeHeads = -1;
+
+var heads =
+[
+    /*0*/ { x:30, y:610, width:34, height:30,  own:false, img:"images/heads/one.png", imgO: "images/heads/oneD.png"},
+    /*1*/ { x:60, y:610, width:34, height:30,  own:false, img:"images/heads/two.png", imgO: "images/heads/twoD.png"},
+    /*2*/ { x:90, y:610, width:34, height:30, own:false, img:"images/heads/three.png", imgO: "images/heads/threeD.png"},
+    /*3*/ { x:120, y:610, width:34, height:30, own:false, img:"images/heads/four.png", imgO: "images/heads/fourD.png"},
+    /*4*/ { x:150, y:610, width:34, height:30, own:false, img:"images/heads/five.png", imgO: "images/heads/fiveD.png"},
+    /*5*/ { x:180, y:610, width:34, height:30, own:false, img:"images/heads/six.png", imgO: "images/heads/sixD.png"},
+    /*6*/ { x:210, y:610, width:34, height:30, own:false, img:"images/heads/seven.png", imgO: "images/heads/sevenD.png"},
+    /*7*/ { x:240, y:610, width:34, height:30, own:false, img:"images/heads/eight.png", imgO: "images/heads/eightD.png"}
+];
+
+var headsOwned = 0;
+
+var midHead =
+{
+	x: 304,
+	y: 304,
+	width: 32,
+	height: 32,
+	sprtX: 0,
+	sprtY: 0,
+	incrVal: 32,
+	maxVal: 224,
+	img: "empty",
+	active: true,
+	reset:
+	function()
+	{
+		this.sprtX = 0;
+		this.img = "empty";
+	}
+}
+
+function checkHeads()
+{
+	console.log(midHead.active);
+	if(player.x < midHead.x+midHead.width && player.x+player.width > midHead.x && player.y < midHead.y+midHead.height && player.y+player.height > midHead.y && midHead.active === true && headsOwned <= 8)
+	{
+		playSound("collect");
+		midHead.active = false;
+		if(midHead.sprtX < midHead.maxVal)
+			midHead.sprtX += midHead.incrVal;
+		headsOwned++;
+		heads[headsOwned-1].own = true;
+	}
+	if(midHead.active === false)
+	{
+		midHead.img = "empty";
+	}
 }
 
 //----Asset Loading-----//
@@ -2615,7 +2791,13 @@ var imgNames =
         /*46*/"images/eye.png",  /*47*/ "images/ui/sound.png",
         /*48*/"images/ui/flame1.png", /*49*/ "images/ui/flame2.png",
         /*50*/"images/ui/leave.png", /*51*/"images/ui/grim.png",
-        /*52*/"images/jester.png"
+        /*52*/"images/jester.png", /*53*/"images/heads/fullHeads2.png", /*54*/"images/40.png", /*55*/"images/41.png", /*56*/"images/42.png", /*57*/"images/43.png", /*58*/"images/44.png", /*59*/"images/45.png",
+		/*60*/"images/46.png", /*61*/"images/47.png", /*62*/"images/48.png", /*63*/"images/49.png", /*64*/"images/50.png", /*65*/"images/51.png", /*66*/"images/52.png", /*67*/"images/53.png",
+		/*68*/"images/54.png", /*69*/"images/55.png", /*70*/"images/56.png", /*71*/"images/57.png", /*72*/"images/58.png", /*73*/"images/59.png", /*74*/"images/60.png", /*75*/"images/61.png",
+		/*76*/"images/62.png", /*77*/"images/63.png", /*78*/"images/64.png", /*79*/"images/65.png", /*80*/"images/66.png", /*81*/"images/67.png", /*82*/"images/68.png", /*83*/"images/69.png",
+		/*84*/"images/70.png", /*85*/"images/71.png", /*86*/"images/72.png", /*87*/"images/73.png", /*88*/"images/74.png", /*89*/"images/75.png", /*90*/"images/76.png", /*91*/"images/77.png",
+		/*92*/"images/78.png", /*93*/"images/79.png", /*94*/"images/80.png", /*95*/"images/81.png", /*96*/"images/82.png", /*97*/"images/83.png", /*98*/"images/84.png", /*99*/"images/85.png",
+		/*100*/"images/86.png", /*101*/"images/87.png", /*102*/"images/88.png", /*103*/"images/89.png", /*104*/"images/90.png"
     ];
 
 var images = [];
@@ -2688,6 +2870,8 @@ function onAssetLoad(e)
         doors[1].img = images[15];
         doors[2].img = images[16];
         doors[3].img = images[17];
+		
+		midHead.img = images[53];
 
         //Initializes game after all assets are loaded
         initGame();
