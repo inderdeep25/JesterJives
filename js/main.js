@@ -1531,6 +1531,10 @@ function keyDownHandler(e)
             break;
         case key.ESC:
             paused = !paused;
+            break;
+        case 72:
+            headsOwned = 8;
+            break;
     }
 }
 
