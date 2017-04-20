@@ -36,8 +36,16 @@
 - If player dies, die function is called, state is changed to game over state
 */
 
+var vid1 = document.createElement('VIDEO');
+var vid1Playing = false;
+var vid2 = document.createElement('VIDEO');
+var vid2Playing = false;
+vid1.src = "video/first.mp4";
+vid2.src = "video/end.mp4";
+
+
 //IIFE
-// (function (){
+(function (){
 
 //*****GLOBAL VARIABLES*****//
 
@@ -53,6 +61,7 @@ var numOfLevelsPassed = 0;
 
 var friction = 0.7;
 var gravity = 0.26;
+var maxNumOfTraps = 5;
 
 var dir =
 {
@@ -153,7 +162,7 @@ var fire =
                 player.y < this.y+this.height-10 &&
                 player.y+player.height > this.y+10)
             {
-                window.setTimeout(die, 100);
+                die();
             }
         }
 };
@@ -196,7 +205,7 @@ var spikes =
                 && player.x < this.x + SIZE
                 && player.x > this.x)
             {
-                window.setTimeout(die, 100);
+               die();
             }
         }
 };
@@ -316,23 +325,23 @@ var arrowSpawn =
                     {
                         die();
                     }
-                    if(this.arrows[i] !== "undefined" && this.arrows[i].x < SIZE)
+                    if(this.arrows[i] != undefined && this.arrows[i].x < SIZE)
                         this.arrows.splice(i, 1);
 
-                    if(this.arrows[i] !== "undefined" && this.arrows[i].y < SIZE)
+                    if(this.arrows[i] != undefined && this.arrows[i].y < SIZE)
                         this.arrows.splice(i, 1);
 
-                    if(this.arrows[i] !== "undefined" && this.arrows[i].x+this.arrows[i].width > canvas.width-SIZE)
+                    if(this.arrows[i] != undefined && this.arrows[i].x+this.arrows[i].width > canvas.width-SIZE)
                         this.arrows.splice(i, 1);
 
-                    if(this.arrows[i] !== "undefined" && this.arrows[i].y+this.arrows[i].height > canvas.height-SIZE)
+                    if(this.arrows[i] != undefined && this.arrows[i].y+this.arrows[i].height > canvas.height-SIZE)
                         this.arrows.splice(i, 1);
 
                     for(var j = 0; j < ROWS; j++)
                     {
                         for(var k = 0; k < COLS; k++)
                         {
-                            if(this.arrows[i].x < platforms[j][k].x+platforms[j][k].width &&
+                            if(this.arrows[i] != undefined && platforms[j][k] != undefined && this.arrows[i].x < platforms[j][k].x+platforms[j][k].width &&
                                 this.arrows[i].x+this.arrows[i].width > platforms[j][k].x &&
                                 this.arrows[i].y < platforms[j][k].y+platforms[j][k].height &&
                                 this.arrows[i].y+this.arrows[i].height > platforms[j][k].y &&
@@ -666,7 +675,7 @@ function generateRoom()
 
                 temp.collidable = true;
             }
-            else if(tileChance > 24 && tileChance <= 28)
+            else if(tileChance > 24 && tileChance <= 28 && traps.length < maxNumOfTraps)
             {
                 var randTrap = Math.floor(Math.random()*4);
                 switch(randTrap)
@@ -1172,7 +1181,7 @@ var jester =
         xdir:dir.EAST,
         ydir:dir.NORTH,
         jumpSpeed:3,
-        speed:2,
+        speed:1.5,
         coll:false,
         jumping: false,
         running: true,
@@ -1260,7 +1269,6 @@ var jester =
             function ()
             {
                 //TODO: Fighting code here.
-                console.log("attack");
             },
         patrol:
             function ()
@@ -1471,38 +1479,29 @@ function clickHandler()
             switch(activeButtons[i])
             {
                 case buttons[0]: //Start
-                    console.log("Check1");
                     changeState(1);
                     break;
                 case buttons[1]: //Help
-                    console.log("Check2");
                     changeState(2);
                     break;
                 case buttons[2]: //Settings
-                    console.log("Check4");
                     changeState(4);
                     break;
                 case buttons[3]: //Exit
-                    console.log("Check5");
                     changeState(5);
                     break;
                 case buttons[4]: //Main Menu
-                    console.log("Check4");
                     changeState(0);
                     break;
                 case buttons[5]: //New
-                    console.log("Check5");
                     changeState(1);
                     break;
                 case buttons[6]: //Return
-                    console.log("Check6");
                     changeState(lastState);
                     break;
             }
         }
     }
-
-    console.log(findTile(mouse.x, mouse.y));
 }
 
 function keyDownHandler(e)
@@ -1830,7 +1829,7 @@ function playerCollision()
     }
     if(player.x < SIZE)//Left wall top
     {
-        if (player.jumping == true)
+        if (player.jumping == true && jumpPressed == false)
         {
             jumpFromLeftWall();
 
@@ -1840,7 +1839,7 @@ function playerCollision()
     }
     if(player.x+player.width > canvas.width-SIZE)//Right wall
     {
-        if (player.jumping == true)
+        if (player.jumping == true && jumpPressed == false)
         {
             jumpFromRightWall();
 
@@ -1881,7 +1880,7 @@ function playerCollision()
                 player.y < platforms[i][j].y+SIZE-SIZE/4 &&
                 player.y+player.height > platforms[i][j].y+SIZE/4+SIZE)
             {
-                if (player.jumping == true)
+                if (player.jumping == true && jumpPressed == false)
                 {
                     jumpFromLeftWall();
 
@@ -1896,7 +1895,7 @@ function playerCollision()
                 player.y < platforms[i][j].y+SIZE-SIZE/4 &&
                 player.y+player.height > platforms[i][j].y+SIZE/4+SIZE)
             {
-                if (player.jumping == true)
+                if (player.jumping == true && jumpPressed == false)
                 {
                     jumpFromRightWall();
                 }
@@ -1947,10 +1946,19 @@ var doors =
         { x: 288, y: 608, width: 64, height: 32, img: undefined }//Bottom
     ];
 
+var door1O = true;
+var door2O = true;
+var door3O = true;
+var door4O = true;
+	
 function switchRoom()
 {
-    if(player.x+player.width < doors[3].x+doors[3].width && player.x > doors[3].x && player.y+player.height > canvas.height-SIZE/2)//Bottom door
+    if(player.x+player.width < doors[3].x+doors[3].width && player.x > doors[3].x && player.y+player.height > canvas.height-SIZE/2 && door3O === true)//Bottom door
     {
+		door1O = false;
+		door2O = true;
+		door4O = true;
+		door3O = true;
 		playSound("teleport");
 		changeTheme(headsOwned+1);
         jester.x = -1000;
@@ -1971,9 +1979,14 @@ function switchRoom()
                     eyeTrap.isActivated = true;
                 },3000);
         }
+        maxNumOfTraps += 2;
     }
-    if(player.x+player.width < doors[1].x+doors[1].width && player.x > doors[1].x && player.y < SIZE/2)//Top door
+    if(player.x+player.width < doors[1].x+doors[1].width && player.x > doors[1].x && player.y < SIZE/2 && door1O === true)//Top door
     {
+		door1O = true;
+		door2O = true;
+		door3O = false;
+		door4O = true;
 		playSound("teleport");
 		changeTheme(headsOwned+1);
         jester.x = -1000;
@@ -1995,9 +2008,14 @@ function switchRoom()
                     eyeTrap.isActivated = true;
                 },3000);
         }
+        maxNumOfTraps += 2;
     }
-    if(player.x < SIZE && player.y > doors[0].y && player.y+player.height < doors[0].y+doors[0].height && player.y > doors[0].y)//Left door
+    if(player.x < SIZE && player.y+player.height > doors[2].y+SIZE && player.y < doors[2].y+doors[2].height && door4O === true)//Left door
     {
+		door1O = true;
+		door2O = false;
+		door3O = true;
+		door4O = true;
 		playSound("teleport");
 		changeTheme(headsOwned+1);
         jester.x = -1000;
@@ -2018,9 +2036,14 @@ function switchRoom()
                     eyeTrap.isActivated = true;
                 },3000);
         }
+        maxNumOfTraps += 2;
     }
-    if(player.x+player.width > doors[2].x && player.y+player.height < doors[2].y+doors[2].height && player.y > doors[2].y)//Right door
+    if(player.x+player.width > doors[2].x && player.y+player.height > doors[2].y+SIZE && player.y < doors[2].y+doors[2].height && door2O === true)//Right door
     {
+		door1O = true;
+		door3O = true;
+		door4O = false;
+		door2O = true;
 		playSound("teleport");
 		changeTheme(headsOwned+1);
         jester.x = -1000;
@@ -2040,6 +2063,7 @@ function switchRoom()
                     eyeTrap.isActivated = true;
                 },3000);
         }
+        maxNumOfTraps += 2;
     }
 }
 
@@ -2287,7 +2311,8 @@ function updateMenu() //0
 
 function enterGame() //1
 {
-
+	bgAudio.src = "sounds/mainMusic.mp3";
+	bgAudio.play();
     canvas.style.backgroundColor = "#36454f";
     gameLoop = window.setInterval(updateGame, FPS);
     activeButtons = [];
@@ -2444,19 +2469,26 @@ function updateExitMenu()// 5
 
 function enterWin() // State 6
 {
-    activeButtons = [ buttons[5], buttons[4] ]; //to go back to main menu
+	bgAudio.src = "sounds/menuMusic.mp3";
+	bgAudio.play();
+    //activeButtons = [ buttons[5], buttons[4] ]; //to go back to main menu
     gameLoop = window.setInterval(updateWin, FPS);
-
-    buttons[5].x = 230;
-    buttons[5].y = 240;
-    buttons[4].x = 230;
-    buttons[4].y = 300;
+	vid2.play();
+	vid2.playing = true;
+    //buttons[5].x = 230;
+    //buttons[5].y = 240;
+    //buttons[4].x = 230;
+    //buttons[4].y = 300;
 }
 
 function updateWin() // 6
 {
-    render();
     checkButtonOverlap();
+	surface.drawImage(vid2, 0, 0, canvas.width, canvas.height);
+	if(vid2.ended === true)
+	{
+		changeState(0);
+	}
     console.log("victory!");
 }
 
@@ -2476,8 +2508,6 @@ function animate()
 function render()
 {
     surface.clearRect(0, 0, canvas.width, canvas.height);
-
-
 
 
 
@@ -2539,10 +2569,16 @@ function render()
         surface.drawImage(images[5], 0, 0);
 
         //DRAW DOORS//
-        for(var i = 0; i < doors.length; i++)
-        {
-            surface.drawImage(doors[i].img, doors[i].x, doors[i].y);
-        }
+        
+		if(door1O === true)
+			surface.drawImage(doors[1].img, doors[1].x, doors[1].y);
+		if(door2O === true)
+			surface.drawImage(doors[2].img, doors[2].x, doors[2].y);
+		if(door3O === true)
+			surface.drawImage(doors[3].img, doors[3].x, doors[3].y);
+		if(door4O === true)
+			surface.drawImage(doors[0].img, doors[0].x, doors[0].y);
+		
 		//DRAW MIDDLE HEAD
 		if(midHead.active === true)
 		{
@@ -2698,12 +2734,28 @@ function eListeners()
     keyUp = window.addEventListener("keyup", keyUpHandler, false);
 }
 
+function drawVid()
+{
+	if(vid1Playing === true)
+		surface.drawImage(vid1, 0, 0, canvas.width, canvas.height);
+	if(vid2Playing === true)
+		surface.drawImage(vid2, 0, 0, canvas.width, canvas.height);
+}
+
 function initSplash()//Draws the splash screen and clears it, then changes to the menu state
 {
     surface.drawImage(images[0], 0, 0);
-	playBackgroundSound("mainMusic", true);
+	playBackgroundSound("menuMusic", true);
 	bgAudio.volume = 0.3;
-    window.setTimeout(function(){surface.clearRect(0,0,canvas.width, canvas.height); changeState(0);}, 1500);
+    window.setTimeout(
+	function()
+	{
+		surface.clearRect(0,0,canvas.width, canvas.height);
+		vid1Playing = true;
+		vid1.play();
+		gameLoop = window.setInterval(drawVid, false);
+		vid1.addEventListener('ended', function(){window.clearInterval(gameLoop); changeState(0);}, false);
+	}, 1500);
 }
 
 function initGame()
@@ -2714,6 +2766,7 @@ function initGame()
 }
 
 //*****LEVEL PROGRESSION*****//
+
 var activeHeads = -1;
 
 var heads =
@@ -2728,7 +2781,7 @@ var heads =
     /*7*/ { x:240, y:610, width:34, height:30, own:false, img:"images/heads/eight.png", imgO: "images/heads/eightD.png"}
 ];
 
-var headsOwned = 0;
+var headsOwned = 6;
 
 var midHead =
 {
@@ -2752,7 +2805,11 @@ var midHead =
 
 function checkHeads()
 {
-	console.log(midHead.active);
+	console.log(headsOwned);
+	if(headsOwned === 8)
+	{
+		changeState(6);
+	}
 	if(player.x < midHead.x+midHead.width && player.x+player.width > midHead.x && player.y < midHead.y+midHead.height && player.y+player.height > midHead.y && midHead.active === true && headsOwned <= 8)
 	{
 		playSound("collect");
@@ -2882,6 +2939,6 @@ function onAssetLoad(e)
 //Initial Function Call
 loadAssets();
 
-// })();//IIFE END
+ })();//IIFE END
 
 //Code End
